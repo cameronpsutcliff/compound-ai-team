@@ -23,7 +23,6 @@ adoption-report.md
 delegation.md
 project-scaffold.md
 project-internal-structure.md
-doctrine/conventions/universal-skill-routing.md
 AGENT.annotated.md
 
 # Design input only (family framing, private vault/repo names)

@@ -25,20 +25,6 @@ jobs:
       - name: Run self-test harness
         run: ./enforcement/tests/run-selftest.sh
 
-  gate-blocking-demo:
-    name: Show gates block planted violations
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Demonstrate blocking behavior
-        run: |
-          set -euo pipefail
-          echo "CI demo: gates correctly block violations when planted fixtures are tested."
-          ./enforcement/tests/run-selftest.sh
-          echo "CI demo: gates correctly block violations."
-
   fresh-clone:
     name: Fresh clone simulation
     runs-on: ubuntu-latest

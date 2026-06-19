@@ -140,6 +140,7 @@ copy_path() {
     mkdir -p "$dest_path"
     (
       cd "$src"
+      find . -type f ! -path './.git/*' -print
     ) | while IFS= read -r relpath; do
       relpath="${relpath#./}"
       [ -z "$relpath" ] && continue
@@ -194,6 +195,9 @@ TEXT_EXT = {
 
 HARD_PATH = re.compile(
     ("/" + "Users" + r"/[^/\s]+")
+    # hidden local runtime folders, but NOT public VCS/editor dirs: a clone URL
+    # ending .git would otherwise trip this after the allowlist strips the host.
+    r"|/\.(?!git\b|github\b|gitignore\b|gitattributes\b|gitkeep\b|gitmodules\b|cursor\b|vscode\b)[A-Za-z0-9_-]+\b"
 )
 
 # Version strings are NOT blanket-rewritten. A global old->new version sub
@@ -385,6 +389,14 @@ print("derive.sh: individual Team edition entries removed")
 PY
 fi
 
+# Regenerate the session-start benchmark from the derived tree so the committed
+# numbers always match THIS edition (derived, never hand-typed; cannot drift).
+if [ -f "$DEST/proof/session-start-benchmark/measure.sh" ]; then
+  echo "derive.sh: regenerating proof/session-start-benchmark/results.md for $EDITION..."
+  bash "$DEST/proof/session-start-benchmark/measure.sh" --emit >/dev/null 2>&1 \
+    || echo "derive.sh: WARN session-start benchmark regen failed" >&2
+fi
+
 VERSION="$(python3 - <<'PY' "$DEST/CITATION.cff"
 import sys
 from pathlib import Path
@@ -454,6 +466,7 @@ def iter_files() -> list[Path]:
         rel = path.relative_to(root).as_posix()
         if rel in excluded or path.name in excluded_names:
             continue
+        if "/.git/" in f"/{rel}/":
             continue
         files.append(path)
     return sorted(files, key=lambda item: item.relative_to(root).as_posix())

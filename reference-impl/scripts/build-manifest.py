@@ -38,6 +38,7 @@ def iter_files() -> list[Path]:
             continue
         if path.name in EXCLUDED_NAMES:
             continue
+        if "/.git/" in f"/{rel}/":
             continue
         files.append(path)
     return sorted(files, key=lambda item: item.relative_to(ROOT).as_posix())

@@ -11,7 +11,7 @@ no private paths, no vault names, and no personal framing.
   contracts, provenance, and memory. Authored by Cameron Sutcliff.
 - The **enforced runtime** (Layer B) is a hook-enforced Claude Code runtime that
   already implements the controls the doctrine could only advise. Authored by
-  Joshua Sutcliff. Public reference: `github.com/brass458/claude-config-public`.
+  Joshua Sutcliff. Public reference: `github.com/joshuadsutcliff`.
 
 The doctrine describes what good operation is. The runtime makes parts of it
 mechanical. The two were built independently and merged into this co-owned kit.

@@ -60,7 +60,7 @@ After version and token rewrites, for each text file:
 
 Allowlisted co-author identities **must survive**: `Joshua Sutcliff`,
 `joshuadsutcliff`, `Cameron Sutcliff`, `cameronpsutcliff`, and the public System B
-reference `github.com/brass458/claude-config-public`.
+reference `github.com/joshuadsutcliff`.
 
 ## 4. Individual zip omissions
 

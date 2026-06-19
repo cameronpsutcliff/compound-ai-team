@@ -1,5 +1,5 @@
 # Install
-# Compound AI Operating Standards v3.0.1
+# Compound AI Operating Standards v3.0.2
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 The kit is a tiered set of files. You can drop the directory into your project
