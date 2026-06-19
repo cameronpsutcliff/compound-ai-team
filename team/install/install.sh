@@ -8,20 +8,34 @@ KIT_ROOT=$(CDPATH= cd -- "$SCRIPT_DIR/../.." && pwd)
 REGISTRY_TEMPLATE="$KIT_ROOT/team/team-router/templates/routing-registry.md"
 
 AUTO=0
+DRY_RUN=0
+UNINSTALL=0
 
 usage() {
   cat <<'EOF'
-Usage: install.sh [--yes|-y|--auto|--non-interactive]
+Usage: install.sh [--yes|-y|--auto|--non-interactive] [--dry-run] [--uninstall]
 
 Copies the Compound AI kit into a "Compound AI" folder under your cloud-docs
 root, creates a Teams area in your notes root, and writes a routing registry.
 Non-destructive: asks before overwriting unless --yes is passed.
+--dry-run prints the files and Claude settings keys that would change.
+--uninstall removes Compound AI Claude Code hook wiring from settings.
 EOF
 }
 
 while [ "$#" -gt 0 ]; do
   case "$1" in
     -y|--yes|--auto|--non-interactive)
+      AUTO=1
+      shift
+      ;;
+    --dry-run)
+      DRY_RUN=1
+      AUTO=1
+      shift
+      ;;
+    --uninstall)
+      UNINSTALL=1
       AUTO=1
       shift
       ;;
@@ -42,15 +56,18 @@ say() {
 }
 
 expand_user_path() {
+  # Quote the tilde in the patterns so the shell matches a LITERAL leading `~`,
+  # not a tilde-expanded `$HOME`. An unquoted `~/*` pattern expands to `$HOME/*`
+  # and then wrongly matches any absolute path already under $HOME, doubling it.
   case "$1" in
-    ~/*)
+    '~/'*)
       if [ -z "${HOME:-}" ]; then
         printf 'install.sh: HOME is not set; cannot expand %s\n' "$1" >&2
         exit 1
       fi
       printf '%s' "${HOME}${1#\~}"
       ;;
-    ~)
+    '~')
       if [ -z "${HOME:-}" ]; then
         printf 'install.sh: HOME is not set; cannot expand ~\n' >&2
         exit 1
@@ -166,6 +183,51 @@ copy_tree() {
     cp -p "$item" "$target"
     printf '  copied %s\n' "$rel"
   done
+}
+
+list_copy_tree() {
+  src=$1
+  dst=$2
+  find "$src" -type f | sort | while IFS= read -r item; do
+    rel=${item#"$src"/}
+    if should_skip_copy "$rel"; then
+      continue
+    fi
+    printf '  would copy %s -> %s\n' "$rel" "$dst/$rel"
+  done
+}
+
+claude_settings_target() {
+  if [ -n "${CLAUDE_SETTINGS:-}" ]; then
+    printf '%s' "$CLAUDE_SETTINGS"
+    return 0
+  fi
+  if [ -z "${HOME:-}" ]; then
+    printf 'install.sh: HOME is not set; cannot locate Claude settings\n' >&2
+    exit 1
+  fi
+  printf '%s/.claude/settings.json' "$HOME"
+}
+
+preview_claude_runtime() {
+  adapter="$KIT_ROOT/runtime/claude-code/install-adapter.sh"
+  [ -f "$adapter" ] || return 0
+  if ! command -v python3 >/dev/null 2>&1; then
+    say "DRY RUN: python3 not found; would skip Claude settings merge."
+    return 0
+  fi
+  bash "$adapter" --dry-run --settings "$(claude_settings_target)"
+}
+
+uninstall_claude_runtime() {
+  adapter="$KIT_ROOT/runtime/claude-code/install-adapter.sh"
+  [ -f "$adapter" ] || return 0
+  if ! command -v python3 >/dev/null 2>&1; then
+    say "Uninstall skipped: python3 is required for JSON settings updates."
+    exit 1
+  fi
+  bash "$adapter" --uninstall --settings "$(claude_settings_target)"
+  say "No kit files, Teams notes, or routing registries were deleted."
 }
 
 setup_teams_area() {
@@ -290,6 +352,7 @@ setup_claude_runtime() {
     return 0
   fi
   say ""
+  if ask_yes "Merge Claude Code runtime hooks into ~/.claude/settings.json?" 0; then
     if bash "$adapter" --install; then
       say "  Claude Code settings updated."
     else
@@ -303,6 +366,12 @@ setup_claude_runtime() {
 }
 
 main() {
+  if [ "$UNINSTALL" -eq 1 ]; then
+    say "Compound AI Team edition uninstall"
+    uninstall_claude_runtime
+    exit 0
+  fi
+
   say "Compound AI Team edition installer"
   say "----------------------------------"
   say "This copies the kit into your cloud docs and gives your distilled"
@@ -315,6 +384,19 @@ main() {
 
   say ""
   say "Will copy the kit into: $kit_dst"
+  if [ "$DRY_RUN" -eq 1 ]; then
+    say "DRY RUN: no files or settings will be changed."
+    list_copy_tree "$KIT_ROOT" "$kit_dst"
+    say ""
+    notes_raw=$(ask "Where is your Obsidian or notes root?" "$(pwd)")
+    notes_root=$(resolve_dir "$notes_raw")
+    say "Would create Teams area in: $notes_root"
+    say "Would write starter routing registry in: $kit_dst/team/team-router/templates/routing-registry.md"
+    say ""
+    preview_claude_runtime
+    exit 0
+  fi
+
   if ! ask_yes "Proceed?" 1; then
     say "Stopped. Nothing was written."
     exit 1

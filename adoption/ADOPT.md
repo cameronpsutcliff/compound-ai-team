@@ -1,5 +1,5 @@
 # Adopt
-# Compound AI Operating Standards v3.0.4
+# Compound AI Operating Standards v3.0.5
 # Authors: Cameron Sutcliff, Joshua Sutcliff (joshuadsutcliff)
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
@@ -167,6 +167,9 @@ Use this pattern:
 
 ```text
 ~/.compound-ai/skills/[skill-name]   canonical shared skill
+~/.claude/skills/[skill-name]        symlink to canonical copy
+~/.agents/skills/[skill-name]        symlink to canonical copy
+~/.codex/skills/[skill-name]         symlink only when Codex needs it
 ```
 
 Rules:
@@ -209,6 +212,7 @@ bounded sections.
 - Does NOT change your package manager or build system
 - Does NOT replace your existing AGENT.md / CLAUDE.md / AGENTS.md
 - Does NOT enable kit-specific git hooks unless you explicitly opt in
+- Does NOT update global instruction files (~/.claude/CLAUDE.md, ~/.codex/AGENTS.md) without a separate explicit confirmation
 
 Adoption is additive. The kit becomes an option for your agent, not a
 replacement for what you already had.
@@ -248,9 +252,12 @@ is Claude Code-specific and must not be described as vendor-neutral. See
 
 ## Optional: reference tooling (Layer C)
 
-Maintainer scripts live under `reference-impl/` (`verify-integrity.py`,
-`build-manifest.py`, `skill-creator/`). Adopters do not need these. The Individual
-edition release zip excludes them.
+Scripts live under `reference-impl/` and ship in both edition zips. To verify
+what you downloaded, run `reference-impl/scripts/verify-integrity.py` and
+`reference-impl/scripts/verify-origin.py` (stdlib-only, no install).
+`build-manifest.py` and the `skill-creator/` scaffold are maintainer reference
+material you can ignore. None of this is tier-0 loaded,
+so it does not affect the lean session-start cost.
 
 ## Companion files
 

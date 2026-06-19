@@ -1,5 +1,5 @@
 # Install
-# Compound AI Operating Standards v3.0.4
+# Compound AI Operating Standards v3.0.5
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 The kit is a tiered set of files. You can drop the directory into your project
@@ -10,12 +10,30 @@ bash adoption/install.sh
 ```
 
 Non-interactive: `bash adoption/install.sh --yes`. The script copies the kit
-into `operating-standards/` under your project root (same skip rules as the Team
-installers). Verify with:
+into `operating-standards/` under your project root, asking before it overwrites
+any existing file. Verify with:
 
 ```bash
 bash operating-standards/enforcement/bin/check-kit.sh operating-standards
 ```
+
+Preview without writing anything:
+
+```bash
+bash adoption/install.sh --dry-run
+```
+
+The dry run prints every file the installer would copy and the Claude Code
+settings keys it would add or merge. To remove Compound AI Claude Code hook
+wiring later without deleting kit files or project notes:
+
+```bash
+bash adoption/install.sh --uninstall
+```
+
+Uninstall restores the prior Claude settings hook keys from
+`settings.json.compound-ai-bak` when that backup exists. If there is no backup,
+it removes only hook keys that still exactly match the kit fragment.
 
 Otherwise, point your agent at `adoption/ADOPT.md` for an existing project or
 `HANDOFF.md` for a new one.

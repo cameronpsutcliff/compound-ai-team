@@ -1,5 +1,5 @@
 # Citations Registry
-# Compound AI Operating Standards v3.0.4
+# Compound AI Operating Standards v3.0.5
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 This file is the canonical attribution registry. Citation markers in the

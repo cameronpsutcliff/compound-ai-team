@@ -35,8 +35,11 @@ STANDARDS_DIR="$(resolve_standards_dir "${1:-}")"
 # Docs that discuss the benchmark and must reference results.md by pointer.
 SCOPED_DOCS="README.md EXECUTIVE.md STANDARD.md docs/ARCHITECTURE.md _map.md AGENT.md"
 
-# Benchmark-shaped figures: comma-grouped 6-digit counts, or a precise decimal ratio.
-PATTERN='[0-9]{3},[0-9]{3}|[0-9]+\.[0-9]+x'
+# Benchmark-shaped figures: comma-grouped 6-digit counts, a precise decimal
+# ratio (e.g. 156.2x), or a 3+ digit integer multiplier (e.g. 158x). Common
+# small multipliers (2x, 10x, 50x) are left alone; a 3-digit Nx in a headline
+# doc is a benchmark ceiling figure and must come from the generated results.md.
+PATTERN='[0-9]{3},[0-9]{3}|[0-9]+\.[0-9]+x|[0-9]{3,}x'
 
 failed=0
 for rel in $SCOPED_DOCS; do

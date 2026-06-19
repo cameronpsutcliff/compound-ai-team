@@ -1,5 +1,5 @@
 # Viz Canon
-# Compound AI Operating Standards v3.0.4
+# Compound AI Operating Standards v3.0.5
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 The sources behind the rules and taxonomy in this skill. Cite these when justifying a recommendation; the reasoning lands harder when grounded in named canon than in unattributed assertion.

@@ -1,7 +1,7 @@
 # Compound AI Operating Standards
 ## The Six-Layer Standard
 
-Version: v3.0.4
+Version: v3.0.5
 Authors: Cameron Sutcliff (cameronpsutcliff), Joshua Sutcliff (joshuadsutcliff)
 
 ---
@@ -115,9 +115,14 @@ drift); a reviewer can re-run `measure.sh` on a bare laptop and reproduce them.
 drop-in adoption protocol).
 
 `reference-impl/` is the only place Python lives: provenance verification,
-manifest build, derive, and the skill-creator scaffold. It is excluded from the
-Individual edition release zip (lean adopter payload) and included in the Team
-edition. `adoption/` carries `ADOPT.md`, the installer, and `INSTALL.md`.
+manifest build, derive, and the skill-creator scaffold. It ships in both
+editions: the verifiers (`verify-integrity.py`, `verify-origin.py`) are
+stdlib-only and the docs tell adopters to run them, and the pattern code and
+skill-creator are reference material. None of it is tier-0 loaded, so it does
+not affect the lean session-start cost. The Individual zip stays lean by
+omitting the canonical working docs, the derive tooling, and the Team org layer
+(`team/`), not the reference tooling. `adoption/` carries `ADOPT.md`, the
+installer, and `INSTALL.md`.
 
 ---
 
@@ -153,6 +158,15 @@ what is advisory rather than mechanically enforced.
 
 ## Version history
 
+- v3.0.5 (2026-06-19): runtime-reversibility, packaging-safety, and repo-hygiene
+  pass, hardened by an adversarial pre-publication review. A settings-wiring
+  integration test (assembles settings.json from the fragment, invokes the wired
+  PreToolUse command, asserts the block), reversible installers (--dry-run and
+  --uninstall) that now append rather than overwrite a user's existing hooks, a
+  derive syntax gate plus a scrub fix so the shipped installer parses, removal of
+  two private-deployment docs that were shipping in the Team edition, a leaner
+  published root, and coherence fixes (reference-impl ships in both editions; a
+  retired-skill reference corrected). No doctrine change.
 - v3.0.4 (2026-06-19): impressiveness and depth pass. An enforcement-in-action
   proof (the hook shown blocking a real over-budget spawn), conformance cases
   (CT-AC/UD/SR/GL) executed in the self-test, README badges and an enforced-vs-
@@ -165,7 +179,7 @@ what is advisory rather than mechanically enforced.
   in headline docs, the ARCHITECTURE stale-numbers fix, a corrected release date,
   and a repo description that states the enforcement scope. No doctrine change.
 - v3.0.2 (2026-06-19): pre-publication hardening. An executive one-pager, a
-  README that leads with the thesis (the 158x figure is now generated, not
+  README that leads with the thesis (the headline figure is now generated, not
   hand-typed, so it cannot drift), real captured hook-block evidence in place of
   an illustration, clone-safe proof scripts, the CI workflow relocated to the
   repo root so it actually runs, a seventh gate documented, provenance pointed
@@ -176,7 +190,8 @@ what is advisory rather than mechanically enforced.
   HANDOFF roster gate, a deduped changelog, ccusage degradation docs, a
   session-router singular-term fix, a quick-recap convention, scripted
   installers, edition-specific zips, and an estimator-based reframing of the
-  158x and non-Claude enforcement claims. No behavior change to the doctrine.
+  headline-multiplier and non-Claude enforcement claims. No behavior change to
+  the doctrine.
 - v3.0.0 (2026-06-19): co-owned consolidation. Six-layer architecture, the
   runtime-agnostic capability and adapter model, cross-repo skill-merge
   (memory, delegation, review), goal-parity, vendored runtime/claude-code hooks.

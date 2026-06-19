@@ -2,6 +2,80 @@
 
 Release notes for the Compound AI Operating Standards kit. Newest first.
 
+## v3.0.5 (2026-06-19)
+
+Runtime-reversibility, packaging-safety, and repo-hygiene pass. No doctrine
+change. Hardened by an adversarial multi-lens pre-publication review.
+
+### Added
+
+- **Settings-wiring integration test.** The self-test previously called the
+  hooks directly with stdin fixtures, which proves the hook logic but not that
+  the Claude Code settings wiring invokes them. A new integration test
+  (`enforcement/tests/settings-wiring-integration.sh`, wired into the self-test)
+  assembles a real `settings.json` from `runtime/claude-code/settings.fragment.json`
+  via the installer, extracts the exact wired `PreToolUse` command, and invokes
+  THAT command with a realistic over-budget `Agent` spawn event, asserting a
+  `block` (and that a compliant event passes). This closes the gap between "the
+  hook returns block" and "the wired settings actually stop the call."
+- **Reversible install.** `adoption/install.sh` and the Team installers
+  (`install.sh`, `install.py`), plus `runtime/claude-code/install-adapter.sh`,
+  gain `--dry-run` (print exactly what would be copied and which settings keys
+  would be merged, change nothing) and `--uninstall` (back up settings before
+  the first write and restore on uninstall; never delete kit files or user
+  content the kit did not add). Both are documented in `adoption/INSTALL.md` and
+  each installer `--help`.
+- **Shipped-script syntax gate in the derive.** The derive step now runs
+  `bash -n` over every shipped shell script and refuses to package a tree whose
+  scripts do not parse, so an over-scrubbed or stale derive can never publish a
+  non-parsing installer again.
+
+### Fixed
+
+- **The installer no longer ships broken.** The build-time scrub was deleting
+  lines that referenced `~/.claude/settings.json` (it treated `.claude` as a
+  private dotdir), which dropped a guard line and left the shipped
+  `adoption/install.sh` with a shell syntax error even though the canonical
+  source parsed cleanly. The scrub now allowlists the public agent-config
+  dotdirs (`.claude`, `.codex`, `.gemini`, `.kiro`, `.compound-ai`, ...), and the
+  new derive syntax gate backstops it.
+- **Install no longer overwrites a user's existing hooks.** The Claude settings
+  merge replaced each hook event wholesale; it now appends the kit's hook
+  entries and never removes a user's own, deduped so re-install is idempotent.
+  Uninstall restores from the pre-install backup, or removes only the kit's own
+  entries when no backup exists. The "never deletes" promise is now literally
+  true.
+- **Two private-deployment docs were shipping in the Team edition.**
+  `docs/derived-not-typed.md` and `docs/brief-standard.md` carried
+  private-deployment specifics (a named private project, real scheduled-job
+  labels, an internal pipeline). They are now dropped from BOTH editions
+  alongside the other internal-process docs.
+- **reference-impl packaging claims were stale.** Several docs (`STANDARD.md`,
+  `docs/ARCHITECTURE.md`, `reference-impl/README.md`, `adoption/ADOPT.md`,
+  `derive/transform-rules.md`, and an `exclude.txt` comment) still said
+  `reference-impl/` is excluded from the Individual edition, but since v3.0.1 it
+  ships in both editions so adopters can run the documented
+  `verify-integrity.py` / `verify-origin.py` step. The prose now matches the
+  build: the Individual zip stays lean by omitting the canonical working docs,
+  `derive/`, and `team/`, not the reference tooling.
+- **A retired skill was referenced as live.** `AGENT.md`, the canonical
+  operating contract, told every agent to promote patterns via
+  `pattern-promoter`, a skill retired into `memory`; it now points at the
+  `memory` skill (preserve mode). The Field Guide's historical skill appendix is
+  flagged as historical, with `_skills-index.md` named as the live roster.
+
+### Changed
+
+- **Leaner published root.** Internal working files (`BACKLOG.md`, `STATE.md`,
+  `session-log.md`, `Project.md`) are no longer shipped in either edition; the
+  published root carries only adopter-facing furniture. No doctrine or
+  capability change. The decluttered files are now framed as project-local
+  (created during adoption, read if present) in the agent contract and handoff
+  template.
+- Minor coherence fixes: the rules-schema `version` in `enforcement-rules.yaml`
+  is labeled as independent of the kit release, and the provenance verifiers are
+  referenced by full path in the adoption guide.
+
 ## v3.0.4 (2026-06-19)
 
 Impressiveness and depth pass driven by a five-persona cold-reviewer panel (all
@@ -144,7 +218,7 @@ self-consistent for publication.
 
 ### Changed
 
-- **Honesty pass.** The 158x headline is reframed as an estimator-based,
+- **Honesty pass.** The headline multiplier is reframed as an estimator-based,
   order-of-magnitude figure (no metered tokenizer read), and the docs state
   that hard-blocking enforcement is real on Claude Code while other runtimes
   honor the contract by prompt-prelude and wrapper (advisory, graceful

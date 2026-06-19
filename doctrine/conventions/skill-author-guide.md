@@ -1,6 +1,6 @@
 # Skill Author Guide
 
-Version: v3.0.4
+Version: v3.0.5
 Authors: Cameron Sutcliff, Joshua Sutcliff (joshuadsutcliff)
 
 Use this file when adding, revising, or evaluating a skill under `skills/` or

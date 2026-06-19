@@ -3,7 +3,7 @@
 Optional Python and maintainer tooling for authors. Not required to adopt or apply
 the Compound AI Operating Standards Doctrine.
 
-**Version:** v3.0.4  
+**Version:** v3.0.5  
 **Authors:** Cameron Sutcliff, Joshua Sutcliff (joshuadsutcliff)
 
 ## Contents
@@ -31,6 +31,10 @@ The `skill-creator` skill pointer lives at
 
 ## Packaging
 
-The Individual edition release zip excludes this directory (lean adopter
-payload). The Team edition zip includes it. See `STANDARD.md` and D-002 in the
-ratified plan.
+Both edition zips include this directory. The verifiers
+(`verify-integrity.py`, `verify-origin.py`) are stdlib-only and the docs tell
+adopters to run them, and the pattern code and skill-creator are reference
+material. None of it is tier-0 loaded, so it does not affect the lean
+session-start cost. The Individual zip stays lean by omitting the canonical
+working docs, the derive tooling, and the Team org layer instead. See
+`STANDARD.md` and `derive/transform-rules.md`.

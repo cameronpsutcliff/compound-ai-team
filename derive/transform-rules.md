@@ -62,21 +62,28 @@ Allowlisted co-author identities **must survive**: `Joshua Sutcliff`,
 `joshuadsutcliff`, `Cameron Sutcliff`, `cameronpsutcliff`, and the public System B
 reference `github.com/joshuadsutcliff`.
 
-## 4. Individual zip omissions
+## 4. Edition omissions
 
-Copied into the derived tree when present, then omitted from the Individual zip
-by `exclude.txt`:
+Two categories. First, internal build-process and private-deployment docs that
+never ship in EITHER edition. The Team edition ignores `exclude.txt`, so these
+are dropped in `derive.sh` directly (the `should_skip_copy` always-skip case):
+
+- `docs/FINAL-REVIEW.md`, `docs/HG-2-DEBATE.md`, `docs/PUBLICATION-CHECKLIST.md`,
+  `docs/WEBSITE-COPY.md`, `docs/FRESH-SESSION-DRY-RUN.md`,
+  `docs/component-ledger.md`, `docs/derived-not-typed.md`, `docs/brief-standard.md`
+- `leak-denylist.local.txt`
+
+Second, files copied into the derived tree and shipped in the Team edition but
+omitted from the Individual zip by `exclude.txt` (the lean adopter payload):
 
 - `AGENT.annotated.md`, `adoption-report.md`, `delegation.md`,
   `project-scaffold.md`, `project-internal-structure.md`
-- `docs/FINAL-REVIEW.md`, `docs/HG-2-DEBATE.md`, `docs/derived-not-typed.md`,
-  `docs/brief-standard.md`, `docs/WEBSITE-COPY.md`, `docs/PUBLICATION-CHECKLIST.md`,
-  `docs/FRESH-SESSION-DRY-RUN.md`
-- `doctrine/conventions/universal-skill-routing.md`
 - `_reference/josh-merge/blend-system.md` (design input)
-- `reference-impl/`
-- `derive/`
-- `leak-denylist.local.txt` if deliberately included
+- `team/` (the Team org layer)
+- `derive/` (the build tooling)
+
+`reference-impl/` and `doctrine/conventions/universal-skill-routing.md` ship in
+BOTH editions and are intentionally not omitted.
 
 ## 5. Manifest regeneration
 

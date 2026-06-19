@@ -1,5 +1,5 @@
 # Visualization Prompt Templates
-# Compound AI Operating Standards v3.0.4
+# Compound AI Operating Standards v3.0.5
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 Ready-to-use prompt templates for every chart type in the visualization taxonomy. When a user asks "give me a prompt for X chart", the viz skill can return the matching block verbatim. Each template uses `[placeholders]` for the consumer to fill in.

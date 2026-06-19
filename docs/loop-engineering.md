@@ -126,8 +126,8 @@ The primitives already exist here; loop engineering names and standardizes them:
 | Memory | state files, MEMORY.md, session logs | same files | cron output dirs + memory book | a shared workspace directory, ledgers |
 
 Existing loops to retrofit under this standard: autoresearch (already implements the cycle and
-mechanical-metric verification; needs the three hard stops declared per run), a directory-website
-fleet on Hermes (six closed loops with vision/content gates), the IIP overnight pipeline (L4 with checkpoints), a
+mechanical-metric verification; needs the three hard stops declared per run), a content-and-website
+automation fleet (several closed loops with vision and content gates), the IIP overnight pipeline (L4 with checkpoints), a
 registry-maintenance loop design (a monitoring loop whose stop condition is the health contract).
 
 The L1-L5 autonomy ladder is the permission system for loops: a loop's autonomy ceiling is set by

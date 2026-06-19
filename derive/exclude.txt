@@ -5,9 +5,11 @@
 # should_skip_copy). For --edition team, this file is ignored entirely and the
 # full derived tree ships. Paths are relative to the derived kit root.
 #
-# D-002: Individual (lean) zip excludes reference-impl/ via derive.sh
-# --edition individual. Team (complete) zip ignores this file and includes the
-# full derived tree.
+# D-002 (revised v3.0.1): reference-impl/ now ships in BOTH editions (see the
+# note lower in this file), so it is intentionally NOT listed below. The
+# Individual (lean) zip excludes the canonical working docs, derive/, and team/
+# via derive.sh --edition individual. The Team (complete) zip ignores this file
+# and includes the full derived tree.
 #
 # Lines beginning with # and blank lines are ignored.
 

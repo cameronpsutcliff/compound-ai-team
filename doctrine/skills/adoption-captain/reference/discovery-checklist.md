@@ -42,6 +42,7 @@ find . -maxdepth 3 \( \
 \) 2>/dev/null
 
 # Check global agent files (not part of this project, but relevant)
+ls ~/.claude/CLAUDE.md ~/.codex/AGENTS.md 2>/dev/null
 ```
 
 **What to extract from each file.**
@@ -291,6 +292,7 @@ requirements.txt; no invocation found." Ask the operator for the exact command.
 
 ### Anti-pattern: treating global instruction files as project files
 
+**Symptom.** Agent reads `~/.claude/CLAUDE.md` and lists its rules as if
 they belong to the project.
 
 **Fix.** Global instruction files are noted in the discovery report under a
