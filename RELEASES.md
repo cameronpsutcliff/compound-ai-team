@@ -2,6 +2,34 @@
 
 Release notes for the Compound AI Operating Standards kit. Newest first.
 
+## v3.0.6 (2026-06-19)
+
+Enforcement-coverage and honesty pass. No doctrine change.
+
+### Fixed
+
+- **The leak gate now covers the full shipped surface.** `check-portability.sh`
+  scoped its scan to the Individual edition surface (`include.txt` minus
+  `exclude.txt`), so the Team-only `team/` and `derive/` directories shipped to
+  the public Team edition were never leak-scanned. That is the exact blind spot
+  that let a private term reach the Team edition in an earlier release. The gate
+  now scans the union of what ships (both editions), with `team/` Python
+  exempted from the dependency fence (the Team org layer carries an installer and
+  a command-center tool). A planted-fixture self-test proves a leak in `team/` is
+  now caught and guards the regression.
+
+### Changed
+
+- **One source of truth for "ships to neither edition."** A new
+  `derive/always-skip.txt` lists the internal build-process and private-deployment
+  docs that are dropped from both editions. `derive.sh` drops them and
+  `check-portability.sh` excludes them from its scan by reading the same file, so
+  the derive's drop set and the gate's scanned surface can no longer drift apart.
+- **Benchmark scope stated plainly.** A known-limits note records what the
+  session-start benchmark measures (context-loading cost, a character estimate)
+  and what it does not (output quality, agent coherence, or multi-agent drift
+  over a long engagement). The kit makes no claim about the latter.
+
 ## v3.0.5 (2026-06-19)
 
 Runtime-reversibility, packaging-safety, and repo-hygiene pass. No doctrine

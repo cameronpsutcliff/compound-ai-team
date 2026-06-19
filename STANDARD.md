@@ -1,7 +1,7 @@
 # Compound AI Operating Standards
 ## The Six-Layer Standard
 
-Version: v3.0.5
+Version: v3.0.6
 Authors: Cameron Sutcliff (cameronpsutcliff), Joshua Sutcliff (joshuadsutcliff)
 
 ---
@@ -13,7 +13,8 @@ layers below it still apply and the Standard still holds.
 The first two layers are vendor-neutral and portable. The remaining layers add
 mechanism: real adapters, real enforcement, proof, and tooling. The dependency
 fence is enforced by `enforcement/bin/check-portability.sh`: no Python outside
-`reference-impl/`, no shell or JS outside `runtime/` and `enforcement/`.
+`reference-impl/` and `team/`, no scripts in the portable `doctrine/` layer, and
+no personal-data leak anywhere in the shipped surface of either edition.
 
 ---
 
@@ -145,6 +146,7 @@ Eight gates orchestrated by `enforcement/bin/check-kit.sh` (thresholds in
 |---|---|
 | `enforcement/bin/check-line-caps.sh` | Pointer Markdown files at or under 100 lines |
 | `enforcement/bin/check-tier-discipline.sh` | tier0 never references tier-2/tier-3 |
+| `enforcement/bin/check-portability.sh` | No personal-data leaks anywhere in the shipped surface of either edition (including the Team-only `team/` and `derive/`); no .py outside reference-impl/ or team/; no scripts in doctrine/ |
 | `enforcement/bin/check-counts.sh` | Skill count derived, never hand-typed; matches index and registry |
 | `enforcement/bin/check-registry-coherence.sh` | Every registry pointer resolves and every SKILL.md is registered |
 | `enforcement/bin/check-handoff-skills.sh` | HANDOFF.md lists the live Tier 1 skills, no stale or duplicate entries |
@@ -158,6 +160,15 @@ what is advisory rather than mechanically enforced.
 
 ## Version history
 
+- v3.0.6 (2026-06-19): enforcement-coverage and honesty pass. The leak gate now
+  scans the full shipped surface of BOTH editions (it previously scanned only the
+  Individual surface, leaving the Team-only `team/` and `derive/` unscanned: the
+  exact blind spot that let a private term reach the Team edition). A single
+  `derive/always-skip.txt` is now the one source of truth for "ships to neither
+  edition", read by both the derive and the gate so they cannot drift, with a
+  planted-fixture self-test for the Team-surface coverage. A known-limits note on
+  what the benchmark does and does not measure (context-loading cost, not
+  multi-agent drift). No doctrine change.
 - v3.0.5 (2026-06-19): runtime-reversibility, packaging-safety, and repo-hygiene
   pass, hardened by an adversarial pre-publication review. A settings-wiring
   integration test (assembles settings.json from the fragment, invokes the wired

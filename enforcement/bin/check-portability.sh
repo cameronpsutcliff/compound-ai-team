@@ -117,10 +117,15 @@ fi
 failures=0
 
 build_scan_excludes() {
-  local exclude_file="$STANDARDS_DIR/derive/exclude.txt"
+  # The gate's scanned surface must equal the UNION of what actually ships (the
+  # Team edition = include.txt minus the always-skip set). Scoping to the
+  # Individual-only exclude.txt instead would leave a Team-shaped blind spot:
+  # team/ and derive/ ship to Team but would never be leak-scanned. Use the
+  # single-source always-skip list that derive.sh also drops by.
+  local skip_file="$STANDARDS_DIR/derive/always-skip.txt"
   local rel
 
-  if [ ! -f "$exclude_file" ]; then
+  if [ ! -f "$skip_file" ]; then
     return
   fi
 
@@ -129,13 +134,8 @@ build_scan_excludes() {
     rel="${rel%"${rel##*[![:space:]]}"}"
     rel="${rel#"${rel%%[![:space:]]*}"}"
     [ -n "$rel" ] || continue
-    case "$rel" in
-      reference-impl/|reference-impl)
-        continue
-        ;;
-    esac
     printf '%s\n' "${rel%/}"
-  done < "$exclude_file"
+  done < "$skip_file"
 }
 
 build_scan_excludes > "$tmp_scan_exclude"
@@ -208,10 +208,10 @@ while IFS= read -r file; do
   [ -n "$file" ] || continue
   rel="${file#$STANDARDS_DIR/}"
   case "$rel" in
-    reference-impl/*)
+    reference-impl/*|team/*)
       ;;
     *)
-      printf 'FAIL portability: Python file outside reference-impl/: %s\n' "$rel" >&2
+      printf 'FAIL portability: Python file outside reference-impl/ or team/: %s\n' "$rel" >&2
       failures=$((failures + 1))
       ;;
   esac

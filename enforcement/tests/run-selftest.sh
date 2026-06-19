@@ -334,6 +334,22 @@ make_tree "$case_dir"
 printf '# Public attribution\n\nJoshua Sutcliff\njoshuadsutcliff\n' > "$case_dir/docs/allowlisted-near-match.md"
 run_expect_pass "check-portability allowlisted near-match" "$BIN_DIR/check-portability.sh" "$case_dir"
 
+# Team-surface coverage: team/ is omitted from the Individual zip (exclude.txt)
+# but SHIPS to the Team edition, so a leak there must still be caught. The gate
+# keys its scan-exclude off always-skip.txt (the union of what ships), not
+# exclude.txt (the Individual-only surface). A gate that excluded by exclude.txt
+# would miss this and wrongly pass; this fixture guards that regression.
+case_dir="$TMP_ROOT/portability-team-surface"
+make_tree "$case_dir"
+mkdir -p "$case_dir/team/command-center" "$case_dir/derive"
+printf '%s\n' 'doctrine/**' 'docs/**' 'runtime/**' 'team/**' 'enforcement-rules.yaml' '_skills-index.md' 'HANDOFF.md' > "$case_dir/derive/include.txt"
+printf '%s\n' 'team/' > "$case_dir/derive/exclude.txt"
+printf '%s\n' 'docs/FINAL-REVIEW.md' > "$case_dir/derive/always-skip.txt"
+# Assemble the leak path at runtime so the literal does not appear in this
+# shipped, leak-scanned script (the same technique derive.sh uses for its regex).
+printf 'Build note: /%s/someone/private/notes.md\n' "Users" > "$case_dir/team/command-center/notes.md"
+run_expect_fail "check-portability scans Team-shipped team/ (exclude.txt-omitted, not always-skipped)" "$BIN_DIR/check-portability.sh" "$case_dir"
+
 case_dir="$TMP_ROOT/counts"
 make_tree "$case_dir"
 printf '%s\n' '---' 'Total skills: 2' '---' '' '- `doctrine/skills/minimal/SKILL.md`' > "$case_dir/_skills-index.md"

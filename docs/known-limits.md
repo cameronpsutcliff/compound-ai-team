@@ -1,6 +1,6 @@
 # Known Limits
 
-Compound AI Operating Standards v3.0.5
+Compound AI Operating Standards v3.0.6
 
 This document states honestly what the kit enforces mechanically, what remains
 advisory, and what the human always controls. A Thoughtworks-grade reader will
@@ -110,3 +110,18 @@ broken `ccusage` binary, stale cache, missing `python3`, or JSON parse error
 results in the hook exiting 0 with no injection or block. A hook failure never
 blocks legitimate work. This property is preserved from the vendor
 implementation and is self-tested in `enforcement/tests/run-selftest.sh`.
+
+---
+
+## What the benchmark measures (and does not)
+
+The session-start benchmark measures one thing: the **context-loading cost** of
+a tiered, route-on-demand layout versus an un-tiered one, as a character
+estimate (bytes / 4), pure shell, reproducible on a bare laptop. It is an
+order-of-magnitude signal, not a tokenizer-exact or billing figure.
+
+It does **not** measure output quality, agent coherence, or real-world
+multi-agent drift over a long engagement. Those are harder to measure and the
+kit makes no claim about them. The benchmark shows the kit loads less context
+per session; whether that yields better or more coherent work is left to the
+operator's own observation, not asserted here.

@@ -1,5 +1,5 @@
 # Project Operating Contract
-# Compound AI Operating Standards v3.0.5
+# Compound AI Operating Standards v3.0.6
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0 (code) / CC BY 4.0 (docs)
 
 Canonical URL: `https://cameronsutcliff.com/compound-ai`
