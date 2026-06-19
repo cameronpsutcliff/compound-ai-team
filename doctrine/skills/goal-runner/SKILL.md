@@ -1,5 +1,5 @@
 # Skill: goal-runner
-# Compound AI Operating Standards v3.0.5
+# Compound AI Operating Standards v3.0.6
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 ## What this skill does

@@ -16,6 +16,7 @@ DERIVE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CANONICAL="$(cd "$DERIVE_DIR/.." && pwd)"
 INCLUDE_FILE="$DERIVE_DIR/include.txt"
 EXCLUDE_FILE="$DERIVE_DIR/exclude.txt"
+ALWAYS_SKIP_FILE="$DERIVE_DIR/always-skip.txt"
 BUILD_MANIFEST="$CANONICAL/reference-impl/scripts/build-manifest.py"
 
 EDITION="individual"
@@ -86,6 +87,26 @@ if [ ! -f "$INCLUDE_FILE" ]; then
   exit 2
 fi
 
+always_skipped() {
+  # Match a path against always-skip.txt (the single source of truth shared with
+  # check-portability.sh's scan-exclude, so the derive drop set and the gate's
+  # scanned surface cannot drift apart).
+  local rel="${1%/}"
+  local pattern
+  [ -f "$ALWAYS_SKIP_FILE" ] || return 1
+  while IFS= read -r pattern || [ -n "$pattern" ]; do
+    pattern="${pattern%%#*}"
+    pattern="${pattern#"${pattern%%[![:space:]]*}"}"
+    pattern="${pattern%"${pattern##*[![:space:]]}"}"
+    [ -n "$pattern" ] || continue
+    pattern="${pattern%/}"
+    if [ "$rel" = "$pattern" ] || [[ "$rel" == "$pattern/"* ]]; then
+      return 0
+    fi
+  done < "$ALWAYS_SKIP_FILE"
+  return 1
+}
+
 should_skip_copy() {
   local rel="$1"
   rel="${rel%/}"
@@ -94,24 +115,17 @@ should_skip_copy() {
     # path in its co_filename (a personal-path leak that text-greps miss) and is
     # non-deterministic, which breaks the manifest/verify-integrity check. These
     # regenerate whenever a .py is run or compiled, so filter them at every
-    # derive, regardless of what is in the canonical tree.
+    # derive (glob match, so kept here rather than in always-skip.txt).
     __pycache__|*/__pycache__|*/__pycache__/*|*.pyc|*.pyo)
       return 0
       ;;
-    leak-denylist.local.txt)
-      return 0
-      ;;
-    # Internal build-process and private-deployment docs: never ship in EITHER
-    # edition (the Team edition ignores exclude.txt, so these must be skipped
-    # here). They expose the solo/internal-process reality, contradict the
-    # co-owned framing, or carry private deployment specifics (a named private
-    # project, real launchd job labels, an internal orchestration pipeline).
-    docs/FINAL-REVIEW.md|docs/HG-2-DEBATE.md|docs/PUBLICATION-CHECKLIST.md|\
-    docs/WEBSITE-COPY.md|docs/FRESH-SESSION-DRY-RUN.md|docs/component-ledger.md|\
-    docs/derived-not-typed.md|docs/brief-standard.md)
-      return 0
-      ;;
   esac
+  # Internal build-process and private-deployment docs plus the maintainer-only
+  # local denylist: never ship in EITHER edition (the Team edition ignores
+  # exclude.txt, so these must be dropped here). Listed in always-skip.txt.
+  if always_skipped "$rel"; then
+    return 0
+  fi
   if [ "$EDITION" = "individual" ] && should_skip_zip "$rel"; then
     return 0
   fi

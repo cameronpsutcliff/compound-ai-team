@@ -7,12 +7,12 @@
   ],
   "canonical_url": "https://cameronsutcliff.com/compound-ai",
   "source_repo": "https://github.com/cameronpsutcliff/compound-ai",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "release_date": "2026-06-19",
   "license_docs": "CC-BY-4.0",
   "license_code": "Apache-2.0",
-  "generated_at": "2026-06-19T17:35:28.175463+00:00",
-  "aggregate_sha256": "c3fb5f3dec739004d74ea91eb9dc7c43f2fa94980068aa6cddfdec99f7ee87b2",
+  "generated_at": "2026-06-19T20:13:54.397378+00:00",
+  "aggregate_sha256": "cbf270ff3c8832fc8280bd3bb8dcab200a1845b9f016fc2bb9e81fc0c3cdaa4d",
   "files": [
     {
       "path": ".github/ISSUE_TEMPLATE/bug_report.md",
@@ -42,12 +42,12 @@
     {
       "path": "AGENT.md",
       "bytes": 3769,
-      "sha256": "1f80db9ad5b2a0778bf3152368210a742c523f7e4d59204160ed045fae699ced"
+      "sha256": "fbaa90e400b74e4c114192ae7254aec8e2387aa5e639d88005c29f7e9cfd70e6"
     },
     {
       "path": "CITATION.cff",
       "bytes": 922,
-      "sha256": "f8eed4ddf9f41fc283ee8f4aaf24111f62a86f5e822752a1efc0116968832ef1"
+      "sha256": "0952938aa0d537a67180ac1b5dd8ec1ca82ba36d7137a58159fb1cd37edef5c8"
     },
     {
       "path": "CLAUDE.md",
@@ -67,7 +67,7 @@
     {
       "path": "HANDOFF.md",
       "bytes": 7469,
-      "sha256": "ce08fd69da5b6d33f8723489fd8e0e0a95bfc8450b62d719beca30e580b1cde0"
+      "sha256": "a1547b1e4ceb4eb0f69b4823f25fdd534edc03469bc17664d9c7ae1375160c2b"
     },
     {
       "path": "LICENSE",
@@ -87,17 +87,17 @@
     {
       "path": "NOTICE.md",
       "bytes": 1055,
-      "sha256": "41f760626eb0a0c7444b0f0cb3e0558693212389b867b4d9051a56d7eb70cc45"
+      "sha256": "47fd8c2a81df40cf62c0749d246cf9f7df2d916322afc04ef43fabb63c3cbab7"
     },
     {
       "path": "README.md",
       "bytes": 8916,
-      "sha256": "7e83ddc052dbc5ebdfaad336bd0ee51ac1248c965cc8a77d30249193ffef91ea"
+      "sha256": "e5b0f0d30e1760c7512e0ff6d7d6b233e134d786e1b4bc9ed9e2cf0113ccf791"
     },
     {
       "path": "RELEASES.md",
-      "bytes": 15908,
-      "sha256": "44301da10b9b6fa92c7a4dc79d2b4402e67aaadbb3278047dd8e3f67e1d3c659"
+      "bytes": 17372,
+      "sha256": "02befdd2ff81de812a42bc868ef19a4aecd17d68d7cde0ec20c89fd9f33f9342"
     },
     {
       "path": "SECURITY.md",
@@ -106,23 +106,23 @@
     },
     {
       "path": "STANDARD.md",
-      "bytes": 9658,
-      "sha256": "f7b38b7d4329ca474caa6d34f570c476a91e1ead631c6de59533cd9588f9b5db"
+      "bytes": 10647,
+      "sha256": "fbc22d5c933c5376d33919d98eec83335d82175945da28586021d11a2ed562bd"
     },
     {
       "path": "_citations.md",
       "bytes": 6821,
-      "sha256": "129963141554832d5747466dd51c5b24eb489897c66ac280552331fd434bbff4"
+      "sha256": "a331e81f1eb49db6caede220ecc406441a1aea6272ba8e792a91c983addb570d"
     },
     {
       "path": "_map.md",
       "bytes": 2659,
-      "sha256": "f0780a305611226446d6cc44f5c9b7b9f7ee55773e937c583076f0e99261406e"
+      "sha256": "5af8a9227cb096c5b7ee00c955f4708f889464f4efcdca06912d7af426c2c74e"
     },
     {
       "path": "_skills-index.md",
       "bytes": 9186,
-      "sha256": "216a38087af2b19cdc31bd5baee8ce12a8d895b97cd10d944861c4dda216bf06"
+      "sha256": "9b76c7fc8240b96fd5194db375f391079e0e3d8b884dfbac80b064eca93cd0ac"
     },
     {
       "path": "_tiers.md",
@@ -132,12 +132,12 @@
     {
       "path": "adoption/ADOPT.md",
       "bytes": 10639,
-      "sha256": "996e2b09ad84ce3aa5ee0213a42e67eab5430e9b287d8a8f12bd1d54c7b22979"
+      "sha256": "b26855a70401210ba846af6388309b2c4b3e8f255fabac7175cb7fdac6533352"
     },
     {
       "path": "adoption/INSTALL.md",
       "bytes": 8696,
-      "sha256": "96f8b7905e316e7a127c1f7fb2442d29c87ba66a1f9d9ad03091411a54c2934c"
+      "sha256": "853110dbeaa221fc95b74648bbcdb0fc7dec3f749b09bb5cb95b26d06edc0029"
     },
     {
       "path": "adoption/install.sh",
@@ -182,12 +182,17 @@
     {
       "path": "codemeta.json",
       "bytes": 1104,
-      "sha256": "4326020fb182899a6984aca88434b2532ed10da57a75b6ba1208a2388b1dafb9"
+      "sha256": "ffb4f0f9ea27d05b50978333809ecf109bf7c60a0253b4a4bf126504d8c7a99c"
+    },
+    {
+      "path": "derive/always-skip.txt",
+      "bytes": 1317,
+      "sha256": "aeb8f1339f8cbb502a6e7ce85da3aa5e59ed3fdd28aef5050226b4a03f2026b9"
     },
     {
       "path": "derive/derive.sh",
-      "bytes": 17822,
-      "sha256": "6ec50b8db9a8d074478b60e20f30a85ebb7bc99cab70816964d7304bd84af883"
+      "bytes": 18168,
+      "sha256": "c7a4377968d659fe28737c7cbf61329ddb911029175df55d43515744ee03e525"
     },
     {
       "path": "derive/exclude.txt",
@@ -207,7 +212,7 @@
     {
       "path": "docs/ARCHITECTURE.md",
       "bytes": 13193,
-      "sha256": "856df5721294acb5e4145b204f2a8fad5d40a0c068e3374e6bb7b5d1235d8fa8"
+      "sha256": "af7f51d833df52b45bcd0d630b96df3bbf1e96f65f7f544ce09408a29ffe4da5"
     },
     {
       "path": "docs/ENFORCEMENT-PROVENANCE.md",
@@ -221,8 +226,8 @@
     },
     {
       "path": "docs/known-limits.md",
-      "bytes": 5798,
-      "sha256": "5d3e113f5e915a5186ea43b8fe031a2753554beac0791dcfa392234417642395"
+      "bytes": 6498,
+      "sha256": "d1111087f9eee0e6d6df3b5d1d3f60423dec6864a0d526ab137a2f2cdcb4a5c2"
     },
     {
       "path": "docs/loop-engineering.md",
@@ -277,7 +282,7 @@
     {
       "path": "doctrine/conventions/skill-author-guide.md",
       "bytes": 3853,
-      "sha256": "ae0a2f3e79b91f7216bf61faab6745143d8a67149d4439f3ec4f9fd782ab5a03"
+      "sha256": "f33525356e90af248b0529be00639983d57c6ba102ba4d8dd938a4bc1485f444"
     },
     {
       "path": "doctrine/conventions/style-guide.md",
@@ -292,7 +297,7 @@
     {
       "path": "doctrine/conventions/trigger-registry.yaml",
       "bytes": 9907,
-      "sha256": "907aa17e9109416404273a41c60a29582398d14fae640f26f418d7d10f32fde8"
+      "sha256": "8f9ce00420514d32ee7800990fc7664d18e5544cc1acd4135efe9d03312cc321"
     },
     {
       "path": "doctrine/conventions/universal-skill-routing.md",
@@ -302,7 +307,7 @@
     {
       "path": "doctrine/skills/adoption-captain/SKILL.md",
       "bytes": 5440,
-      "sha256": "37466e744ce8cb0fb6c90cf42599d617603c0d3f2ee4b5fbe3df862c4f7da406"
+      "sha256": "cc8d8cd53d3d8826eb42b9860d51bb98be83b58e3670e630f8c574cc81bd5308"
     },
     {
       "path": "doctrine/skills/adoption-captain/reference/adoption-plan-template.md",
@@ -347,7 +352,7 @@
     {
       "path": "doctrine/skills/agent-panel-planning/SKILL.md",
       "bytes": 3495,
-      "sha256": "0fdbf038cb7114318369bdf75e8c8fc7dd9dc2bbf70f2ba2ab531bb2f03ba63c"
+      "sha256": "b0d76c838966eabe3a23ec17ada189170b4a416f20d7defdee509fc43931b1ce"
     },
     {
       "path": "doctrine/skills/agent-panel-planning/reference/concession-discipline.md",
@@ -392,7 +397,7 @@
     {
       "path": "doctrine/skills/agent-panel-review/SKILL.md",
       "bytes": 5007,
-      "sha256": "45ab2d60797bc3984df6f9e3b484d804113921773fcf20ce1a3dd0e80612151a"
+      "sha256": "4f57b90c4413c98db865574367fbb1793a53dc8be73796039a77012ca6ea9657"
     },
     {
       "path": "doctrine/skills/agent-panel-review/reference/agent-strengths.md",
@@ -517,7 +522,7 @@
     {
       "path": "doctrine/skills/course-shell/README.md",
       "bytes": 3365,
-      "sha256": "cd54341ef370432a088796f69497bfe4d3745bb038f706fd6622dc5be43722c2"
+      "sha256": "594ecab0ff3a7f9409382df6301aa375131e26d73969f7253fa689a30418720a"
     },
     {
       "path": "doctrine/skills/course-shell/index.html",
@@ -582,7 +587,7 @@
     {
       "path": "doctrine/skills/goal-runner/SKILL.md",
       "bytes": 2694,
-      "sha256": "8b76519009d73be071b5ddf2a9f61b196c7a03e45bc6cf57e75e621e70e5aae9"
+      "sha256": "8aea30d7aef8b458c38ceebee4733c50ec007dcd28b5b574dc3adb931479c9ee"
     },
     {
       "path": "doctrine/skills/goal-runner/reference/claude-goal-adapter.md",
@@ -652,7 +657,7 @@
     {
       "path": "doctrine/skills/mission-control/README.md",
       "bytes": 3747,
-      "sha256": "b95fd6b0decafb73af46068fcabd316ba4ba0a6ad79fe6a9aa2b071c78d5717d"
+      "sha256": "5d3550fc3d55c016dcc0d1ce1dfdc08fbd951e3d4ba65e3a4a1a7686f7db00a1"
     },
     {
       "path": "doctrine/skills/mission-control/index.html",
@@ -702,22 +707,22 @@
     {
       "path": "doctrine/skills/pressure-test/SKILL.md",
       "bytes": 3187,
-      "sha256": "8f8bcf305bfc7bceb3dd7876336476c39f55458bda1875f52480deb5f011297f"
+      "sha256": "79e6f87906f4c148f3c8542fc88e3c18041539a40ff3e0880267894a780b9c2d"
     },
     {
       "path": "doctrine/skills/pressure-test/reference/lenses.md",
       "bytes": 6700,
-      "sha256": "5a871c0be27058a6bc4321663f74c05c1b0d52b536806489098ec4eb8e023b36"
+      "sha256": "94c3772c61b1464fa0c04799428b28a5e6cf085e39a87466348eb18eb3392e0d"
     },
     {
       "path": "doctrine/skills/pressure-test/reference/output-template.md",
       "bytes": 5588,
-      "sha256": "bed021bd2b7e236c4cce4d5b79ba12e6400d8e397a4524bb217dfac57f861b8b"
+      "sha256": "557e53c907d6dde1779ac1872a2fe368fbe66b6946d025ba349db78315ce444e"
     },
     {
       "path": "doctrine/skills/pressure-test/reference/scope-modes.md",
       "bytes": 4787,
-      "sha256": "459821d868830e0e4ee25ae1216b477d130fd2ad72c171b1eca17bf494e315b3"
+      "sha256": "eb09848df0f1817cd6e5f6397c407542fe6a287f10a73e2aa482fe839708b65c"
     },
     {
       "path": "doctrine/skills/provenance-check/SKILL.md",
@@ -727,12 +732,12 @@
     {
       "path": "doctrine/skills/quality-gate/SKILL.md",
       "bytes": 2486,
-      "sha256": "7aa9cc47ac00446009c136b9a1b54811ead331834ade41bbcbcc04dd30d80e3d"
+      "sha256": "bb820dbac4bf6dc3fcc1f380c37f61a49ce694b24206deb555d3e1b047056b2a"
     },
     {
       "path": "doctrine/skills/release-captain/SKILL.md",
       "bytes": 4744,
-      "sha256": "207f16705a0fda98420b2f23af74cbf8846c6a9e74e86c51b27cc6961d5ee945"
+      "sha256": "7dbc16ce3efacbb4a6ebee83fa1fe14e6c2e3bd3a54aa7ec04d8d56dc2dc7817"
     },
     {
       "path": "doctrine/skills/release-captain/reference/checklist.md",
@@ -752,7 +757,7 @@
     {
       "path": "doctrine/skills/release-captain/reference/provenance-verification.md",
       "bytes": 2869,
-      "sha256": "b26d939c4ff525a12e037e66372b50161f36a7ca1f5eaf0b93ee16929cdfda76"
+      "sha256": "f197ed0b6e9cc78bb3500f976cb8024877c99e57d729994aa4c439a9d88acff3"
     },
     {
       "path": "doctrine/skills/release-captain/reference/verification-protocol.md",
@@ -762,7 +767,7 @@
     {
       "path": "doctrine/skills/request-router/SKILL.md",
       "bytes": 2656,
-      "sha256": "2c83b1d6ce5b0b47d58fe39cf0d1c95c2696321938840b7b2409c22f2832c42f"
+      "sha256": "9a615dae533f15ab06fcd384715bd331d869f6a4b02c6750f56d2a63de14fb90"
     },
     {
       "path": "doctrine/skills/request-router/reference/compound-requests.md",
@@ -777,7 +782,7 @@
     {
       "path": "doctrine/skills/request-router/reference/registry-maintenance.md",
       "bytes": 4286,
-      "sha256": "7420185168af0df6b97f65c1b6d7ef65e007015bfaf5e1af3ef0d6131df3ef07"
+      "sha256": "b4738d83c663ee98ea7ee6062d805e31fa11c88204b6ce4f6e4135ba897f8c57"
     },
     {
       "path": "doctrine/skills/request-router/reference/router-rationale.md",
@@ -787,7 +792,7 @@
     {
       "path": "doctrine/skills/scroll-shell/README.md",
       "bytes": 3697,
-      "sha256": "b24631e994e43fd2bf5592908dd225d7c87ac4b52d13af63331b3b957ec7ee85"
+      "sha256": "c854a481c8d1c8f99f0baa166601e3c87be91c901e3f92e087ffcfab5e100c10"
     },
     {
       "path": "doctrine/skills/scroll-shell/index.html",
@@ -822,7 +827,7 @@
     {
       "path": "doctrine/skills/slide-shell/README.md",
       "bytes": 3301,
-      "sha256": "9c0cc5cb03c55aa45083b860f27b9c943c8b02bd31e0370580e4e91753662272"
+      "sha256": "f596d1be7a6494c3d386649fb41a99be203f650d6134c22d2b62eeb53006a0af"
     },
     {
       "path": "doctrine/skills/slide-shell/index.html",
@@ -832,7 +837,7 @@
     {
       "path": "doctrine/skills/stakeholder-mapping/SKILL.md",
       "bytes": 2448,
-      "sha256": "eda461b60570496f297cafcaa81f4dcc1d0e94a2bda2e29cefb6226fcbf4e395"
+      "sha256": "a845834a6b4ef926938f5e3bb6958db5c38f9b37d2b3c9a44b56f731366d56ca"
     },
     {
       "path": "doctrine/skills/stakeholder-mapping/reference/protocol.md",
@@ -852,7 +857,7 @@
     {
       "path": "doctrine/skills/trigger-indexer/reference/registry-schema.md",
       "bytes": 1297,
-      "sha256": "ec9a7b2610f6e984652b5c44b56fbd8e28a0a53d64ff943bc6ab6dbfbf118cab"
+      "sha256": "02f5257629c2ebc254276685579686274c960a76dc634caae975cf2683eee87a"
     },
     {
       "path": "doctrine/skills/ultra-think/SKILL.md",
@@ -867,17 +872,17 @@
     {
       "path": "doctrine/skills/viz/SKILL.md",
       "bytes": 4200,
-      "sha256": "cc8e4542812b5088ff1cc66bc695ea0e02f17d74ec3e0811d68a77558cc6f999"
+      "sha256": "3168d164f501baf865f03c6b753239b2f7e5e3b42d672ac39475d091b57046ab"
     },
     {
       "path": "doctrine/skills/viz/reference/canon.md",
       "bytes": 4700,
-      "sha256": "789bb946bb13323fad5d95155d0e34a04dbc2500f3631795ef833e7942df8417"
+      "sha256": "1f0c96a16d620b0c791bbf8a1c24d9a8a0dc7b0d3733803fbc8d8ed3daf76056"
     },
     {
       "path": "doctrine/skills/viz/reference/critique-protocol.md",
       "bytes": 4447,
-      "sha256": "1fae0bbef4a1372b48ea9a543b9b26b9882e1e2cc2fc44d99b6f1c39bdc3ae53"
+      "sha256": "8f48167a0eaf704be7efb308b2a2a8198e41f0a9f56943466c079a98952e1bf9"
     },
     {
       "path": "doctrine/skills/viz/reference/nyt-graphics.md",
@@ -887,17 +892,17 @@
     {
       "path": "doctrine/skills/viz/reference/prompts.md",
       "bytes": 9728,
-      "sha256": "147faeccfcf9bbb0a4a887a55c6622e1e4d3ef61c58ffb375e58baa545c8cd20"
+      "sha256": "03a148ef8f7e60f848830ae53c620a8c6b4403cfddda87cd74a75d8f415ce1af"
     },
     {
       "path": "doctrine/skills/viz/reference/rules.md",
       "bytes": 6484,
-      "sha256": "ba67d46b13344af817ad7370b1ef05b9ea046d545fa5595ade45de038fbbc20f"
+      "sha256": "e6dccff380dba01ba43804bfe8690accd71e5f44e4051b9593f4f648cbd9af95"
     },
     {
       "path": "doctrine/skills/viz/reference/taxonomy.md",
       "bytes": 10089,
-      "sha256": "c1ea6b4c8b2adf37f02b6e35514d7058a442f9a03c1ba12f49ae755a5cbbbb8f"
+      "sha256": "c6ffab206b1c84fa630860e953bd6018a00ba39cbd5656793d9558d63bf42152"
     },
     {
       "path": "doctrine/tiers/AGENT-tier1.md",
@@ -967,7 +972,7 @@
     {
       "path": "doctrine/tiers/tier0.md",
       "bytes": 1612,
-      "sha256": "919264fa6f847945b55aa89fc2c23a4a342153f11115e55720e4e8b524cb75e6"
+      "sha256": "2c96de1efd0d084c07f69ac0cdd6bf34d927cb3046805dd7bb4b33c107adee79"
     },
     {
       "path": "doctrine/tiers/tier1-current.md",
@@ -982,7 +987,7 @@
     {
       "path": "enforcement-rules.yaml",
       "bytes": 10273,
-      "sha256": "7388ab509d87a253e84732436d83a3fc07bfe232f7de5c1d57d28395f5d720e5"
+      "sha256": "9464bbd1ababedb0c9ed6435195911ed4a0e6e973638299abf6671deb5dff91c"
     },
     {
       "path": "enforcement/bin/check-benchmark-figures.sh",
@@ -1011,8 +1016,8 @@
     },
     {
       "path": "enforcement/bin/check-portability.sh",
-      "bytes": 9424,
-      "sha256": "f0f7a742a1cb3d51125649feabbe419ed50766d788cf35f9d589f1420d8f381b"
+      "bytes": 9714,
+      "sha256": "df8ad9771ad9f1be7d2c98c52856fc6889fa9aa200a722ed7ef13cda231dc6e3"
     },
     {
       "path": "enforcement/bin/check-registry-coherence.sh",
@@ -1151,8 +1156,8 @@
     },
     {
       "path": "enforcement/tests/run-selftest.sh",
-      "bytes": 21834,
-      "sha256": "b485f30e60a733e4a3d104f3f6911a94cc7db1af689239e4ff6a1f28cfd63014"
+      "bytes": 23039,
+      "sha256": "9a57b1feac371bb3ddcf892cfe002b1d3f4b021f5a9d66f7e8f890e027e044c5"
     },
     {
       "path": "enforcement/tests/settings-wiring-integration.sh",
@@ -1207,12 +1212,12 @@
     {
       "path": "proof/session-start-benchmark/results.md",
       "bytes": 2821,
-      "sha256": "ecf1b066cf8abfe230c224d6eb50e218bdaac33876f1e4993b9d20c8234f3783"
+      "sha256": "0f86821dd521731aa9adf6be18e3e7e39344f9d619c0119d71a9ea46e36a9348"
     },
     {
       "path": "reference-impl/README.md",
       "bytes": 1566,
-      "sha256": "e1e380962350649d24daca1e20820e4891ca02af707359a99c4784baca60a513"
+      "sha256": "7f7c613e79cd53a21b16c982d525c7f03ee057d3293824ebb8b88536d5ee930f"
     },
     {
       "path": "reference-impl/code/cache_key.py",
@@ -1357,7 +1362,7 @@
     {
       "path": "runtime/claude-code/README.md",
       "bytes": 1793,
-      "sha256": "c8c6606113ce59afc5f9a6a5b02fbdfd1fc554a0afcd00acbc21e7e660749ac5"
+      "sha256": "128416e577afda5c174d432a129e58e9a1bc2e925120b44411ab711c22099e8f"
     },
     {
       "path": "runtime/claude-code/agents/README.md",

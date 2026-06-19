@@ -1,5 +1,5 @@
 # Viz Critique Protocol
-# Compound AI Operating Standards v3.0.5
+# Compound AI Operating Standards v3.0.6
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 The before / after critique pattern, built on Andy Kriebel's #MakeoverMonday method. Use when the user pastes a chart, links to one, or asks "is this chart wrong" / "makeover this" / "critique this viz".

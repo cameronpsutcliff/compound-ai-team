@@ -1,5 +1,5 @@
 # Skills Index
-# Compound AI Operating Standards v3.0.5
+# Compound AI Operating Standards v3.0.6
 # Authors: Cameron Sutcliff + Joshua Sutcliff
 # Source: github.com/cameronpsutcliff/compound-ai | License: Apache 2.0
 
