@@ -11,6 +11,7 @@ check-portability.sh
 check-counts.sh
 check-registry-coherence.sh
 check-handoff-skills.sh
+check-benchmark-figures.sh
 check-runtime-wiring.sh
 "
 

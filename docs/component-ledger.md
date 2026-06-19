@@ -1,5 +1,5 @@
 # Component Ledger
-# Compound AI Operating Standards v3.0.2
+# Compound AI Operating Standards v3.0.3
 # Maintained by: Cameron Sutcliff + Joshua Sutcliff
 
 Every component from both contributing systems is evaluated here against

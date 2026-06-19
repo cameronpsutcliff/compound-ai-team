@@ -1,5 +1,5 @@
 # Scope Modes
-# Compound AI Operating Standards v3.0.2
+# Compound AI Operating Standards v3.0.3
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 # Borrowed from: Garry Tan's GSTACK (github.com/garrytan/gstack, MIT)
 

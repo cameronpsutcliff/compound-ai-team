@@ -1,6 +1,6 @@
 # Architecture
 
-# Compound AI Operating Standards v3.0.2
+# Compound AI Operating Standards v3.0.3
 # Source: cameronsutcliff.com/compound-ai | License: CC BY 4.0
 # Authors: Cameron Sutcliff (cameronpsutcliff), Joshua Sutcliff (joshuadsutcliff)
 
@@ -26,7 +26,7 @@ If you read one diagram, read this one:
    |   Layer 3  runtime/        claude-code | codex |      |
    |                            cursor | generic           |
    |   Layer 4  enforcement/    CI gates + self-test       |
-   |   Layer 5  proof/          158x benchmark + evidence  |
+   |   Layer 5  proof/          session benchmark + proof  |
    |   Layer 6  reference-impl/ + adoption/                |
    +-------------------------------------------------------+
 ```
@@ -50,7 +50,7 @@ honors regardless of runtime.
 
 The defining discipline is **tiered context loading**. Tier 0 is always loaded
 and is tiny. Higher tiers load on demand through the router. This is what the
-158x proof point measures: the kit reaches full capability by routing to one
+session-start benchmark measures: the kit reaches full capability by routing to one
 short procedure instead of keeping the whole reference resident.
 
 ### Layer 2 - Capabilities (`capabilities/`)
@@ -83,12 +83,15 @@ them, so the enforcement story is itself tested. All thresholds live in
 ### Layer 5 - Proof (`proof/`)
 
 Net-positive evidence a reviewer can reproduce. The headline is the
-session-start benchmark: full reference resident costs about 158.4x the context
-the kit loads at session start (135 files and roughly 202,207 estimated tokens
-versus 2 files and roughly 1,276). The token figures are character estimates
-(bytes / 4), not a tokenizer read, so the point is order-of-magnitude, not a
-model-exact byte count. Pure shell, no metered API, reproducible on a bare laptop
-with `bash proof/session-start-benchmark/measure.sh`. Also includes delegation
+session-start benchmark: a realistic un-tiered setup costs many times the
+context the kit loads at session start, and keeping the full reference resident
+costs more still (a labeled ceiling). The exact
+file counts, token estimates, and ratio are generated from the tree into
+`proof/session-start-benchmark/results.md` (never hand-typed here, so they
+cannot drift). The token figures are character estimates (bytes / 4), not a
+tokenizer read, so the point is order-of-magnitude, not a model-exact byte
+count. Pure shell, no metered API, reproducible on a bare laptop with
+`bash proof/session-start-benchmark/measure.sh`. Also includes delegation
 economics and loop-adoption evidence.
 
 ### Layer 6 - Reference implementation and adoption (`reference-impl/`, `adoption/`)
@@ -251,7 +254,7 @@ distilled practice, deliberately not an implementation.
    contract.
 4. Run `enforcement/bin/check-kit.sh` and the self-test: watch the gates pass
    and block planted violations.
-5. Read `proof/`: reproduce the 158x ratio on a bare laptop.
+5. Read `proof/`: reproduce the ratio on a bare laptop.
 
 Two credited authors. Leak-clean. No secret sauce. The Claude Code runtime
 hooks (usage-guard, session-router) are vendored under Apache-2.0, adapted from

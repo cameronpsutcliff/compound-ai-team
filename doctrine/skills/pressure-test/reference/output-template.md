@@ -1,5 +1,5 @@
 # Pressure-Test Output Template
-# Compound AI Operating Standards v3.0.2
+# Compound AI Operating Standards v3.0.3
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 The structured verdict format. Use this exact shape so users learn what to expect from the skill.

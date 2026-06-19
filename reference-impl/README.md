@@ -3,7 +3,7 @@
 Optional Python and maintainer tooling for authors. Not required to adopt or apply
 the Compound AI Operating Standards Doctrine.
 
-**Version:** v3.0.2  
+**Version:** v3.0.3  
 **Authors:** Cameron Sutcliff, Joshua Sutcliff (joshuadsutcliff)
 
 ## Contents
