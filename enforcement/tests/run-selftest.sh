@@ -50,6 +50,40 @@ run_expect_fail() {
   fi
 }
 
+run_expect_contains() {
+  local label="$1"
+  local expected="$2"
+  shift 2
+  local output rc
+  output="$("$@" 2>&1)"
+  rc=$?
+  if [ "$rc" -eq 0 ] && printf '%s\n' "$output" | grep -Fq "$expected"; then
+    log "PASS $label"
+    [ -n "$output" ] && printf '%s\n' "$output" | sed 's/^/  /'
+  else
+    fail "$label expected exit 0 and output containing: $expected"
+    printf 'exit: %s\n' "$rc" >&2
+    [ -n "$output" ] && printf '%s\n' "$output" >&2
+  fi
+}
+
+run_expect_not_contains() {
+  local label="$1"
+  local rejected="$2"
+  shift 2
+  local output rc
+  output="$("$@" 2>&1)"
+  rc=$?
+  if [ "$rc" -eq 0 ] && ! printf '%s\n' "$output" | grep -Fq "$rejected"; then
+    log "PASS $label"
+    [ -n "$output" ] && printf '%s\n' "$output" | sed 's/^/  /'
+  else
+    fail "$label expected exit 0 and output without: $rejected"
+    printf 'exit: %s\n' "$rc" >&2
+    [ -n "$output" ] && printf '%s\n' "$output" >&2
+  fi
+}
+
 write_usage_guard_stub() {
   local path="$1"
   cat > "$path" <<'EOF'
@@ -147,14 +181,54 @@ make_tree() {
   printf '# Minimal Skill\n\nUse this placeholder for gate self-tests.\n' > "$tree/doctrine/skills/minimal/SKILL.md"
   printf '%s\n' '---' 'Total skills: 1' '---' '' '- `doctrine/skills/minimal/SKILL.md`' > "$tree/_skills-index.md"
   cat > "$tree/doctrine/conventions/trigger-registry.yaml" <<'EOF'
-skills:
+version: 1
+entries:
   - skill: minimal
+    tier: 1
     pointer: doctrine/skills/minimal/SKILL.md
+    mode: auto
     triggers:
       - selftest
 EOF
 
+  cat > "$tree/HANDOFF.md" <<'EOF'
+# Handoff
+
+Tier 1: Session infrastructure (1 skills):
+  ✓ minimal
+
+Tier 2: Cognitive modes (0 skills):
+EOF
+
   install_runtime_hooks "$tree"
+}
+
+make_integrity_tree() {
+  local tree="$1"
+  mkdir -p "$tree/reference-impl/scripts"
+  cp "$STANDARDS_DIR/reference-impl/scripts/build-manifest.py" "$tree/reference-impl/scripts/build-manifest.py"
+  cp "$STANDARDS_DIR/reference-impl/scripts/verify-integrity.py" "$tree/reference-impl/scripts/verify-integrity.py"
+  cp "$STANDARDS_DIR/reference-impl/scripts/verify-origin.py" "$tree/reference-impl/scripts/verify-origin.py"
+  cp "$STANDARDS_DIR/NOTICE" "$tree/NOTICE"
+  cp "$STANDARDS_DIR/NOTICE.md" "$tree/NOTICE.md"
+  cp "$STANDARDS_DIR/CITATION.cff" "$tree/CITATION.cff"
+  cat > "$tree/compound-ai.manifest.json" <<'EOF'
+{
+  "package_name": "Compound AI Operating Standards",
+  "origin_id": "compound-ai",
+  "authors": ["Cameron Sutcliff", "Joshua Sutcliff"],
+  "canonical_url": "https://cameronsutcliff.com/compound-ai",
+  "source_repo": "https://github.com/cameronpsutcliff/compound-ai",
+  "version": "selftest",
+  "release_date": "2026-06-19",
+  "license_docs": "CC-BY-4.0",
+  "license_code": "Apache-2.0",
+  "generated_at": "",
+  "aggregate_sha256": "",
+  "files": []
+}
+EOF
+  python3 "$tree/reference-impl/scripts/build-manifest.py" >/dev/null
 }
 
 assert_fixture_exists() {
@@ -173,7 +247,8 @@ for fixture in \
   "$FIXTURES_DIR/usage-guard/workflow-cap-hit.json" \
   "$FIXTURES_DIR/session-router/light.json" \
   "$FIXTURES_DIR/session-router/medium.json" \
-  "$FIXTURES_DIR/session-router/heavy.json"; do
+  "$FIXTURES_DIR/session-router/heavy.json" \
+  "$FIXTURES_DIR/session-router/heavy-singular.json"; do
   assert_fixture_exists "$fixture"
 done
 
@@ -189,7 +264,15 @@ run_expect_pass "check-tier-discipline clean baseline" "$BIN_DIR/check-tier-disc
 run_expect_pass "check-portability clean baseline" "$BIN_DIR/check-portability.sh" "$base"
 run_expect_pass "check-counts clean baseline" "$BIN_DIR/check-counts.sh" "$base"
 run_expect_pass "check-registry-coherence clean baseline" "$BIN_DIR/check-registry-coherence.sh" "$base"
+run_expect_pass "check-handoff-skills clean baseline" "$BIN_DIR/check-handoff-skills.sh" "$base"
 run_expect_pass "check-runtime-wiring clean baseline" "$BIN_DIR/check-runtime-wiring.sh" "$base"
+
+log "== Provenance fixtures =="
+integrity_tree="$TMP_ROOT/integrity"
+make_integrity_tree "$integrity_tree"
+run_expect_pass "verify-integrity shipped manifest" python3 "$integrity_tree/reference-impl/scripts/verify-integrity.py"
+printf '\nTampered by selftest.\n' >> "$integrity_tree/NOTICE"
+run_expect_fail "verify-integrity detects tampered file" python3 "$integrity_tree/reference-impl/scripts/verify-integrity.py"
 
 log "== Gate block fixtures =="
 case_dir="$TMP_ROOT/line-cap"
@@ -220,13 +303,28 @@ run_expect_fail "check-counts count drift" "$BIN_DIR/check-counts.sh" "$case_dir
 case_dir="$TMP_ROOT/registry"
 make_tree "$case_dir"
 cat > "$case_dir/doctrine/conventions/trigger-registry.yaml" <<'EOF'
-skills:
+version: 1
+entries:
   - skill: missing
+    tier: 1
     pointer: doctrine/skills/missing/SKILL.md
+    mode: auto
     triggers:
       - selftest
 EOF
 run_expect_fail "check-registry-coherence missing pointer" "$BIN_DIR/check-registry-coherence.sh" "$case_dir"
+
+case_dir="$TMP_ROOT/handoff"
+make_tree "$case_dir"
+cat > "$case_dir/HANDOFF.md" <<'EOF'
+# Handoff
+
+Tier 1: Session infrastructure (1 skills):
+  ✓ retired-skill
+
+Tier 2: Cognitive modes (0 skills):
+EOF
+run_expect_fail "check-handoff-skills stale roster" "$BIN_DIR/check-handoff-skills.sh" "$case_dir"
 
 case_dir="$TMP_ROOT/runtime-wiring"
 make_tree "$case_dir"
@@ -244,10 +342,17 @@ run_expect_fail "usage-guard blocks agent-no-model.json" bash -c "'$hook_tree/ru
 run_expect_pass "usage-guard allows agent-cheap-model.json" bash -c "'$hook_tree/runtime/claude-code/hooks/usage-guard.sh' block < '$FIXTURES_DIR/usage-guard/agent-cheap-model.json'"
 run_expect_fail "usage-guard blocks workflow-cap-hit.json" bash -c "'$hook_tree/runtime/claude-code/hooks/usage-guard.sh' block < '$FIXTURES_DIR/usage-guard/workflow-cap-hit.json'"
 
+usage_notice_payload="$TMP_ROOT/usage-inform.json"
+usage_notice_file="$TMP_ROOT/usage-estimation.notice"
+printf '{"prompt":"short prompt without explicit usage"}\n' > "$usage_notice_payload"
+run_expect_contains "usage-guard informs when ccusage unavailable" "usage cap running on estimation, not metered spend" bash -c "USAGE_GUARD_NOTICE_FILE='$usage_notice_file' CCUSAGE_BIN='__missing_ccusage__' '$hook_tree/runtime/claude-code/hooks/usage-guard.sh' inform < '$usage_notice_payload'"
+run_expect_not_contains "usage-guard estimation notice is one-time" "usage cap running on estimation, not metered spend" bash -c "USAGE_GUARD_NOTICE_FILE='$usage_notice_file' CCUSAGE_BIN='__missing_ccusage__' '$hook_tree/runtime/claude-code/hooks/usage-guard.sh' inform < '$usage_notice_payload'"
+
 run_expect_pass "session-router fail-open on malformed input" bash -c "printf 'not-json' | '$hook_tree/runtime/claude-code/hooks/session-router.sh'"
 run_expect_pass "session-router accepts light.json" bash -c "'$hook_tree/runtime/claude-code/hooks/session-router.sh' < '$FIXTURES_DIR/session-router/light.json'"
 run_expect_pass "session-router accepts medium.json" bash -c "'$hook_tree/runtime/claude-code/hooks/session-router.sh' < '$FIXTURES_DIR/session-router/medium.json'"
 run_expect_pass "session-router accepts heavy.json" bash -c "'$hook_tree/runtime/claude-code/hooks/session-router.sh' < '$FIXTURES_DIR/session-router/heavy.json'"
+run_expect_contains "session-router routes heavy-singular.json as HEAVY" "Routing tier: HEAVY" bash -c "'$hook_tree/runtime/claude-code/hooks/session-router.sh' < '$FIXTURES_DIR/session-router/heavy-singular.json'"
 
 if [ "$failures" -ne 0 ]; then
   printf 'FAIL selftest: %s assertion(s) failed\n' "$failures" >&2

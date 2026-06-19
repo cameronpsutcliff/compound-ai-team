@@ -16,6 +16,8 @@ USAGE_GUARD_CACHE_SECS="${USAGE_GUARD_CACHE_SECS:-180}"
 USAGE_GUARD_ESTIMATE_CHARS="${USAGE_GUARD_ESTIMATE_CHARS:-60000}"
 CHEAP_WORKERS="${CHEAP_WORKERS:-researcher|code-generator|tester}"
 BUDGET_PROBE="${BUDGET_PROBE:-auto}"
+CCUSAGE_BIN="${CCUSAGE_BIN:-ccusage}"
+USAGE_GUARD_NOTICE_FILE="${USAGE_GUARD_NOTICE_FILE:-${TMPDIR:-/tmp}/compound-ai-usage-guard-estimation.notice}"
 
 json_out() {
   local decision="$1"
@@ -56,6 +58,8 @@ allowed = {
     "USAGE_GUARD_ESTIMATE_CHARS",
     "CHEAP_WORKERS",
     "BUDGET_PROBE",
+    "CCUSAGE_BIN",
+    "USAGE_GUARD_NOTICE_FILE",
 }
 try:
     with open(sys.argv[1], "r", encoding="utf-8") as handle:
@@ -120,8 +124,8 @@ estimate_pct_from_payload() {
 }
 
 ccusage_pct() {
-  command -v ccusage >/dev/null 2>&1 || return 1
-  ccusage --json 2>/dev/null | python3 - "$USAGE_GUARD_COST_LIMIT" <<'PY' 2>/dev/null
+  command -v "$CCUSAGE_BIN" >/dev/null 2>&1 || return 1
+  "$CCUSAGE_BIN" --json 2>/dev/null | python3 - "$USAGE_GUARD_COST_LIMIT" <<'PY' 2>/dev/null
 import json
 import re
 import sys
@@ -139,6 +143,31 @@ if limit <= 0:
     raise SystemExit(1)
 print(int(min(999, round((cost / limit) * 100))))
 PY
+}
+
+ccusage_unavailable_for_probe() {
+  local explicit_pct="$1"
+  if printf '%s' "$explicit_pct" | grep -Eq '^[0-9]+([.][0-9]+)?$'; then
+    return 1
+  fi
+  case "$BUDGET_PROBE" in
+    ccusage|auto|'')
+      command -v "$CCUSAGE_BIN" >/dev/null 2>&1 && return 1
+      return 0
+      ;;
+  esac
+  return 1
+}
+
+emit_estimation_notice_once() {
+  local pct="$1"
+  if [ -f "$USAGE_GUARD_NOTICE_FILE" ]; then
+    return 1
+  fi
+  mkdir -p "$(dirname "$USAGE_GUARD_NOTICE_FILE")" 2>/dev/null || true
+  : > "$USAGE_GUARD_NOTICE_FILE" 2>/dev/null || true
+  json_out allow "usage cap running on estimation, not metered spend" "$pct"
+  return 0
 }
 
 probe_pct() {
@@ -229,6 +258,9 @@ if [ "$mode" = "refresh" ]; then
 fi
 
 if [ "$mode" = "inform" ]; then
+  if ccusage_unavailable_for_probe "$estimated_usage_pct"; then
+    emit_estimation_notice_once "$pct" && exit 0
+  fi
   if [ "$pct" -ge "$USAGE_GUARD_WARN_PCT" ] 2>/dev/null; then
     json_out allow "usage warning threshold reached" "$pct"
   else

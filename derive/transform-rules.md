@@ -11,14 +11,17 @@ personal-path pattern. This matches `enforcement/bin/check-portability.sh`.
 
 ## 1. Version strings
 
-| From | To | Notes |
-|------|-----|-------|
-| `v3.0.0` | `v3.0.0` | Header badges, comments, prose |
-| `3.0.0` | `3.0.0` | Manifest fields, `@origin` tags |
-| `v3.0.0` | `v3.0.0` | Historical upgrade examples in checklists |
-| `3.0.0` | `3.0.0` | Same, un-prefixed |
+Version strings are NOT blanket-substituted. A global old-version to
+new-version rewrite corrupts history: it turns `## v2.7.0 Changes` changelog
+headers and the `v2.7.0: Cameron Sutcliff solo edition` attribution into the
+current version, and mangles upgrade-mechanic examples like `v2.6.0 -> v2.7.0`.
 
-Target version is **3.0.0** per operator arbitration D-003.
+Current-version stamps are bumped at the source in the canonical (the per-file
+`# Compound AI Operating Standards vX.Y.Z` header, `version:` fields,
+`kit_version:`, and shell-skill page stamps). Legacy version references that
+remain in the derived tree are deliberate: version history, the solo-edition
+attribution, and illustrative upgrade examples in the adoption-captain
+reference docs. The release version of record is in `CITATION.cff`.
 
 ## 2. Path and coupling rewrites
 

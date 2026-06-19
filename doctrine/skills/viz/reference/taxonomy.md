@@ -1,5 +1,5 @@
 # Visualization Taxonomy
-# Compound AI Operating Standards v3.0.0
+# Compound AI Operating Standards v3.0.1
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 A chart selection taxonomy organized by domain and story type. Use it to map a question to a viable visualization, then narrow by audience and complexity before committing.

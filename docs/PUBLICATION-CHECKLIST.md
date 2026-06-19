@@ -7,10 +7,9 @@ The v1.0.0 build is published. GitHub, the release tag, the website route, downl
 ## Published Surfaces
 
 1. Website: `https://cameronsutcliff.com/compound-ai`
-2. GitHub repo: `https://github.com/cameronpsutcliff/compound-ai-operating-standards`
-3. GitHub release: `https://github.com/cameronpsutcliff/compound-ai-operating-standards/releases/tag/v1.0.0`
+2. GitHub repo: `https://github.com/cameronpsutcliff/compound-ai`
+3. GitHub release: `https://github.com/cameronpsutcliff/compound-ai/releases/tag/v1.0.0`
 4. Canonical manifest: `https://cameronsutcliff.com/compound-ai/manifest.json`
-5. Canonical checksum: `https://cameronsutcliff.com/compound-ai/compound-ai.sha256`
 
 ---
 

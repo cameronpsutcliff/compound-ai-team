@@ -1,7 +1,7 @@
 # Compound AI Operating Standards
 ## The Six-Layer Standard
 
-Version: v3.0.0
+Version: v3.0.1
 Authors: Cameron Sutcliff (cameronpsutcliff), Joshua Sutcliff (joshuadsutcliff)
 
 ---
@@ -99,8 +99,10 @@ never duplicated in scripts).
 
 **What:** Everything under `proof/`. Net-positive evidence.
 
-Includes the 158x session-start benchmark (pure shell, no metered API),
-delegation economics, and loop-adoption evidence. A reviewer can re-run
+Includes the 158x session-start benchmark (a character-estimate ratio, pure
+shell, no metered API), delegation economics, and loop-adoption evidence. The
+token counts are heuristic estimates (bytes / 4), so the result is
+order-of-magnitude, not a model-exact byte count. A reviewer can re-run
 `proof/session-start-benchmark/measure.sh` on a bare laptop and reproduce the
 ratio.
 
@@ -147,8 +149,14 @@ what is advisory rather than mechanically enforced.
 
 ## Version history
 
+- v3.0.1 (2026-06-19): coherence and provenance remediation. Provenance
+  verifiers now ship in both editions with a planted-fixture self-test; a
+  HANDOFF roster gate, a deduped changelog, ccusage degradation docs, a
+  session-router singular-term fix, a quick-recap convention, scripted
+  installers, edition-specific zips, and an estimator-based reframing of the
+  158x and non-Claude enforcement claims. No behavior change to the doctrine.
 - v3.0.0 (2026-06-18): co-owned consolidation. Six-layer architecture, the
   runtime-agnostic capability and adapter model, cross-repo skill-merge
   (memory, delegation, review), goal-parity, vendored runtime/claude-code hooks.
   SemVer-major signals a re-read-before-adopting boundary.
-- v3.0.0: Cameron Sutcliff solo edition (CAOS), prose-only enforcement.
+- v2.7.0: Cameron Sutcliff solo edition (CAOS), prose-only enforcement.

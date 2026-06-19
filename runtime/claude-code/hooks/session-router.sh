@@ -105,8 +105,16 @@ registry = sys.argv[2]
 text = prompt.lower()
 
 heavy_terms = [
-    "multi-agent", "architecture", "strategy", "tradeoff", "tradeoffs",
-    "review", "converge", "panel", "migration", "release", "design",
+    ("multi-agent", True),
+    ("architecture", True),
+    ("strategy", False),
+    ("tradeoff", True),
+    ("review", False),
+    ("converge", False),
+    ("panel", False),
+    ("migration", False),
+    ("release", False),
+    ("design", False),
 ]
 medium_terms = [
     "implement", "validation", "local checks", "script", "wire", "test",
@@ -131,10 +139,12 @@ for match in re.finditer(r"^\s*-\s+([A-Za-z0-9][^\n#]+)$", raw, re.MULTILINE):
         triggers.append(value)
 
 matched = [trigger for trigger in triggers if trigger.lower() in text]
-heavy_count = sum(1 for term in heavy_terms if term in text)
+heavy_matches = [term for term, _ in heavy_terms if term in text]
+heavy_count = len(heavy_matches)
+heavy_override = any(term in text for term, is_override in heavy_terms if is_override)
 medium_count = sum(1 for term in medium_terms if term in text)
 
-if heavy_count >= 2 or any(term in text for term in ["multi-agent", "architecture", "tradeoffs"]):
+if heavy_count >= 2 or heavy_override:
     tier = "HEAVY"
 elif medium_count >= 1 or matched:
     tier = "MEDIUM"

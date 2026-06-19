@@ -1,5 +1,5 @@
 # Component Ledger
-# Compound AI Operating Standards v3.0.0
+# Compound AI Operating Standards v3.0.1
 # Maintained by: Cameron Sutcliff + Joshua Sutcliff
 
 Every component from both contributing systems is evaluated here against
@@ -59,7 +59,7 @@ A capability earns a standalone `SKILL.md` if and only if it has:
 | Rule (3) | Universal. Any project with multi-step durable work. |
 | Rule (4) | Compliant. |
 | Rule (5) | Operator preservation list; real internal production usage confirmed. |
-| Notes | Keeper. Verbatim from v3.0.0. |
+| Notes | Keeper. Verbatim from v2.7.0. |
 
 ### context-loader
 
@@ -384,7 +384,7 @@ A capability earns a standalone `SKILL.md` if and only if it has:
 | Rule (3) | Any project with recurring agent automation. |
 | Rule (4) | Compliant. |
 | Rule (5) | Operator preservation list. 26 live loop-spec.md instances on Mini (proof/loop-adoption-evidence). |
-| Notes | Keeper. Verbatim from v3.0.0. |
+| Notes | Keeper. Verbatim from v2.7.0. |
 
 ---
 
@@ -573,7 +573,7 @@ Note them as external installs in the kit documentation.
 | visual-recap | B | EXTERNAL | github.com/brass458/claude-config-public |
 
 Active SKILL.md count: derived by `check-counts.sh`.
-v3.0.0 base 28; minus trigger-indexer (demoted) and provenance-check (merged) = 26
+v2.7.0 base 28; minus trigger-indexer (demoted) and provenance-check (merged) = 26
 at v3.0.0. The skill-merge added `memory` and `delegation` and retired
 `context-loader` and `pattern-promoter` into them, so the active count holds at 26
 (now 4 retired redirect stubs, 30 SKILL.md files total).

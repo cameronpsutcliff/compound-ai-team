@@ -1,5 +1,5 @@
 # Skill: agent-panel-planning
-# Compound AI Operating Standards v3.0.0
+# Compound AI Operating Standards v3.0.1
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 ## What this skill does

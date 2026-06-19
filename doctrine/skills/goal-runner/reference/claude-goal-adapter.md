@@ -38,7 +38,7 @@ Good:
 
 ```text
 /goal all package counts are internally consistent, integrity verification
-passes from a clean unzip, and README/AGENT/HANDOFF mention v3.0.0
+passes from a clean unzip, and README/AGENT/HANDOFF mention v3.0.1
 ```
 
 Still keep validation and memory in the visible plan. `/goal` decides whether

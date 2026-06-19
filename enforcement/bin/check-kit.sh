@@ -10,6 +10,7 @@ check-tier-discipline.sh
 check-portability.sh
 check-counts.sh
 check-registry-coherence.sh
+check-handoff-skills.sh
 check-runtime-wiring.sh
 "
 

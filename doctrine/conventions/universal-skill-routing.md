@@ -12,6 +12,7 @@ skills route from that native directory to one canonical skill source of truth.
 Typical layout:
 
 ```text
+~/.compound-ai/
   operating-standards/
   skills/
     spotlight/
@@ -36,6 +37,8 @@ Typical layout:
 
 | Purpose | Path |
 |---|---|
+| Global operating standards | `~/.compound-ai/operating-standards` |
+| Global shared skills | `~/.compound-ai/skills` |
 
 ## Verification
 

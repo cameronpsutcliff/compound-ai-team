@@ -49,7 +49,7 @@ rest of the file.
 Markdown surfaces (CLAUDE.md, AGENT.md, AGENTS.md, CONVENTIONS.md):
 
 ```markdown
-<!-- compound-ai:start v3.0.0 -->
+<!-- compound-ai:start v2.6.0 -->
 ## Compound AI Operating Standards
 
 [contents]
@@ -60,7 +60,7 @@ Markdown surfaces (CLAUDE.md, AGENT.md, AGENTS.md, CONVENTIONS.md):
 YAML / config surfaces (.cursorrules if rule-format, .aider.conf.yml):
 
 ```yaml
-# compound-ai:start v3.0.0
+# compound-ai:start v2.6.0
 compound-ai:
   kit-path: .compound-ai
   [...]
@@ -70,13 +70,13 @@ compound-ai:
 Plain text (rare; some projects use plain CONVENTIONS.txt):
 
 ```
-# ---- compound-ai:start v3.0.0 ----
+# ---- compound-ai:start v2.6.0 ----
 [contents]
 # ---- compound-ai:end ----
 ```
 
 The version stamp in the start marker lets future adoption runs detect
-upgrades (e.g. v3.0.0 -> v3.0.0 should replace the section, not
+upgrades (e.g. v2.6.0 -> v2.7.0 should replace the section, not
 duplicate it).
 
 ---
@@ -176,10 +176,12 @@ Native runtime roots remain native:
 
 
 Shared skills route to the canonical global root:
+`~/.compound-ai/skills`.
 
 Edit the canonical copy first. After changing shared skills, run:
 
 ```bash
+~/.compound-ai/bin/skill_drift.py
 ```
 ```
 
@@ -266,7 +268,7 @@ surfaces:
 4. Save the file
 
 The markers are designed to make this trivially scriptable. A future
-`adoption-captain --uninstall` flow could automate this; v3.0.0 ships
+`adoption-captain --uninstall` flow could automate this; v2.6.0 ships
 the discipline, not the automation.
 
 ---

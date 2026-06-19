@@ -146,11 +146,11 @@ cat .compound-ai/AGENT.md 2>/dev/null | head -5
 
 For a prior kit installation, the agent compares the existing kit version
 (from the `AGENT.md` header or from any version stamp in the directory) to
-the current kit version (v3.0.0). The agent then:
+the current kit version (v2.6.0). The agent then:
 
-1. Lists files that are new in v3.0.0 (safe to add)
+1. Lists files that are new in v2.6.0 (safe to add)
 2. Lists files that have changed (propose replacement per file)
-3. Lists files that are in the existing kit but not in v3.0.0 (surface to
+3. Lists files that are in the existing kit but not in v2.6.0 (surface to
    operator: "these files are from the prior version and may no longer be
    needed; should I remove them?")
 
@@ -190,7 +190,7 @@ updated":
 
 ```bash
 # Open the file and delete from:
-#   <!-- compound-ai:start v3.0.0 -->
+#   <!-- compound-ai:start v2.6.0 -->
 # to (and including):
 #   <!-- compound-ai:end -->
 ```
@@ -237,7 +237,7 @@ change to this specific file." Both are required for protected files.
 ### Anti-pattern: silent upgrade of existing .compound-ai/
 
 **Symptom.** Agent finds `.compound-ai/` from a prior v2.3.x installation
-and overwrites it entirely to install v3.0.0.
+and overwrites it entirely to install v2.6.0.
 
 **Fix.** Prior kit installations require the upgrade flow: version comparison,
 per-file review of changes, operator confirmation of each replacement.

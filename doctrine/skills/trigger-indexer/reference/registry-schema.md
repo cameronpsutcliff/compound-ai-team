@@ -11,7 +11,7 @@ full router prose.
 
 ```yaml
 version: 1
-kit_version: 3.0.0
+kit_version: 3.0.1
 generated_by: trigger-indexer
 entries:
   - skill: goal-runner

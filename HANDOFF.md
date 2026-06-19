@@ -1,5 +1,5 @@
 # Agent Handoff
-# Compound AI Operating Standards v3.0.0
+# Compound AI Operating Standards v3.0.1
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 This is the document you hand to a fresh agent (Claude, Codex, Cursor, Aider, Continue, or any other) to get it operational on this kit in under two minutes.
@@ -61,7 +61,7 @@ If the directory contains the user's existing code, README, package files, agent
 2. Pointer skills are under 100 lines, target 80. They dispatch to `reference/` subfolders. Load those references only when the skill says to.
 3. Compound requests (analysis + decision + action) trigger sequenced skills. See request-router's "Compound requests" section.
 4. `AGENT.md` is the canonical operating contract. `CLAUDE.md` exists only as a 3-line pointer to AGENT.md, never read CLAUDE.md for content.
-5. Update `STATE.md` and append to `session-log.md` at the end of every non-trivial session.
+5. Update `STATE.md` and append to `session-log.md` at the end of every non-trivial session. When you stop or hand off mid-stream, also leave a quick recap (changed / in-flight / next / artifacts) per `doctrine/conventions/quick-recap.md`.
 6. Confirm before destructive operations, force pushes, billing changes, external publishing, or auth/secret changes.
 
 **Begin by reading the files in the order above. When done, report what you've loaded and ask me what I'm working on.**
@@ -74,18 +74,19 @@ If the directory contains the user's existing code, README, package files, agent
 LOADED COMPOUND AI v3.0.0
 ═════════════════════════
 
-Tier 1: Session infrastructure (11 skills):
+Tier 1: Session infrastructure (12 skills):
   ✓ request-router (active, auto-routing + panel-offer mode enabled)
   ✓ goal-runner (canonical goal contract; Claude /goal is a thin wrapper over it)
-  ✓ context-loader
+  ✓ memory
   ✓ token-economist
   ✓ engagement-bootstrap
   ✓ quality-gate
-  ✓ pattern-promoter
+  ✓ delegation
   ✓ agent-panel-planning
   ✓ agent-panel-review
   ✓ release-captain (includes provenance verification at Step 3)
   ✓ adoption-captain
+  ✓ team-router
 
 Tier 2: Cognitive modes (7 skills):
   ✓ parallel-lens-synthesis
@@ -139,7 +140,7 @@ For a project that uses this kit, write a project-specific handoff that subclass
 ```markdown
 # Project Handoff: [Project Name]
 
-You are working on [project] which uses Compound AI Operating Standards v3.0.0.
+You are working on [project] which uses Compound AI Operating Standards v3.0.1.
 
 Read these files in order:
 1. AGENT.md (root)

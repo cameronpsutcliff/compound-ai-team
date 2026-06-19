@@ -1,5 +1,5 @@
 # Adopt
-# Compound AI Operating Standards v3.0.0
+# Compound AI Operating Standards v3.0.1
 # Authors: Cameron Sutcliff, Joshua Sutcliff (joshuadsutcliff)
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
@@ -105,7 +105,7 @@ my approval.**
 ## What you should see when the agent finishes
 
 ```
-ADOPTION COMPLETE: Compound AI v3.0.0 -> [your project]
+ADOPTION COMPLETE: Compound AI v3.0.1 -> [your project]
 ═══════════════════════════════════════════════════════
 
 Discovery:
@@ -166,6 +166,7 @@ without breaking native runtime expectations.
 Use this pattern:
 
 ```text
+~/.compound-ai/skills/[skill-name]   canonical shared skill
 ```
 
 Rules:
@@ -175,6 +176,7 @@ Rules:
 3. Back up both copies before convergence.
 4. Compare drift before selecting a canonical copy.
 5. Preserve real machine paths and runtime-specific commands.
+6. Replace shared runtime copies with symlinks to `~/.compound-ai/skills`.
 7. Leave tool-specific skills in their native roots.
 8. Add a drift-audit command to the memory-commit section.
 

@@ -146,7 +146,7 @@ Step 6: Field guide badge ↔ markdown version
 
 Step 7: releaseUrl resolves to current tag
   Status: PASS
-  URL: https://github.com/cameronpsutcliff/compound-ai-operating-standards/releases/tag/v2.3.2
+  URL: https://github.com/cameronpsutcliff/compound-ai/releases/tag/v2.3.2
   HTTP: 200
 
 Step 8: Public downloads return 200

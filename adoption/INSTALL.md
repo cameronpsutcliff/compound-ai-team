@@ -1,10 +1,24 @@
 # Install
-# Compound AI Operating Standards v3.0.0
+# Compound AI Operating Standards v3.0.1
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
-The kit is a tiered set of files. There is no install script to run.
-Drop the directory into your project (or next to it), point your agent
-at `adoption/ADOPT.md` for an existing project or `HANDOFF.md` for a new one.
+The kit is a tiered set of files. You can drop the directory into your project
+manually, or run the scripted installer:
+
+```bash
+bash adoption/install.sh
+```
+
+Non-interactive: `bash adoption/install.sh --yes`. The script copies the kit
+into `operating-standards/` under your project root (same skip rules as the Team
+installers). Verify with:
+
+```bash
+bash operating-standards/enforcement/bin/check-kit.sh operating-standards
+```
+
+Otherwise, point your agent at `adoption/ADOPT.md` for an existing project or
+`HANDOFF.md` for a new one.
 
 What follows is the one decision that affects how much value you get
 out of the kit: **do you have access to multiple AI agents?**
@@ -21,8 +35,9 @@ dominance. **A panel needs at least two agents.**
 
 If you have access to two or more agents already, the panel skills light
 up immediately. If you only have one, the rest of the kit still works
-(26 of the 28 skills are single-agent skills), but you are leaving the
-highest-leverage patterns on the table.
+(24 of the 26 skills are single-agent skills; only the two panel skills
+need a second agent), but you are leaving the highest-leverage patterns
+on the table.
 
 The good news: forming a panel does not require paid subscriptions to
 three frontier models. The patterns work with same-platform sessions in
@@ -41,6 +56,7 @@ Tier 1. Convene them when high-stakes deliverables warrant it.
 If those agents have separate skill directories, also read
 `doctrine/conventions/universal-skill-routing.md`. The preferred
 machine setup is: each agent reads its native skill root, while shared skills
+route by symlink to `~/.compound-ai/skills`.
 
 ---
 
@@ -121,6 +137,33 @@ patterns to work. The discipline includes:
 If you cannot sustain the discipline yet, start with single-agent
 work, get familiar with the kit's skills, then add a second agent
 when you hit a deliverable that genuinely warrants it.
+
+---
+
+## Optional: usage awareness (ccusage)
+
+This step matters only if you install the enforced Claude Code runtime
+(`runtime/claude-code/`). It is not needed for the portable doctrine or the
+panel patterns above.
+
+`ccusage` is a third-party CLI that reads Claude Code's local session-cost data
+so the usage-guard hook can reason about metered spend against a configured
+ceiling. Install it once, globally:
+
+```bash
+npm install -g ccusage
+```
+
+You can also run it without installing via `npx ccusage`; the hook will use a
+globally installed binary if it finds one on `PATH`.
+
+The kit works without ccusage. When the binary is absent, the usage-guard hook
+falls back to local character/prompt-length estimation: it never makes a metered
+API call, never blocks legitimate work on a missing or broken probe (it is
+fail-open), and at most attaches an advisory note. ccusage simply upgrades the
+ceiling from an estimate to a read of Claude Code's own cost data. The
+authoritative figure remains Claude Code's `/usage` command. See
+`capabilities/usage-discipline.md` and `docs/known-limits.md`.
 
 ---
 

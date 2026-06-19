@@ -10,9 +10,9 @@ authors:
     given-names: Joshua
     alias: joshuadsutcliff
 url: https://cameronsutcliff.com/compound-ai
-repository-code: https://github.com/cameronpsutcliff/compound-ai-operating-standards
-version: 3.0.0
-date-released: "2026-06-18"
+repository-code: https://github.com/cameronpsutcliff/compound-ai
+version: 3.0.1
+date-released: "2026-06-19"
 license:
   - CC-BY-4.0
   - Apache-2.0
