@@ -1,5 +1,5 @@
 # Pressure-Test Lenses
-# Compound AI Operating Standards v3.0.3
+# Compound AI Operating Standards v3.0.4
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 Ten executive operating lenses. Apply each to the work being reviewed. Each lens produces a verdict (PASS / REVISE / FAIL) and a specific refinement.

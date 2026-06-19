@@ -29,6 +29,19 @@ That history is why this kit can claim incident-hardened enforcement rather than
 an untested design. The control exists because the failure it prevents actually
 happened.
 
+## The incident behind the durability doctrine
+
+The usage-cap exhaustion above motivated the runtime control. A separate,
+earlier incident motivated the durability patterns in the doctrine itself, and
+it is the one quoted in the foreword and the executive read: an overnight run
+meant to process 22 workstreams lost 18 of them, because a cache opened its own
+database handle on every model call and bypassed the single-writer discipline
+the system claimed on paper. The fix was structural (shared connection
+threading, cache attribution, phase-level observability, fail-visible recovery),
+not more prompting. That is the difference between a clever demo and an operating
+standard, and it is why the doctrine treats durability as a first-class concern.
+Full account in the Field Guide foreword (`docs/FIELD-GUIDE.md`).
+
 ## What the runtime enforces
 
 - `usage-guard.sh` (PreToolUse): denies conductor-model subagents that are not on

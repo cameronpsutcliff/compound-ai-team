@@ -1,5 +1,5 @@
 # Viz Rules
-# Compound AI Operating Standards v3.0.3
+# Compound AI Operating Standards v3.0.4
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 The non-negotiable rules for visualization design. Most are distilled from Stephen Few's *Perceptual Edge* canon, with practical storytelling input from Andy Kriebel's #MakeoverMonday archive. See `canon.md` for full attribution.

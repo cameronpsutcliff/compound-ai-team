@@ -84,6 +84,34 @@ run_expect_not_contains() {
   fi
 }
 
+run_json_assert() {
+  local label="$1"
+  local expr="$2"
+  shift 2
+  local output rc json_file
+  output="$("$@" 2>&1)"
+  rc=$?
+  json_file="$TMP_ROOT/json-assert.json"
+  printf '%s\n' "$output" > "$json_file"
+  if python3 - "$json_file" "$expr" <<'PY'; then
+import json
+import sys
+
+path, expr = sys.argv[1], sys.argv[2]
+raw = open(path, "r", encoding="utf-8").read().strip()
+data = json.loads(raw)
+if not eval(expr, {"__builtins__": {}}, {"data": data, "bool": bool}):
+    raise SystemExit(1)
+PY
+    log "PASS $label"
+    [ -n "$output" ] && printf '%s\n' "$output" | sed 's/^/  /'
+  else
+    fail "$label JSON assertion failed: $expr"
+    printf 'exit: %s\n' "$rc" >&2
+    [ -n "$output" ] && printf '%s\n' "$output" >&2
+  fi
+}
+
 write_usage_guard_stub() {
   local path="$1"
   cat > "$path" <<'EOF'
@@ -244,7 +272,17 @@ for fixture in \
   "$FIXTURES_DIR/leak-sample.md" \
   "$FIXTURES_DIR/usage-guard/agent-no-model.json" \
   "$FIXTURES_DIR/usage-guard/agent-cheap-model.json" \
+  "$FIXTURES_DIR/usage-guard/agent-over-budget.json" \
+  "$FIXTURES_DIR/usage-guard/bash-tool.json" \
   "$FIXTURES_DIR/usage-guard/workflow-cap-hit.json" \
+  "$FIXTURES_DIR/adapter-contract/no-goal.json" \
+  "$FIXTURES_DIR/adapter-contract/budget-closed.json" \
+  "$FIXTURES_DIR/adapter-contract/unmet-goal.json" \
+  "$FIXTURES_DIR/adapter-contract/false-positive-no-agent.json" \
+  "$FIXTURES_DIR/adapter-contract/routing-heavy.json" \
+  "$FIXTURES_DIR/goal-loop/done-first.json" \
+  "$FIXTURES_DIR/goal-loop/two-iterations-unmet.json" \
+  "$FIXTURES_DIR/goal-loop/no-progress.json" \
   "$FIXTURES_DIR/session-router/light.json" \
   "$FIXTURES_DIR/session-router/medium.json" \
   "$FIXTURES_DIR/session-router/heavy.json" \
@@ -348,6 +386,12 @@ run_expect_pass "usage-guard fail-open on malformed input" bash -c "printf 'not-
 run_expect_fail "usage-guard blocks agent-no-model.json" bash -c "'$hook_tree/runtime/claude-code/hooks/usage-guard.sh' block < '$FIXTURES_DIR/usage-guard/agent-no-model.json'"
 run_expect_pass "usage-guard allows agent-cheap-model.json" bash -c "'$hook_tree/runtime/claude-code/hooks/usage-guard.sh' block < '$FIXTURES_DIR/usage-guard/agent-cheap-model.json'"
 run_expect_fail "usage-guard blocks workflow-cap-hit.json" bash -c "'$hook_tree/runtime/claude-code/hooks/usage-guard.sh' block < '$FIXTURES_DIR/usage-guard/workflow-cap-hit.json'"
+run_json_assert "CT-UD-1 Agent over budget returns block" 'data.get("decision")=="block"' bash -c "'$hook_tree/runtime/claude-code/hooks/usage-guard.sh' block < '$FIXTURES_DIR/usage-guard/agent-over-budget.json'"
+run_json_assert "CT-UD-2 cheap Agent below warning returns allow" 'data.get("decision")=="allow"' bash -c "'$hook_tree/runtime/claude-code/hooks/usage-guard.sh' block < '$FIXTURES_DIR/usage-guard/agent-cheap-model.json'"
+run_json_assert "CT-UD-3 Bash tool returns allow without evaluation" 'data.get("decision")=="allow" and data.get("usage_pct")==-1' bash -c "'$hook_tree/runtime/claude-code/hooks/usage-guard.sh' block < '$FIXTURES_DIR/usage-guard/bash-tool.json'"
+run_json_assert "CT-UD-4 malformed probe fails open" 'data.get("decision")=="allow" and data.get("usage_pct")==-1' bash -c "printf 'not-json' | '$hook_tree/runtime/claude-code/hooks/usage-guard.sh' block"
+run_json_assert "CT-UD-5 closed pct ceiling blocks delegation" 'data.get("decision")=="block"' bash -c "USAGE_GUARD_BLOCK_PCT=0 '$hook_tree/runtime/claude-code/hooks/usage-guard.sh' block < '$FIXTURES_DIR/usage-guard/agent-cheap-model.json'"
+run_json_assert "CT-UD-6 approved cheap worker passes model check" 'data.get("decision")=="allow"' bash -c "'$hook_tree/runtime/claude-code/hooks/usage-guard.sh' block < '$FIXTURES_DIR/usage-guard/agent-cheap-model.json'"
 
 usage_notice_payload="$TMP_ROOT/usage-inform.json"
 usage_notice_file="$TMP_ROOT/usage-estimation.notice"
@@ -360,6 +404,38 @@ run_expect_pass "session-router accepts light.json" bash -c "'$hook_tree/runtime
 run_expect_pass "session-router accepts medium.json" bash -c "'$hook_tree/runtime/claude-code/hooks/session-router.sh' < '$FIXTURES_DIR/session-router/medium.json'"
 run_expect_pass "session-router accepts heavy.json" bash -c "'$hook_tree/runtime/claude-code/hooks/session-router.sh' < '$FIXTURES_DIR/session-router/heavy.json'"
 run_expect_contains "session-router routes heavy-singular.json as HEAVY" "Routing tier: HEAVY" bash -c "'$hook_tree/runtime/claude-code/hooks/session-router.sh' < '$FIXTURES_DIR/session-router/heavy-singular.json'"
+run_expect_contains "CT-SR-1 multi-agent architecture routes HEAVY" "Routing tier: HEAVY" bash -c "'$hook_tree/runtime/claude-code/hooks/session-router.sh' < '$FIXTURES_DIR/session-router/heavy.json'"
+run_expect_contains "CT-SR-2 implement session router routes MEDIUM" "Routing tier: MEDIUM" bash -c "'$hook_tree/runtime/claude-code/hooks/session-router.sh' < '$FIXTURES_DIR/session-router/medium.json'"
+run_expect_contains "CT-SR-3 simple prompt routes LIGHT" "Routing tier: LIGHT" bash -c "'$hook_tree/runtime/claude-code/hooks/session-router.sh' < '$FIXTURES_DIR/session-router/light.json'"
+run_expect_contains "CT-SR-4 missing registry still returns tier" "Routing tier:" bash -c "CAOS_REGISTRY='$TMP_ROOT/missing-registry.yaml' '$hook_tree/runtime/claude-code/hooks/session-router.sh' < '$FIXTURES_DIR/session-router/medium.json'"
+run_expect_contains "CT-SR-5 router off passes through" "Routing disabled by SESSION_ROUTER_OFF" bash -c "SESSION_ROUTER_OFF=1 '$hook_tree/runtime/claude-code/hooks/session-router.sh' < '$FIXTURES_DIR/session-router/heavy.json'"
+run_expect_contains "CT-SR-6 LIGHT directive appears" "Keep context lean" bash -c "'$hook_tree/runtime/claude-code/hooks/session-router.sh' < '$FIXTURES_DIR/session-router/light.json'"
+run_expect_contains "CT-SR-6 MEDIUM directive appears" "run local validation" bash -c "'$hook_tree/runtime/claude-code/hooks/session-router.sh' < '$FIXTURES_DIR/session-router/medium.json'"
+run_expect_contains "CT-SR-6 HEAVY directive appears" "check usage before delegation" bash -c "'$hook_tree/runtime/claude-code/hooks/session-router.sh' < '$FIXTURES_DIR/session-router/heavy.json'"
+
+log "== Adapter contract conformance fixtures =="
+invalid_task="$TMP_ROOT/invalid-task.json"
+printf 'not-json\n' > "$invalid_task"
+
+for runtime_name in generic codex cursor; do
+  dispatch="$STANDARDS_DIR/runtime/$runtime_name/dispatch.sh"
+  run_json_assert "CT-AC-1 $runtime_name returns required fields" '"id" in data and "status" in data and "output" in data' "$dispatch" --input "$FIXTURES_DIR/adapter-contract/no-goal.json" --agent-cmd 'printf "4\n"'
+  run_json_assert "CT-AC-2 $runtime_name closed budget halts" 'data.get("status")=="halted"' "$dispatch" --input "$FIXTURES_DIR/adapter-contract/budget-closed.json"
+  run_json_assert "CT-AC-3 $runtime_name no GoalContract completes without error" 'data.get("status")!="error"' "$dispatch" --input "$FIXTURES_DIR/adapter-contract/no-goal.json" --agent-cmd 'printf "4\n"'
+  run_json_assert "CT-AC-4 $runtime_name unmet goal is not done" 'data.get("status")!="done" and data.get("halt_reason")' "$dispatch" --input "$FIXTURES_DIR/adapter-contract/unmet-goal.json" --agent-cmd 'printf "not yet\n"'
+  run_json_assert "CT-AC-5 $runtime_name injects routing context" '"Routing tier: HEAVY" in data.get("output","")' "$dispatch" --input "$FIXTURES_DIR/adapter-contract/routing-heavy.json"
+  run_json_assert "CT-AC-6 $runtime_name invalid JSON errors with reason" 'data.get("status")=="error" and bool(data.get("halt_reason"))' "$dispatch" --input "$invalid_task"
+done
+
+run_json_assert "P-1 false-positive fixture halts without agent output" 'data.get("status")!="done" and "no agent command" in data.get("halt_reason","")' "$STANDARDS_DIR/runtime/generic/dispatch.sh" --input "$FIXTURES_DIR/adapter-contract/false-positive-no-agent.json"
+
+log "== Goal-loop conformance fixtures =="
+run_json_assert "CT-GL-1 done on first iteration" 'data.get("status")=="done" and data.get("iterations_run")==1 and data.get("completion_met") is True' "$STANDARDS_DIR/runtime/generic/dispatch.sh" --input "$FIXTURES_DIR/goal-loop/done-first.json" --agent-cmd 'printf "done\n"'
+run_json_assert "CT-GL-2 iteration budget halts after two" 'data.get("status")=="halted" and data.get("iterations_run")==2 and bool(data.get("halt_reason"))' "$STANDARDS_DIR/runtime/generic/dispatch.sh" --input "$FIXTURES_DIR/goal-loop/two-iterations-unmet.json" --agent-cmd 'printf "attempt %s\n" "$CAOS_ITERATION"'
+run_json_assert "CT-GL-3 identical outputs halt no-progress" 'data.get("status")=="halted" and data.get("iterations_run")==2 and data.get("no_progress_halt") is True' "$STANDARDS_DIR/runtime/generic/dispatch.sh" --input "$FIXTURES_DIR/goal-loop/no-progress.json" --agent-cmd 'printf "same\n"'
+run_json_assert "CT-GL-4 no GoalContract has no completion_met field" 'data.get("status")!="error" and "completion_met" not in data' "$STANDARDS_DIR/runtime/generic/dispatch.sh" --input "$FIXTURES_DIR/adapter-contract/no-goal.json" --agent-cmd 'printf "4\n"'
+run_json_assert "CT-GL-5 usage block halts before execution" 'data.get("status")=="halted" and "usage" in data.get("halt_reason","")' "$STANDARDS_DIR/runtime/generic/dispatch.sh" --input "$FIXTURES_DIR/adapter-contract/budget-closed.json" --agent-cmd 'printf "should not run\n"'
+run_expect_contains "CT-GL-6 evaluator is separate from generator command" "evaluate_completion()" grep -F "evaluate_completion()" "$STANDARDS_DIR/runtime/generic/dispatch.sh"
 
 if [ "$failures" -ne 0 ]; then
   printf 'FAIL selftest: %s assertion(s) failed\n' "$failures" >&2

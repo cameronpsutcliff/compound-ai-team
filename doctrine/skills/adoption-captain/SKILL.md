@@ -1,5 +1,5 @@
 # Skill: adoption-captain
-# Compound AI Operating Standards v3.0.3
+# Compound AI Operating Standards v3.0.4
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 ## What this skill does

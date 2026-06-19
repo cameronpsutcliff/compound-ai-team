@@ -1,5 +1,5 @@
 # Tier 0 Context
-# Compound AI Operating Standards v3.0.3
+# Compound AI Operating Standards v3.0.4
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 Always load this for non-trivial work.

@@ -51,8 +51,10 @@ TASK_FILE="$(mktemp "${TMPDIR:-/tmp}/caos-task.XXXXXX")"
 ROUTE_FILE="$(mktemp "${TMPDIR:-/tmp}/caos-route.XXXXXX")"
 USAGE_FILE="$(mktemp "${TMPDIR:-/tmp}/caos-usage.XXXXXX")"
 AGENT_OUTPUT_FILE="$(mktemp "${TMPDIR:-/tmp}/caos-agent-output.XXXXXX")"
+PREV_OUTPUT_FILE="$(mktemp "${TMPDIR:-/tmp}/caos-agent-prev.XXXXXX")"
+EVAL_FILE="$(mktemp "${TMPDIR:-/tmp}/caos-eval.XXXXXX")"
 ENV_FILE="$(mktemp "${TMPDIR:-/tmp}/caos-task-env.XXXXXX")"
-trap 'rm -f "$TASK_FILE" "$ROUTE_FILE" "$USAGE_FILE" "$AGENT_OUTPUT_FILE" "$ENV_FILE"' EXIT
+trap 'rm -f "$TASK_FILE" "$ROUTE_FILE" "$USAGE_FILE" "$AGENT_OUTPUT_FILE" "$PREV_OUTPUT_FILE" "$EVAL_FILE" "$ENV_FILE"' EXIT
 
 if [ -n "$INPUT_FILE" ]; then
   cat "$INPUT_FILE" > "$TASK_FILE" 2>/dev/null || {
@@ -147,6 +149,20 @@ if [ "${BUDGET_ITERATIONS:-}" = "0" ]; then
   exit 0
 fi
 
+MAX_ITERATIONS="$(python3 - "${BUDGET_ITERATIONS:-}" <<'PY'
+import sys
+
+raw = sys.argv[1].strip()
+try:
+    value = int(float(raw)) if raw else 1
+except Exception:
+    value = 1
+if value < 1:
+    value = 1
+print(value)
+PY
+)"
+
 router_payload="$(python3 - "$TASK_PROMPT" <<'PY'
 import json
 import sys
@@ -171,26 +187,37 @@ except Exception:
 PY
 )"
 
-usage_payload="$(python3 - "$TASK_PROMPT" "$BUDGET_PCT" <<'PY'
+build_usage_payload() {
+  python3 - "$TASK_PROMPT" "$BUDGET_PCT" "$1" <<'PY'
 import json
 import sys
-prompt, pct = sys.argv[1], sys.argv[2]
+prompt, pct, iteration = sys.argv[1], sys.argv[2], sys.argv[3]
 value = 0 if pct == "0" else ""
 print(json.dumps({
     "tool_name": "Workflow",
     "tool_input": {
         "prompt": prompt,
         "estimated_usage_pct": value,
+        "iteration": iteration,
     },
 }, separators=(",", ":")))
 PY
-)"
+}
 
-if [ -n "${BUDGET_PCT:-}" ]; then
-  if printf '%s' "$usage_payload" | USAGE_GUARD_BLOCK_PCT="$BUDGET_PCT" "$STANDARDS_DIR/runtime/claude-code/hooks/usage-guard.sh" block > "$USAGE_FILE" 2>/dev/null; then
-    :
-  else
-    halt_reason="$(python3 - "$USAGE_FILE" <<'PY'
+run_usage_guard() {
+  local iteration="$1"
+  if [ -n "${BUDGET_PCT:-}" ]; then
+    if build_usage_payload "$iteration" | USAGE_GUARD_BLOCK_PCT="$BUDGET_PCT" "$STANDARDS_DIR/runtime/claude-code/hooks/usage-guard.sh" block > "$USAGE_FILE" 2>/dev/null; then
+      return 0
+    fi
+    return 2
+  fi
+  printf '{"decision":"allow","reason":"no pct ceiling supplied","usage_pct":-1}\n' > "$USAGE_FILE"
+  return 0
+}
+
+usage_halt_reason() {
+  python3 - "$USAGE_FILE" <<'PY'
 import json
 import sys
 try:
@@ -199,8 +226,10 @@ try:
 except Exception:
     print("usage discipline blocked dispatch")
 PY
-)"
-    usage_pct="$(python3 - "$USAGE_FILE" <<'PY'
+}
+
+usage_pct_value() {
+  python3 - "$USAGE_FILE" <<'PY'
 import json
 import sys
 try:
@@ -209,13 +238,7 @@ try:
 except Exception:
     print("")
 PY
-)"
-    json_result halted "" "$halt_reason" "$usage_pct" "Dispatch halted before execution by usage discipline."
-    exit 0
-  fi
-else
-  printf '{"decision":"allow","reason":"no pct ceiling supplied","usage_pct":-1}\n' > "$USAGE_FILE"
-fi
+}
 
 prelude_path="$STANDARDS_DIR/runtime/generic/prompt-prelude.md"
 if [ -f "$prelude_path" ]; then
@@ -237,19 +260,24 @@ $TASK_CONTEXT
 Task:
 $TASK_PROMPT"
 
-if [ -n "$AGENT_CMD" ]; then
-  if printf '%s\n' "$DISPATCH_PROMPT" | sh -c "$AGENT_CMD" > "$AGENT_OUTPUT_FILE" 2>&1; then
-    :
-  else
-    output="$(cat "$AGENT_OUTPUT_FILE")"
-    json_result error "$output" "agent command failed" "" "Dispatch failed after capability prechecks."
-    exit 1
+if [ -z "$AGENT_CMD" ]; then
+  if ! run_usage_guard 1; then
+    halt_reason="$(usage_halt_reason)"
+    usage_pct="$(usage_pct_value)"
+    json_result halted "" "$halt_reason" "$usage_pct" "Dispatch halted before manual execution by usage discipline."
+    exit 0
   fi
-else
   printf '%s\n' "$DISPATCH_PROMPT" > "$AGENT_OUTPUT_FILE"
+  if [ -n "${GOAL_CONDITION:-}" ]; then
+    json_result halted "$(cat "$AGENT_OUTPUT_FILE")" "no agent command supplied; completion condition was not evaluated against agent output" "" "Dispatch prompt prepared for manual execution; no agent output captured."
+    exit 0
+  fi
+  json_result done "$(cat "$AGENT_OUTPUT_FILE")" "" "" ""
+  exit 0
 fi
 
-python3 - "$TASK_ID" "$AGENT_OUTPUT_FILE" "$GOAL_CONDITION" "$GOAL_VALIDATION" <<'PY'
+evaluate_completion() {
+  python3 - "$TASK_ID" "$AGENT_OUTPUT_FILE" "$GOAL_CONDITION" "$GOAL_VALIDATION" <<'PY'
 import json
 import os
 import subprocess
@@ -303,7 +331,94 @@ if halt_reason:
     result["halt_reason"] = halt_reason
 if condition:
     result["completion_met"] = bool(completion_met)
-result["iterations_run"] = 1
+print(json.dumps(result, separators=(",", ":")))
+PY
+}
+
+emit_loop_result() {
+  python3 - "$1" "$2" "$3" "$4" "$5" "$AGENT_OUTPUT_FILE" "$USAGE_FILE" <<'PY'
+import json
+import sys
+
+task_id, status, halt_reason, iterations, no_progress, output_path, usage_path = sys.argv[1:8]
+output = open(output_path, "r", encoding="utf-8", errors="replace").read()
+result = {
+    "id": task_id,
+    "status": status,
+    "output": output,
+    "iterations_run": int(iterations),
+    "no_progress_halt": no_progress == "1",
+}
+if halt_reason:
+    result["halt_reason"] = halt_reason
+try:
+    usage = json.load(open(usage_path, "r", encoding="utf-8"))
+    if "usage_pct" in usage:
+        result["usage"] = {"pct_used": int(float(usage["usage_pct"]))}
+except Exception:
+    pass
+if status != "done":
+    result["memory_update"] = f"Dispatch halted after {iterations} iteration(s): {halt_reason}"
+print(json.dumps(result, separators=(",", ":")))
+PY
+}
+
+iterations_run=0
+while [ "$iterations_run" -lt "$MAX_ITERATIONS" ]; do
+  next_iteration=$((iterations_run + 1))
+
+  if ! run_usage_guard "$next_iteration"; then
+    halt_reason="$(usage_halt_reason)"
+    usage_pct="$(usage_pct_value)"
+    json_result halted "$(cat "$AGENT_OUTPUT_FILE")" "$halt_reason" "$usage_pct" "Dispatch halted before iteration $next_iteration by usage discipline."
+    exit 0
+  fi
+
+  if printf '%s\n' "$DISPATCH_PROMPT" | CAOS_ITERATION="$next_iteration" sh -c "$AGENT_CMD" > "$AGENT_OUTPUT_FILE" 2>&1; then
+    :
+  else
+    output="$(cat "$AGENT_OUTPUT_FILE")"
+    json_result error "$output" "agent command failed on iteration $next_iteration" "" "Dispatch failed after capability prechecks."
+    exit 1
+  fi
+  iterations_run="$next_iteration"
+
+  evaluate_completion > "$EVAL_FILE"
+  status="$(python3 - "$EVAL_FILE" <<'PY'
+import json
+import sys
+print(json.load(open(sys.argv[1], "r", encoding="utf-8")).get("status", "error"))
+PY
+)"
+  if [ "$status" = "done" ]; then
+    python3 - "$EVAL_FILE" "$iterations_run" <<'PY'
+import json
+import sys
+
+result = json.load(open(sys.argv[1], "r", encoding="utf-8"))
+result["iterations_run"] = int(sys.argv[2])
 result["no_progress_halt"] = False
 print(json.dumps(result, separators=(",", ":")))
 PY
+    exit 0
+  fi
+
+  if [ "$iterations_run" -gt 1 ] && cmp -s "$AGENT_OUTPUT_FILE" "$PREV_OUTPUT_FILE"; then
+    emit_loop_result "$TASK_ID" halted "no progress detected: consecutive iterations produced identical output" "$iterations_run" 1
+    exit 0
+  fi
+
+  cp "$AGENT_OUTPUT_FILE" "$PREV_OUTPUT_FILE"
+done
+
+final_reason="$(python3 - "$EVAL_FILE" <<'PY'
+import json
+import sys
+try:
+    data = json.load(open(sys.argv[1], "r", encoding="utf-8"))
+    print(data.get("halt_reason") or "iteration budget exhausted before completion")
+except Exception:
+    print("iteration budget exhausted before completion")
+PY
+)"
+emit_loop_result "$TASK_ID" halted "$final_reason" "$iterations_run" 0

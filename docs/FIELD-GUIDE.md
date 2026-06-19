@@ -2,12 +2,14 @@
 
 *A field guide for token economics, repeatable engagement, and durable agentic systems.*
 
-**Version:** 1.0.0-draft
-**Status:** In progress. See the build plan for chapter ownership and the rolling build log.
-**Author:** Cameron Sutcliff
+**What this is:** the deep reference for the kit, the why behind the way it is
+built. It is NOT required reading to adopt the kit; the README, `EXECUTIVE.md`,
+and `adoption/ADOPT.md` are. Read this when you want the full reasoning.
+**Author:** Cameron Sutcliff (the field guide is the authored manual; the kit
+and its enforced runtime are co-owned with Joshua Sutcliff, see `NOTICE`).
 **Canonical source:** `github.com/cameronpsutcliff/compound-ai`
 **Landing page:** `cameronsutcliff.com/compound-ai`
-**License:** CC BY 4.0 (docs), Apache 2.0 (code samples). See `compound-ai-starter-kit/LICENSE.md`.
+**License:** CC BY 4.0 (docs), Apache 2.0 (code samples). See `LICENSE`.
 
 ---
 

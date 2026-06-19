@@ -1,7 +1,7 @@
 # Compound AI Operating Standards
 ## The Six-Layer Standard
 
-Version: v3.0.3
+Version: v3.0.4
 Authors: Cameron Sutcliff (cameronpsutcliff), Joshua Sutcliff (joshuadsutcliff)
 
 ---
@@ -153,6 +153,12 @@ what is advisory rather than mechanically enforced.
 
 ## Version history
 
+- v3.0.4 (2026-06-19): impressiveness and depth pass. An enforcement-in-action
+  proof (the hook shown blocking a real over-budget spawn), conformance cases
+  (CT-AC/UD/SR/GL) executed in the self-test, README badges and an enforced-vs-
+  advisory table under the hero, CONTRIBUTING/SECURITY/templates, a fixed
+  goal-adapter false-positive plus a real iterating goal-loop, and the Team
+  edition no longer publishing internal build-process docs. No doctrine change.
 - v3.0.3 (2026-06-19): second-review close-out. A realistic middle baseline in
   the session-start benchmark (honest everyday ratio plus a labeled ceiling), an
   eighth gate (check-benchmark-figures) that forbids hand-typed benchmark figures

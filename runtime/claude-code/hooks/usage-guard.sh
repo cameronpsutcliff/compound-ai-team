@@ -242,6 +242,11 @@ subagent_type="$(sed -n '3p' "$fields_file")"
 estimated_usage_pct="$(sed -n '4p' "$fields_file")"
 prompt="$(sed -n '5,$p' "$fields_file")"
 
+if [ "$mode" = "block" ] && [ "$tool_name" != "Agent" ] && [ "$tool_name" != "Workflow" ]; then
+  json_out allow "non-delegation tool ignored" -1
+  exit 0
+fi
+
 pct="$(probe_pct "$estimated_usage_pct" "$prompt")"
 case "$pct" in
   ''|*[!0-9]*) pct=-1 ;;
