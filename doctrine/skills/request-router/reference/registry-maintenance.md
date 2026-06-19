@@ -1,5 +1,5 @@
 # Registry Maintenance Reference
-# Compound AI Operating Standards v3.0.2
+# Compound AI Operating Standards v3.0.3
 # Source: github.com/cameronpsutcliff/compound-ai | License: Apache 2.0
 
 The trigger registry is a repo invariant enforced by CI, not a tier-1 skill

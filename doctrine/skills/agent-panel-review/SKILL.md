@@ -1,5 +1,5 @@
 # Skill: agent-panel-review
-# Compound AI Operating Standards v3.0.2
+# Compound AI Operating Standards v3.0.3
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 ## What this skill does

@@ -1,7 +1,7 @@
 # Compound AI Operating Standards
 ## The Six-Layer Standard
 
-Version: v3.0.2
+Version: v3.0.3
 Authors: Cameron Sutcliff (cameronpsutcliff), Joshua Sutcliff (joshuadsutcliff)
 
 ---
@@ -99,8 +99,8 @@ never duplicated in scripts).
 
 **What:** Everything under `proof/`. Net-positive evidence.
 
-Includes the session-start benchmark (a character-estimate ratio of roughly two
-orders of magnitude, pure shell, no metered API), delegation economics, and
+Includes the session-start benchmark (a character-estimate ratio, a realistic single-tier
+comparison plus a full-resident ceiling, pure shell, no metered API), delegation economics, and
 loop-adoption evidence. The token counts are heuristic estimates (bytes / 4), so
 the result is order-of-magnitude, not a model-exact byte count. The exact
 current numbers are regenerated from the tree into
@@ -133,7 +133,7 @@ edition. `adoption/` carries `ADOPT.md`, the installer, and `INSTALL.md`.
 
 ## What the CI gates enforce
 
-Seven gates orchestrated by `enforcement/bin/check-kit.sh` (thresholds in
+Eight gates orchestrated by `enforcement/bin/check-kit.sh` (thresholds in
 `enforcement-rules.yaml`, the single source of truth):
 
 | Gate script | Enforces |
@@ -143,6 +143,7 @@ Seven gates orchestrated by `enforcement/bin/check-kit.sh` (thresholds in
 | `enforcement/bin/check-counts.sh` | Skill count derived, never hand-typed; matches index and registry |
 | `enforcement/bin/check-registry-coherence.sh` | Every registry pointer resolves and every SKILL.md is registered |
 | `enforcement/bin/check-handoff-skills.sh` | HANDOFF.md lists the live Tier 1 skills, no stale or duplicate entries |
+| `enforcement/bin/check-benchmark-figures.sh` | Benchmark figures live only in the generated results.md; headline docs never hand-type them |
 | `enforcement/bin/check-runtime-wiring.sh` | settings.fragment.json wires all hook events with resolving paths and adapters |
 
 Run them all with `enforcement/bin/check-kit.sh`. See `docs/known-limits.md` for
@@ -152,6 +153,11 @@ what is advisory rather than mechanically enforced.
 
 ## Version history
 
+- v3.0.3 (2026-06-19): second-review close-out. A realistic middle baseline in
+  the session-start benchmark (honest everyday ratio plus a labeled ceiling), an
+  eighth gate (check-benchmark-figures) that forbids hand-typed benchmark figures
+  in headline docs, the ARCHITECTURE stale-numbers fix, a corrected release date,
+  and a repo description that states the enforcement scope. No doctrine change.
 - v3.0.2 (2026-06-19): pre-publication hardening. An executive one-pager, a
   README that leads with the thesis (the 158x figure is now generated, not
   hand-typed, so it cannot drift), real captured hook-block evidence in place of
@@ -165,7 +171,7 @@ what is advisory rather than mechanically enforced.
   session-router singular-term fix, a quick-recap convention, scripted
   installers, edition-specific zips, and an estimator-based reframing of the
   158x and non-Claude enforcement claims. No behavior change to the doctrine.
-- v3.0.0 (2026-06-18): co-owned consolidation. Six-layer architecture, the
+- v3.0.0 (2026-06-19): co-owned consolidation. Six-layer architecture, the
   runtime-agnostic capability and adapter model, cross-repo skill-merge
   (memory, delegation, review), goal-parity, vendored runtime/claude-code hooks.
   SemVer-major signals a re-read-before-adopting boundary.

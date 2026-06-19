@@ -2,6 +2,39 @@
 
 Release notes for the Compound AI Operating Standards kit. Newest first.
 
+## v3.0.3 (2026-06-19)
+
+A second review pass (an external reviewer plus an internal multi-model panel)
+converged on two open items; this closes them. No doctrine or behavior change.
+
+### Added
+
+- **A realistic benchmark baseline.** `proof/session-start-benchmark/measure.sh`
+  now measures three sets, not two: full-resident (the ceiling), a realistic
+  single-tier no-router bundle, and the kit's tier-0. It reports both the
+  honest everyday ratio (realistic vs kit) and the upper-bound ceiling (naive vs
+  kit), so the headline is no longer a best-vs-worst straw man. Numbers stay
+  script-generated.
+- **A benchmark-figures gate.** `enforcement/bin/check-benchmark-figures.sh`
+  (the eighth gate, wired into `check-kit` with a planted-fixture self-test)
+  fails if the headline docs hand-type a benchmark figure instead of pointing at
+  the generated `results.md`. This enforces the kit's own derived-not-typed rule.
+
+### Fixed
+
+- **A derived-not-typed violation.** `docs/ARCHITECTURE.md` hand-typed stale
+  benchmark counts that contradicted the regenerated `results.md`. The prose now
+  points at `results.md` in every headline doc; no benchmark figure is
+  hand-typed anywhere (the new gate guards this).
+- **Release-date label.** The v3.0.0 changelog heading is corrected to its
+  actual tag date (2026-06-19); a note records that the early v3.0.x releases are
+  same-day pre-publication hardening passes, not instability.
+
+### Changed
+
+- **Repo description** reframed to state the enforcement scope (hard on Claude
+  Code, advisory on other runtimes) instead of an unqualified "enforcement-backed."
+
 ## v3.0.2 (2026-06-19)
 
 Pre-publication hardening from a multi-model review pass. No doctrine or
@@ -88,7 +121,7 @@ self-consistent for publication.
   literal private workspace name; literal personal terms live only in the
   gitignored maintainer denylist, which the build-time scrub now also reads.
 
-## v3.0.0 (2026-06-18)
+## v3.0.0 (2026-06-19)
 
 Co-authored by **Cameron Sutcliff**
 ([cameronpsutcliff](https://github.com/cameronpsutcliff)) and **Joshua
@@ -125,8 +158,9 @@ is a SemVer-major release: re-read before adopting.
   the generic adapter honor the same contract. The enforcement Joshua proved on
   one runtime is now a contract any agent can satisfy.
 
-- **The 158x proof.** Loading the full operating reference at session start
-  costs about 158.4x the context this kit loads at session start, because the
+- **The session-start proof.** Loading the full operating reference at session
+  start costs roughly two orders of magnitude more context than this kit loads,
+  because the
   kit routes to one short procedure on demand instead of keeping the whole
   reference resident. The token counts are character estimates (bytes / 4), not
   a tokenizer count, so the figure is order-of-magnitude. No metered API and no

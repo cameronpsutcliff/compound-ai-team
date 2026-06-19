@@ -265,6 +265,7 @@ run_expect_pass "check-portability clean baseline" "$BIN_DIR/check-portability.s
 run_expect_pass "check-counts clean baseline" "$BIN_DIR/check-counts.sh" "$base"
 run_expect_pass "check-registry-coherence clean baseline" "$BIN_DIR/check-registry-coherence.sh" "$base"
 run_expect_pass "check-handoff-skills clean baseline" "$BIN_DIR/check-handoff-skills.sh" "$base"
+run_expect_pass "check-benchmark-figures clean baseline" "$BIN_DIR/check-benchmark-figures.sh" "$base"
 run_expect_pass "check-runtime-wiring clean baseline" "$BIN_DIR/check-runtime-wiring.sh" "$base"
 
 log "== Provenance fixtures =="
@@ -330,6 +331,12 @@ case_dir="$TMP_ROOT/runtime-wiring"
 make_tree "$case_dir"
 rm -f "$case_dir/runtime/claude-code/hooks/session-router.sh"
 run_expect_fail "check-runtime-wiring missing hook" "$BIN_DIR/check-runtime-wiring.sh" "$case_dir"
+
+case_dir="$TMP_ROOT/benchmark-figures"
+make_tree "$case_dir"
+mkdir -p "$case_dir/docs"
+printf '# Architecture\n\nThe full reference resident costs about 158.4x (202,207 tokens versus 1,276).\n' > "$case_dir/docs/ARCHITECTURE.md"
+run_expect_fail "check-benchmark-figures hand-typed figure" "$BIN_DIR/check-benchmark-figures.sh" "$case_dir"
 
 log "== Runtime hook fixtures =="
 hook_tree="$TMP_ROOT/hooks"

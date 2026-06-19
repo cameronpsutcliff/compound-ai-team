@@ -1,4 +1,4 @@
-# Compound AI Operating Standards v3.0.2
+# Compound AI Operating Standards v3.0.3
 
 **A co-owned operating kit that turns any capable AI coding agent into a
 compounding work surface.**
@@ -35,7 +35,7 @@ below the one you stop at still applies and the Standard still holds.
 | 2 | **Capabilities** | `capabilities/` | The runtime-agnostic capability model. Four contracts (`adapter-contract`, `usage-discipline`, `session-routing`, `goal-loop`) that define what any adapter must guarantee. |
 | 3 | **Runtime adapters** | `runtime/` | Real per-runtime adapters, none privileged: `claude-code` (full hook enforcement), `codex`, `cursor`, `generic` (the graceful-degradation path for any agent). |
 | 4 | **Enforcement** | `enforcement/` | CI gates, workflows, and a planted-fixture self-test that block real violations. Run `enforcement/bin/check-kit.sh`. |
-| 5 | **Proof** | `proof/` | The 158x benchmark and other net-positive evidence. |
+| 5 | **Proof** | `proof/` | The session-start benchmark and other net-positive evidence. |
 | 6 | **Reference and adoption** | `reference-impl/`, `adoption/` | Maintainer Python tooling and the drop-in adoption protocol. |
 
 See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the full picture: how the
@@ -104,17 +104,17 @@ secret sauce.
 
 ## The proof point: context that does not reload
 
-Loading the full operating reference at the start of every session costs roughly
-two orders of magnitude more context than this kit loads, because the kit routes
-to one short procedure on demand instead of keeping the whole reference
-resident. That is the cost you pay repeatedly, every session, for the life of
-the work.
+A realistic un-tiered setup carries many times the context this kit loads at the
+start of every session, and keeping the full reference resident costs an order of
+magnitude beyond that. The kit routes to one short procedure on demand instead.
+That is the cost you pay repeatedly, every session, for the life of the work.
 
 The benchmark is pure shell, no metered API and no model call, reproducible on a
 bare laptop with `bash proof/session-start-benchmark/measure.sh`. The token
 counts are character estimates (bytes / 4), so the figure is order-of-magnitude,
 and the ratio is estimator-independent because both sets use the same divisor.
-The exact current numbers are regenerated from the tree and live in
+The exact figures, both the realistic single-tier ratio and the full-resident
+ceiling, are regenerated from the tree into
 [proof/session-start-benchmark/results.md](proof/session-start-benchmark/results.md);
 they are not hand-typed here, so they cannot drift. The benchmark measures
 context-loading cost, not output quality.
@@ -126,6 +126,10 @@ a battle-tested mass-adopted product. Public adoption is low; internal usage is
 real. The enforcement story is incident-hardened on the runtime side. The kit
 states what the hooks block, what stays advisory, and what the human still
 controls, rather than overclaiming. See `docs/known-limits.md`.
+
+The early v3.0.x releases are same-day pre-publication hardening passes from a
+multi-model review, not instability between adopted versions. Pin v3.0.3 or
+later.
 
 ## License
 
