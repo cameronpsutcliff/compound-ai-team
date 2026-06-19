@@ -3,7 +3,7 @@
   "@type": "SoftwareSourceCode",
   "name": "Compound AI Operating Standards",
   "description": "A co-owned operating kit for capable AI coding agents: a portable, vendor-neutral doctrine paired with an optional Claude Code enforced runtime for hook-enforced usage and routing controls.",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "author": [
     {
       "@type": "Person",

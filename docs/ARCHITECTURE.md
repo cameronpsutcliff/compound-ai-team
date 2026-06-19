@@ -1,6 +1,6 @@
 # Architecture
 
-# Compound AI Operating Standards v3.0.1
+# Compound AI Operating Standards v3.0.2
 # Source: cameronsutcliff.com/compound-ai | License: CC BY 4.0
 # Authors: Cameron Sutcliff (cameronpsutcliff), Joshua Sutcliff (joshuadsutcliff)
 
@@ -193,7 +193,7 @@ provenance and memory discipline. This was prose-and-convention enforcement:
 strong on what good operation is, advisory on making it mechanical.
 
 **Joshua Sutcliff** brought System B, the public reference runtime at
-[github.com/brass458/claude-config-public](https://github.com/brass458/claude-config-public),
+[github.com/joshuadsutcliff](https://github.com/joshuadsutcliff),
 hardened by a real multi-agent operating incident. System B contributed
 hook-level enforcement: the `usage-guard` and `session-router` hooks, the worker
 agent definitions, and a capped fan-out workflow. This was the mechanical half:

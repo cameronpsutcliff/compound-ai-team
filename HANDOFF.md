@@ -1,5 +1,5 @@
 # Agent Handoff
-# Compound AI Operating Standards v3.0.1
+# Compound AI Operating Standards v3.0.2
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 This is the document you hand to a fresh agent (Claude, Codex, Cursor, Aider, Continue, or any other) to get it operational on this kit in under two minutes.
@@ -27,7 +27,7 @@ Copy everything between the rules and paste into a new agent session:
 
 ---
 
-You are about to use the **Compound AI Operating Standards kit v3.0.0** at this path. The kit is a tiered operating layer with 26 skills and 4 project shells. Your job is to load it correctly, then help me work.
+You are about to use the **Compound AI Operating Standards kit v3.0.2** at this path. The kit is a tiered operating layer with a routed skill library and a set of project shells (see `_skills-index.md` for the exact, derived counts). Your job is to load it correctly, then help me work.
 
 **First check: am I in a new project or an existing one?**
 
@@ -48,8 +48,8 @@ If the directory contains the user's existing code, README, package files, agent
 
 **After loading, confirm by stating:**
 
-- The 11 Tier 1 infrastructure skills you have access to
-- The 15 Tier 2 capability skills you have access to (7 cognitive modes, 5 analytical, 2 domain, 1 orchestration)
+- The Tier 1 infrastructure skills you have access to
+- The Tier 2 capability skills you have access to (cognitive modes, analytical, domain, and orchestration)
 - The router uses `trigger-registry.yaml` as the canonical trigger surface.
 - `goal-runner` is active for verifiable multi-step work; Claude `/goal` is optional.
 - The 4 Tier 3 shells available (slide, scroll, mission-control, course)
@@ -71,7 +71,7 @@ If the directory contains the user's existing code, README, package files, agent
 ## What the agent sees after running this
 
 ```
-LOADED COMPOUND AI v3.0.0
+LOADED COMPOUND AI v3.0.2
 ═════════════════════════
 
 Tier 1: Session infrastructure (12 skills):
@@ -140,7 +140,7 @@ For a project that uses this kit, write a project-specific handoff that subclass
 ```markdown
 # Project Handoff: [Project Name]
 
-You are working on [project] which uses Compound AI Operating Standards v3.0.1.
+You are working on [project] which uses Compound AI Operating Standards v3.0.2.
 
 Read these files in order:
 1. AGENT.md (root)

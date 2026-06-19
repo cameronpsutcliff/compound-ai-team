@@ -138,6 +138,7 @@ Conflict resolutions:
 | File | Reason not modified |
 |---|---|
 | `./package.json` | No kit-driven dependency changes |
+| `./.github/workflows/ci.yml` | Not proposed; CI unchanged |
 
 ---
 

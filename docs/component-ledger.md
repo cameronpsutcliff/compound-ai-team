@@ -1,5 +1,5 @@
 # Component Ledger
-# Compound AI Operating Standards v3.0.1
+# Compound AI Operating Standards v3.0.2
 # Maintained by: Cameron Sutcliff + Joshua Sutcliff
 
 Every component from both contributing systems is evaluated here against
@@ -423,7 +423,7 @@ intent-routed skill (viz-routing pattern). Co-credited doctrine; portable.
 
 ## System B: Enforced Runtime Components (Joshua Sutcliff / joshuadsutcliff)
 
-Reference: github.com/brass458/claude-config-public
+Reference: github.com/joshuadsutcliff
 
 The enforced-runtime hooks (usage-guard, session-router) are vendored under
 Apache-2.0, adapted from Joshua Sutcliff's public claude-config
@@ -519,7 +519,7 @@ Note them as external installs in the kit documentation.
 | Field | Value |
 |---|---|
 | Status | EXTERNAL |
-| Location | Referenced in github.com/brass458/claude-config-public README |
+| Location | Referenced in github.com/joshuadsutcliff README |
 | Notes | Not vendored. External install. The "+3" count proposed in synthesis is not applied; these do not add to the active SKILL.md count. |
 
 ---
@@ -568,9 +568,9 @@ Note them as external installs in the kit documentation.
 | preserve command | B | FOLDED | runtime/claude-code/commands/ (folded into memory) |
 | resume command | B | FOLDED | runtime/claude-code/commands/ (folded into memory) |
 | settings.fragment.json | B | VENDORED | runtime/claude-code/ (adapted, Apache-2.0) |
-| deep-research | B | EXTERNAL | github.com/brass458/claude-config-public |
-| visual-plan | B | EXTERNAL | github.com/brass458/claude-config-public |
-| visual-recap | B | EXTERNAL | github.com/brass458/claude-config-public |
+| deep-research | B | EXTERNAL | github.com/joshuadsutcliff |
+| visual-plan | B | EXTERNAL | github.com/joshuadsutcliff |
+| visual-recap | B | EXTERNAL | github.com/joshuadsutcliff |
 
 Active SKILL.md count: derived by `check-counts.sh`.
 v2.7.0 base 28; minus trigger-indexer (demoted) and provenance-check (merged) = 26

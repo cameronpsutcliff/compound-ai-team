@@ -1,6 +1,6 @@
 # Known Limits
 
-Compound AI Operating Standards v3.0.1
+Compound AI Operating Standards v3.0.2
 
 This document states honestly what the kit enforces mechanically, what remains
 advisory, and what the human always controls. A Thoughtworks-grade reader will

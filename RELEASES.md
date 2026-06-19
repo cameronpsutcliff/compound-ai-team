@@ -2,6 +2,47 @@
 
 Release notes for the Compound AI Operating Standards kit. Newest first.
 
+## v3.0.2 (2026-06-19)
+
+Pre-publication hardening from a multi-model review pass. No doctrine or
+behavior change; this makes the kit hold up to a cold, skeptical clone.
+
+### Added
+
+- **EXECUTIVE.md**, a one-screen executive read at the repo root: the problem,
+  the shift, what is enforced versus advisory, in business terms.
+
+### Fixed
+
+- **The CI now actually runs.** The enforce workflow lived under
+  `enforcement/.github/`, a path GitHub Actions never triggers (zero runs ever).
+  Relocated to the repo-root `.github/workflows/`; the gates, the self-test, and
+  the fresh-clone simulation now run and pass on every push and PR.
+- **The proof numbers cannot drift.** `proof/session-start-benchmark/measure.sh`
+  now emits `results.md` itself, and the derive step regenerates it per edition,
+  so the committed figure always matches the tree. The README no longer
+  hand-types the ratio.
+- **Real evidence replaced an illustration.** `proof/loop-spec-net-positive.md`
+  now carries a captured `usage-guard` hook-block, not a mock labeled "shape
+  only."
+- **Clone-safe proof.** `proof/loop-adoption-evidence/measure.sh` exits cleanly
+  on a fresh clone instead of erroring, and its results are labeled internal
+  maintainer evidence rather than implying public reproducibility.
+- **README leads with the thesis,** not a hedged metric; the empty install
+  command block is fixed (a derive-scrub false positive on `.git` was eating
+  it); a dead reference to `universal-skill-routing.md` in the Individual
+  edition is resolved (the file now ships).
+- **Honest counts.** HANDOFF.md is synced to the current version and no longer
+  hand-types skill counts; the STANDARD gates table lists all seven gates.
+
+### Changed
+
+- **Provenance points to one canonical handle** (`github.com/joshuadsutcliff`);
+  the prior secondary handle is removed throughout. Lineage `@origin` tags
+  retain original history.
+- Removed a redundant CI demo job; corrected the LICENSE summary to credit both
+  authors.
+
 ## v3.0.1 (2026-06-19)
 
 A coherence and provenance patch on the v3.0.0 co-owned release. No doctrine or
@@ -66,7 +107,7 @@ is a SemVer-major release: re-read before adopting.
 
 - **Enforced runtime adopted from the collaborator.** The Claude Code runtime
   vendored under `runtime/claude-code/` comes from Joshua's System B reference
-  ([brass458/claude-config-public](https://github.com/brass458/claude-config-public)),
+  ([joshuadsutcliff](https://github.com/joshuadsutcliff)),
   hardened by a real multi-agent operating incident. It wires usage ceilings
   and tier routing to live `PreToolUse` and `UserPromptSubmit` hooks, so the
   discipline is a mechanical hard block, not a polite request.

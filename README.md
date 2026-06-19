@@ -1,4 +1,4 @@
-# Compound AI Operating Standards v3.0.1
+# Compound AI Operating Standards v3.0.2
 
 **A co-owned operating kit that turns any capable AI coding agent into a
 compounding work surface.**
@@ -18,28 +18,11 @@ everywhere else, never silently absent.
 **Canonical site:** [cameronsutcliff.com/compound-ai](https://cameronsutcliff.com/compound-ai)
 **Source repo:** [github.com/cameronpsutcliff/compound-ai](https://github.com/cameronpsutcliff/compound-ai)
 
+> Sponsoring an AI initiative, or evaluating this in 90 seconds? Read
+> **[EXECUTIVE.md](EXECUTIVE.md)** first: the problem, the shift, and what is
+> enforced versus advisory, in business terms.
+
 ---
-
-## The 158x proof point
-
-Loading the full operating reference at session start costs about **158.4x**
-the context this kit loads at session start. The kit reaches the same
-capability by routing to one short procedure on demand instead of keeping the
-whole reference resident.
-
-| Set | Files | Est. tokens |
-|---|---:|---:|
-| Naive full reference (resident) | 135 | 202,207 |
-| Kit session-start (tier-0 always-load) | 2 | 1,276 |
-| **Ratio (naive / kit)** | | **158.4x** |
-
-The token counts are character/heuristic estimates (bytes / 4) of session-start
-context, not a metered tokenizer read of any specific model. No metered API and
-no model call: pure shell, reproducible on a bare laptop with
-`bash proof/session-start-benchmark/measure.sh`. The point is order-of-magnitude
-(resident-everything vs route-on-demand), not a model-exact byte count; the
-ratio is estimator-independent because both sets use the same divisor. See
-`proof/`.
 
 ## The six-layer architecture
 
@@ -82,6 +65,7 @@ implements the same `dispatch(task) -> result` contract with its own mechanism:
 ### Option A: adopt the doctrine into an existing project
 
 ```bash
+git clone https://github.com/cameronpsutcliff/compound-ai.git .compound-ai
 ```
 
 Hand the agent `adoption/ADOPT.md` and run the `adoption-captain` skill. The
@@ -100,7 +84,7 @@ public claude-config (github.com/joshuadsutcliff) and credited in
 Version 3 is a true co-owned merge of two complementary systems. Cameron's
 solo edition contributed the portable doctrine, the tiered context model, and
 the skill library. Joshua's System B reference runtime
-([github.com/brass458/claude-config-public](https://github.com/brass458/claude-config-public)),
+([github.com/joshuadsutcliff](https://github.com/joshuadsutcliff)),
 hardened by a real multi-agent operating incident, contributed the hook-level
 enforcement now living in `runtime/claude-code/`. The consolidation lifted the
 shared behavior out of both into the runtime-agnostic `capabilities/` layer, so
@@ -117,6 +101,23 @@ the agent interface contract, multi-agent coordination, and the planning and
 review panels. These read as operating guidance for running your own panels.
 The kit does not ship any sealed-panel protocol mechanics or orchestration
 secret sauce.
+
+## The proof point: context that does not reload
+
+Loading the full operating reference at the start of every session costs roughly
+two orders of magnitude more context than this kit loads, because the kit routes
+to one short procedure on demand instead of keeping the whole reference
+resident. That is the cost you pay repeatedly, every session, for the life of
+the work.
+
+The benchmark is pure shell, no metered API and no model call, reproducible on a
+bare laptop with `bash proof/session-start-benchmark/measure.sh`. The token
+counts are character estimates (bytes / 4), so the figure is order-of-magnitude,
+and the ratio is estimator-independent because both sets use the same divisor.
+The exact current numbers are regenerated from the tree and live in
+[proof/session-start-benchmark/results.md](proof/session-start-benchmark/results.md);
+they are not hand-typed here, so they cannot drift. The benchmark measures
+context-loading cost, not output quality.
 
 ## Honest posture
 

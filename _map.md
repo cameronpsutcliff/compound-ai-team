@@ -1,6 +1,6 @@
 # Map
 
-Navigation map for Compound AI Operating Standards v3.0.1. Tier model lives in `_tiers.md`.
+Navigation map for Compound AI Operating Standards v3.0.2. Tier model lives in `_tiers.md`.
 
 ## Root files
 

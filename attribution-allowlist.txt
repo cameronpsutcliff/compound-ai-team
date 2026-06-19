@@ -31,8 +31,8 @@ IIP
 # System B public reference runtime (the enforced runtime's public origin).
 # Listed most-specific-first so the full public path is scrubbed before any
 # shorter form, keeping the private-repo denylist entry from false-matching.
-github.com/brass458/claude-config-public
-brass458/claude-config-public
+github.com/joshuadsutcliff
+joshuadsutcliff
 
 # Credited contributors, named ONLY as attributions / experts / standards.
 # A name used as a citation, a methodology credit, or an expert reference is

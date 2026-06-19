@@ -80,20 +80,28 @@ session and for a scheduled loop.
 
 The `usage-guard.sh` hook is vendored under Apache-2.0 (adapted from Joshua
 Sutcliff's public claude-config, github.com/joshuadsutcliff; see
-`runtime/claude-code/NOTICE`) and wired in `runtime/claude-code/`. This section
-documents the mechanism and the expected block shape.
+`runtime/claude-code/NOTICE`) and wired in `runtime/claude-code/`. This capture
+uses the checked-in threshold-crossing workflow fixture.
 
-Expected block when the hook fires at the threshold (shape only, for
-illustration):
+Reproduction command:
 
-```
-[usage-guard block] decision=block
-  reason: Usage cap gate: at <pct>% of cap proxy (block threshold: 90%).
-          Pause delegation and resume when usage drops.
-  tool: Workflow   loop: lessons-review   wave: <n>
+```sh
+USAGE_GUARD_NOTICE_FILE=/tmp/compound-ai-proof-usage-guard.notice \
+  bash runtime/claude-code/hooks/usage-guard.sh block \
+  < enforcement/tests/fixtures/usage-guard/workflow-cap-hit.json
 ```
 
-This artifact is completed by capturing the real hook-block log line from a run
-that crosses the threshold, replacing the illustration above. The contrast and
-the net-positive claim do not depend on the vendored hook code; the wiring
-design and the contract are authored here.
+Input fixture: `enforcement/tests/fixtures/usage-guard/workflow-cap-hit.json`.
+It sends a `Workflow` PreToolUse payload with `estimated_usage_pct` set to 95.
+
+Actual output:
+
+```json
+{"decision":"block","reason":"usage block threshold reached","usage_pct":95}
+```
+
+Exit status: `2`.
+
+This is the real block emitted by the hook for the checked-in fixture. The proof
+claim is limited to wiring and enforcement behavior: a threshold-crossing
+workflow spawn is denied by the hook.

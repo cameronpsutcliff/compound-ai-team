@@ -1,7 +1,7 @@
 # Compound AI Operating Standards
 ## The Six-Layer Standard
 
-Version: v3.0.1
+Version: v3.0.2
 Authors: Cameron Sutcliff (cameronpsutcliff), Joshua Sutcliff (joshuadsutcliff)
 
 ---
@@ -99,12 +99,13 @@ never duplicated in scripts).
 
 **What:** Everything under `proof/`. Net-positive evidence.
 
-Includes the 158x session-start benchmark (a character-estimate ratio, pure
-shell, no metered API), delegation economics, and loop-adoption evidence. The
-token counts are heuristic estimates (bytes / 4), so the result is
-order-of-magnitude, not a model-exact byte count. A reviewer can re-run
-`proof/session-start-benchmark/measure.sh` on a bare laptop and reproduce the
-ratio.
+Includes the session-start benchmark (a character-estimate ratio of roughly two
+orders of magnitude, pure shell, no metered API), delegation economics, and
+loop-adoption evidence. The token counts are heuristic estimates (bytes / 4), so
+the result is order-of-magnitude, not a model-exact byte count. The exact
+current numbers are regenerated from the tree into
+`proof/session-start-benchmark/results.md` (never hand-typed, so they cannot
+drift); a reviewer can re-run `measure.sh` on a bare laptop and reproduce them.
 
 ---
 
@@ -132,15 +133,17 @@ edition. `adoption/` carries `ADOPT.md`, the installer, and `INSTALL.md`.
 
 ## What the CI gates enforce
 
-Six gates defined in `enforcement-rules.yaml` (single source of truth):
+Seven gates orchestrated by `enforcement/bin/check-kit.sh` (thresholds in
+`enforcement-rules.yaml`, the single source of truth):
 
 | Gate script | Enforces |
 |---|---|
 | `enforcement/bin/check-line-caps.sh` | Pointer Markdown files at or under 100 lines |
 | `enforcement/bin/check-tier-discipline.sh` | tier0 never references tier-2/tier-3 |
 | `enforcement/bin/check-counts.sh` | Skill count derived, never hand-typed; matches index and registry |
-| `enforcement/bin/check-registry-coherence.sh` | Every registry entry resolves to a real file |
-| `enforcement/bin/check-runtime-wiring.sh` | settings.fragment.json wires all three hook events with resolving paths |
+| `enforcement/bin/check-registry-coherence.sh` | Every registry pointer resolves and every SKILL.md is registered |
+| `enforcement/bin/check-handoff-skills.sh` | HANDOFF.md lists the live Tier 1 skills, no stale or duplicate entries |
+| `enforcement/bin/check-runtime-wiring.sh` | settings.fragment.json wires all hook events with resolving paths and adapters |
 
 Run them all with `enforcement/bin/check-kit.sh`. See `docs/known-limits.md` for
 what is advisory rather than mechanically enforced.
@@ -149,6 +152,13 @@ what is advisory rather than mechanically enforced.
 
 ## Version history
 
+- v3.0.2 (2026-06-19): pre-publication hardening. An executive one-pager, a
+  README that leads with the thesis (the 158x figure is now generated, not
+  hand-typed, so it cannot drift), real captured hook-block evidence in place of
+  an illustration, clone-safe proof scripts, the CI workflow relocated to the
+  repo root so it actually runs, a seventh gate documented, provenance pointed
+  at a single canonical handle, and assorted version and reference fixes. No
+  behavior change to the doctrine.
 - v3.0.1 (2026-06-19): coherence and provenance remediation. Provenance
   verifiers now ship in both editions with a planted-fixture self-test; a
   HANDOFF roster gate, a deduped changelog, ccusage degradation docs, a

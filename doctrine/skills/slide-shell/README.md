@@ -1,6 +1,6 @@
 # Slide Shell
 
-Part of the Compound AI Operating Standards v3.0.1 kit.
+Part of the Compound AI Operating Standards v3.0.2 kit.
 
 ## What this produces
 

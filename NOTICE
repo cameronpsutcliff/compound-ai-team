@@ -1,6 +1,6 @@
 # NOTICE
 
-Compound AI Operating Standards v3.0.1
+Compound AI Operating Standards v3.0.2
 
 Copyright 2026 Cameron Sutcliff and Joshua Sutcliff.
 
