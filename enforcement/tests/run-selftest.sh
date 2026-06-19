@@ -1,0 +1,257 @@
+#!/usr/bin/env bash
+set -u
+
+SELF_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+STANDARDS_DIR="$(cd "$SELF_DIR/../.." && pwd)"
+BIN_DIR="$STANDARDS_DIR/enforcement/bin"
+FIXTURES_DIR="$SELF_DIR/fixtures"
+TMP_ROOT="$(mktemp -d "${TMPDIR:-/tmp}/compound-ai-selftest.XXXXXX")"
+
+trap 'rm -rf "$TMP_ROOT"' EXIT
+
+failures=0
+
+log() {
+  printf '%s\n' "$*"
+}
+
+fail() {
+  printf 'FAIL selftest: %s\n' "$*" >&2
+  failures=$((failures + 1))
+}
+
+run_expect_pass() {
+  local label="$1"
+  shift
+  local output rc
+  output="$("$@" 2>&1)"
+  rc=$?
+  if [ "$rc" -eq 0 ]; then
+    log "PASS $label"
+    [ -n "$output" ] && printf '%s\n' "$output" | sed 's/^/  /'
+  else
+    fail "$label expected exit 0, got $rc"
+    [ -n "$output" ] && printf '%s\n' "$output" >&2
+  fi
+}
+
+run_expect_fail() {
+  local label="$1"
+  shift
+  local output rc
+  output="$("$@" 2>&1)"
+  rc=$?
+  if [ "$rc" -ne 0 ]; then
+    log "PASS $label blocked as expected (exit $rc)"
+    [ -n "$output" ] && printf '%s\n' "$output" | sed 's/^/  /'
+  else
+    fail "$label expected nonzero exit"
+    [ -n "$output" ] && printf '%s\n' "$output" >&2
+  fi
+}
+
+write_usage_guard_stub() {
+  local path="$1"
+  cat > "$path" <<'EOF'
+#!/usr/bin/env bash
+set -u
+
+mode="${1:-block}"
+payload="$(mktemp)"
+trap 'rm -f "$payload"' EXIT
+cat > "$payload" || exit 0
+
+if ! grep -q '^{' "$payload"; then
+  printf '{"decision":"allow","reason":"fail-open malformed input"}\n'
+  exit 0
+fi
+
+if [ "$mode" = "block" ] && grep -q '"tool_name"[[:space:]]*:[[:space:]]*"Agent"' "$payload"; then
+  if ! grep -Eq '"model"[[:space:]]*:[[:space:]]*"(sonnet|haiku)"|"subagent_type"[[:space:]]*:[[:space:]]*"(researcher|code-generator|tester)"' "$payload"; then
+    printf '{"decision":"block","reason":"Agent fixture missing approved model or cheap worker"}\n'
+    exit 2
+  fi
+fi
+
+if [ "$mode" = "block" ] && grep -q '"tool_name"[[:space:]]*:[[:space:]]*"Workflow"' "$payload"; then
+  if grep -Eq '"estimated_usage_pct"[[:space:]]*:[[:space:]]*9[0-9]' "$payload"; then
+    printf '{"decision":"block","reason":"Workflow fixture exceeds usage cap"}\n'
+    exit 2
+  fi
+fi
+
+printf '{"decision":"allow"}\n'
+exit 0
+EOF
+  chmod +x "$path"
+}
+
+write_session_router_stub() {
+  local path="$1"
+  cat > "$path" <<'EOF'
+#!/usr/bin/env bash
+set -u
+
+payload="$(mktemp)"
+trap 'rm -f "$payload"' EXIT
+cat > "$payload" || exit 0
+
+if ! grep -q '^{' "$payload"; then
+  printf '{"hookSpecificOutput":{"hookEventName":"UserPromptSubmit","additionalContext":"Routing unavailable; fail-open on malformed input."}}\n'
+  exit 0
+fi
+
+tier="LIGHT"
+if grep -Eiq 'multi-agent|architecture|strategy|compare tradeoffs' "$payload"; then
+  tier="HEAVY"
+elif grep -Eiq 'implement|validation|local checks|script' "$payload"; then
+  tier="MEDIUM"
+fi
+
+printf '{"hookSpecificOutput":{"hookEventName":"UserPromptSubmit","additionalContext":"Routing tier: %s"}}\n' "$tier"
+exit 0
+EOF
+  chmod +x "$path"
+}
+
+install_runtime_hooks() {
+  local tree="$1"
+  mkdir -p "$tree/runtime/claude-code/hooks"
+
+  if [ -f "$STANDARDS_DIR/runtime/claude-code/hooks/usage-guard.sh" ] && [ -f "$STANDARDS_DIR/runtime/claude-code/hooks/session-router.sh" ]; then
+    cp "$STANDARDS_DIR/runtime/claude-code/hooks/usage-guard.sh" "$tree/runtime/claude-code/hooks/usage-guard.sh"
+    cp "$STANDARDS_DIR/runtime/claude-code/hooks/session-router.sh" "$tree/runtime/claude-code/hooks/session-router.sh"
+    chmod +x "$tree/runtime/claude-code/hooks/usage-guard.sh" "$tree/runtime/claude-code/hooks/session-router.sh"
+    printf 'vendored\n' > "$tree/.runtime-source"
+  else
+    write_usage_guard_stub "$tree/runtime/claude-code/hooks/usage-guard.sh"
+    write_session_router_stub "$tree/runtime/claude-code/hooks/session-router.sh"
+    printf 'fixture-stub\n' > "$tree/.runtime-source"
+  fi
+}
+
+make_tree() {
+  local tree="$1"
+  mkdir -p \
+    "$tree/doctrine/tiers" \
+    "$tree/doctrine/conventions" \
+    "$tree/doctrine/skills/minimal" \
+    "$tree/runtime/claude-code/hooks" \
+    "$tree/docs"
+
+  cp "$STANDARDS_DIR/enforcement-rules.yaml" "$tree/enforcement-rules.yaml"
+  mkdir -p "$tree/runtime/claude-code"
+  cp "$STANDARDS_DIR/runtime/claude-code/settings.fragment.json" "$tree/runtime/claude-code/settings.fragment.json"
+
+  printf '# Tier 0\n\nLoad host project rules first.\n' > "$tree/doctrine/tiers/tier0.md"
+  printf '# Minimal Skill\n\nUse this placeholder for gate self-tests.\n' > "$tree/doctrine/skills/minimal/SKILL.md"
+  printf '%s\n' '---' 'Total skills: 1' '---' '' '- `doctrine/skills/minimal/SKILL.md`' > "$tree/_skills-index.md"
+  cat > "$tree/doctrine/conventions/trigger-registry.yaml" <<'EOF'
+skills:
+  - skill: minimal
+    pointer: doctrine/skills/minimal/SKILL.md
+    triggers:
+      - selftest
+EOF
+
+  install_runtime_hooks "$tree"
+}
+
+assert_fixture_exists() {
+  local file="$1"
+  if [ ! -f "$file" ]; then
+    fail "required fixture missing: ${file#$STANDARDS_DIR/}"
+  fi
+}
+
+for fixture in \
+  "$FIXTURES_DIR/oversized-SKILL.md" \
+  "$FIXTURES_DIR/tier-violation.md" \
+  "$FIXTURES_DIR/leak-sample.md" \
+  "$FIXTURES_DIR/usage-guard/agent-no-model.json" \
+  "$FIXTURES_DIR/usage-guard/agent-cheap-model.json" \
+  "$FIXTURES_DIR/usage-guard/workflow-cap-hit.json" \
+  "$FIXTURES_DIR/session-router/light.json" \
+  "$FIXTURES_DIR/session-router/medium.json" \
+  "$FIXTURES_DIR/session-router/heavy.json"; do
+  assert_fixture_exists "$fixture"
+done
+
+if [ "$failures" -ne 0 ]; then
+  exit 1
+fi
+
+log "== Baseline clean tree =="
+base="$TMP_ROOT/base"
+make_tree "$base"
+run_expect_pass "check-line-caps clean baseline" "$BIN_DIR/check-line-caps.sh" "$base"
+run_expect_pass "check-tier-discipline clean baseline" "$BIN_DIR/check-tier-discipline.sh" "$base"
+run_expect_pass "check-portability clean baseline" "$BIN_DIR/check-portability.sh" "$base"
+run_expect_pass "check-counts clean baseline" "$BIN_DIR/check-counts.sh" "$base"
+run_expect_pass "check-registry-coherence clean baseline" "$BIN_DIR/check-registry-coherence.sh" "$base"
+run_expect_pass "check-runtime-wiring clean baseline" "$BIN_DIR/check-runtime-wiring.sh" "$base"
+
+log "== Gate block fixtures =="
+case_dir="$TMP_ROOT/line-cap"
+make_tree "$case_dir"
+cp "$FIXTURES_DIR/oversized-SKILL.md" "$case_dir/doctrine/skills/minimal/SKILL.md"
+run_expect_fail "check-line-caps oversized-SKILL.md" "$BIN_DIR/check-line-caps.sh" "$case_dir"
+
+case_dir="$TMP_ROOT/tier-discipline"
+make_tree "$case_dir"
+cp "$FIXTURES_DIR/tier-violation.md" "$case_dir/doctrine/tiers/tier0.md"
+run_expect_fail "check-tier-discipline tier-violation.md" "$BIN_DIR/check-tier-discipline.sh" "$case_dir"
+
+case_dir="$TMP_ROOT/portability-leak"
+make_tree "$case_dir"
+cp "$FIXTURES_DIR/leak-sample.md" "$case_dir/docs/leak-sample.md"
+run_expect_fail "check-portability leak-sample.md" "$BIN_DIR/check-portability.sh" "$case_dir"
+
+case_dir="$TMP_ROOT/portability-allowlist"
+make_tree "$case_dir"
+printf '# Public attribution\n\nJoshua Sutcliff\njoshuadsutcliff\n' > "$case_dir/docs/allowlisted-near-match.md"
+run_expect_pass "check-portability allowlisted near-match" "$BIN_DIR/check-portability.sh" "$case_dir"
+
+case_dir="$TMP_ROOT/counts"
+make_tree "$case_dir"
+printf '%s\n' '---' 'Total skills: 2' '---' '' '- `doctrine/skills/minimal/SKILL.md`' > "$case_dir/_skills-index.md"
+run_expect_fail "check-counts count drift" "$BIN_DIR/check-counts.sh" "$case_dir"
+
+case_dir="$TMP_ROOT/registry"
+make_tree "$case_dir"
+cat > "$case_dir/doctrine/conventions/trigger-registry.yaml" <<'EOF'
+skills:
+  - skill: missing
+    pointer: doctrine/skills/missing/SKILL.md
+    triggers:
+      - selftest
+EOF
+run_expect_fail "check-registry-coherence missing pointer" "$BIN_DIR/check-registry-coherence.sh" "$case_dir"
+
+case_dir="$TMP_ROOT/runtime-wiring"
+make_tree "$case_dir"
+rm -f "$case_dir/runtime/claude-code/hooks/session-router.sh"
+run_expect_fail "check-runtime-wiring missing hook" "$BIN_DIR/check-runtime-wiring.sh" "$case_dir"
+
+log "== Runtime hook fixtures =="
+hook_tree="$TMP_ROOT/hooks"
+make_tree "$hook_tree"
+runtime_source="$(cat "$hook_tree/.runtime-source")"
+log "Runtime source: $runtime_source"
+
+run_expect_pass "usage-guard fail-open on malformed input" bash -c "printf 'not-json' | '$hook_tree/runtime/claude-code/hooks/usage-guard.sh' block"
+run_expect_fail "usage-guard blocks agent-no-model.json" bash -c "'$hook_tree/runtime/claude-code/hooks/usage-guard.sh' block < '$FIXTURES_DIR/usage-guard/agent-no-model.json'"
+run_expect_pass "usage-guard allows agent-cheap-model.json" bash -c "'$hook_tree/runtime/claude-code/hooks/usage-guard.sh' block < '$FIXTURES_DIR/usage-guard/agent-cheap-model.json'"
+run_expect_fail "usage-guard blocks workflow-cap-hit.json" bash -c "'$hook_tree/runtime/claude-code/hooks/usage-guard.sh' block < '$FIXTURES_DIR/usage-guard/workflow-cap-hit.json'"
+
+run_expect_pass "session-router fail-open on malformed input" bash -c "printf 'not-json' | '$hook_tree/runtime/claude-code/hooks/session-router.sh'"
+run_expect_pass "session-router accepts light.json" bash -c "'$hook_tree/runtime/claude-code/hooks/session-router.sh' < '$FIXTURES_DIR/session-router/light.json'"
+run_expect_pass "session-router accepts medium.json" bash -c "'$hook_tree/runtime/claude-code/hooks/session-router.sh' < '$FIXTURES_DIR/session-router/medium.json'"
+run_expect_pass "session-router accepts heavy.json" bash -c "'$hook_tree/runtime/claude-code/hooks/session-router.sh' < '$FIXTURES_DIR/session-router/heavy.json'"
+
+if [ "$failures" -ne 0 ]; then
+  printf 'FAIL selftest: %s assertion(s) failed\n' "$failures" >&2
+  exit 1
+fi
+
+printf 'PASS selftest: all planted gate and runtime fixtures behaved as expected\n'

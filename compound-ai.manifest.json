@@ -1,0 +1,1478 @@
+{
+  "package_name": "Compound AI Operating Standards",
+  "origin_id": "compound-ai-operating-standards",
+  "authors": [
+    "Cameron Sutcliff",
+    "Joshua Sutcliff"
+  ],
+  "canonical_url": "https://cameronsutcliff.com/compound-ai",
+  "source_repo": "https://github.com/cameronpsutcliff/compound-ai-operating-standards",
+  "version": "3.0.0",
+  "release_date": "2026-06-19",
+  "license_docs": "CC-BY-4.0",
+  "license_code": "Apache-2.0",
+  "generated_at": "2026-06-19T05:07:23.325112+00:00",
+  "aggregate_sha256": "676a50798a53e659fc0d1a4395b9e7230f2f0c8d47c49c56d5f15cd108f21732",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 165,
+      "sha256": "1426eb44cc2e0fc211679a6762a0e119a1f4b601249828203f76ea22544ba131"
+    },
+    {
+      "path": "AGENT.md",
+      "bytes": 3669,
+      "sha256": "a65b6424d17a5f21df6fb0113e6cd605f6fc6589c60a22d8d75b8a7900c361a5"
+    },
+    {
+      "path": "BACKLOG.md",
+      "bytes": 137,
+      "sha256": "397516be9601bfd2c5db2ef2ce295e96d06d7ccfa125e912efb9180f5df2648b"
+    },
+    {
+      "path": "CITATION.cff",
+      "bytes": 942,
+      "sha256": "aa64c9be586eaf50155bc0f3c64b76239745bbcab004a40b03cdd2fe9e410b96"
+    },
+    {
+      "path": "CLAUDE.md",
+      "bytes": 274,
+      "sha256": "2cb243950d482b43ade40ffd52b5eaace93e9b2c8b22058a25b5f2da385dec11"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 7162,
+      "sha256": "fd90ac7146e5aceb946420d758e0e717eafc3560d110374f44352b64c0a456d0"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 12536,
+      "sha256": "3e6e74b342e913fe23df43f410c76d4c0d33ff673bb63a871c06c8cd2c4d76cd"
+    },
+    {
+      "path": "LICENSE.md",
+      "bytes": 1397,
+      "sha256": "2953c6cd774767de5a72e8e4587485576f05c162503c4fa0fd672fea0c6d53f4"
+    },
+    {
+      "path": "NOTICE",
+      "bytes": 1075,
+      "sha256": "4cb0bda4451be3d4301582585408b933980a7287d4400dbc464964287fa3b1fd"
+    },
+    {
+      "path": "NOTICE.md",
+      "bytes": 534,
+      "sha256": "4eea35cc11bbc72046f73b05e77682333468e3102e47f710bf065b5063869202"
+    },
+    {
+      "path": "Project.md",
+      "bytes": 500,
+      "sha256": "c3f891076819a8751b6024b9d36d50ea88c09f12d8c4d2c4b8eaf6ca0536cfde"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6750,
+      "sha256": "0179fb4aa205cfeafb736601d0f44a2b2d75075e4c9a590249e3898fe93ebca2"
+    },
+    {
+      "path": "STANDARD.md",
+      "bytes": 6135,
+      "sha256": "aedd9e06a2c7150779a850b498ce0e724a0368a6e6137ae7234d0715d1069a47"
+    },
+    {
+      "path": "STATE.md",
+      "bytes": 293,
+      "sha256": "0f168e56c05ee87031d322b879477b4f96d3f79a787578b7df3916a465b0226a"
+    },
+    {
+      "path": "_citations.md",
+      "bytes": 6821,
+      "sha256": "8d915f4b8f78f902689aa2254e37661dc710b3ff1c6d13b3fbb392175de73d45"
+    },
+    {
+      "path": "_map.md",
+      "bytes": 2532,
+      "sha256": "a2fcc5a7aef65ba3d7ea9c9b37318938a8401b133a0be927a1d0df8b80c8deb1"
+    },
+    {
+      "path": "_skills-index.md",
+      "bytes": 9012,
+      "sha256": "f17077e5141968bde20aa25b382a16277a550b4205aca33e1121fff45f314dfd"
+    },
+    {
+      "path": "_tiers.md",
+      "bytes": 2054,
+      "sha256": "cd29f4f2076917b6501b02532ecfc97f04da63b1597970e77c8f090d4c54de91"
+    },
+    {
+      "path": "adoption/ADOPT.md",
+      "bytes": 9965,
+      "sha256": "d93b61559df2b2db1b640e7eba965e572dcaa7f87ada5355ed5d92e31b2bc8f2"
+    },
+    {
+      "path": "adoption/INSTALL.md",
+      "bytes": 6636,
+      "sha256": "488ab2e623c5470dfda22aaa11fde18cdcbb27acdf449286eb8beb2060d2ed0c"
+    },
+    {
+      "path": "attribution-allowlist.txt",
+      "bytes": 1983,
+      "sha256": "5e639a563c164bee23f3e82c4e3788768f06f453c1cbb80bcc1f54e4d216b32d"
+    },
+    {
+      "path": "capabilities/README.md",
+      "bytes": 2854,
+      "sha256": "a19875aeeea0bc3c23877e2794fc7e014d0a1a4addd69d78e201f455abb8abb9"
+    },
+    {
+      "path": "capabilities/adapter-contract.md",
+      "bytes": 4094,
+      "sha256": "a484adc55d34a033ce93ea0d725e4c564fc8083435d6026f580b54bc14d3bf2e"
+    },
+    {
+      "path": "capabilities/goal-loop.md",
+      "bytes": 8063,
+      "sha256": "490d2e107a024dd022c5baafe7514623972a48d22fdd9b31dd6e050479323a24"
+    },
+    {
+      "path": "capabilities/session-routing.md",
+      "bytes": 4996,
+      "sha256": "2823d6e966c240c232a9b51fd87b5b0423104095ef8f5416505b7e32e8a9bf1c"
+    },
+    {
+      "path": "capabilities/team-routing.md",
+      "bytes": 4410,
+      "sha256": "7c22da9ec8e6f8d2553a6861522913c22c7db605c8c75b817a7d9fa0d46355fd"
+    },
+    {
+      "path": "capabilities/usage-discipline.md",
+      "bytes": 3915,
+      "sha256": "b6190cc750807d7f85188b14c2e4c09036d73d59f60a96e086f37a4858e254e7"
+    },
+    {
+      "path": "codemeta.json",
+      "bytes": 1124,
+      "sha256": "b1d63e4bfbf0beb0804bb6828e38713b18dbc0722276cc2072ab029e7acc7750"
+    },
+    {
+      "path": "derive/derive.sh",
+      "bytes": 13856,
+      "sha256": "305e4647fe8db8437c1303520cf865c1fd7ee356526f756548d8d9a7e8430b5c"
+    },
+    {
+      "path": "derive/exclude.txt",
+      "bytes": 1278,
+      "sha256": "65d7d5a50c2144cc3f1bf0e26c0d32050d6f762db0208bc2b514ef1e014b453a"
+    },
+    {
+      "path": "derive/include.txt",
+      "bytes": 1126,
+      "sha256": "28235ee5d3d26e035be0108774e4bb8d4f5c518579d161854dc452b0731a7681"
+    },
+    {
+      "path": "derive/transform-rules.md",
+      "bytes": 4138,
+      "sha256": "e325f222b7467081be51482d70a24e2e1bef65abb55f00b657ff14fc124517b2"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "bytes": 12704,
+      "sha256": "faf5cdaaea5ecaf03851a925a739804e4e771d4d8818fa04f510c12dc45b15a2"
+    },
+    {
+      "path": "docs/ENFORCEMENT-PROVENANCE.md",
+      "bytes": 2847,
+      "sha256": "d7340c8a6a11633753af8427459948c32ff019d0033f2fe69737e68aba5e268a"
+    },
+    {
+      "path": "docs/FIELD-GUIDE.md",
+      "bytes": 141974,
+      "sha256": "25f53e85e7767a91a82a23c2d4ab5dde9fdb6ef39b2b12dfffa19fc3d7cac4e4"
+    },
+    {
+      "path": "docs/FINAL-REVIEW.md",
+      "bytes": 25841,
+      "sha256": "a32f86fbee8d3761345efbda2b3ece843a632d751315dade54dd794a215227d3"
+    },
+    {
+      "path": "docs/FRESH-SESSION-DRY-RUN.md",
+      "bytes": 3797,
+      "sha256": "e27d091fd1a1801dc1a90885b0eedc71647e164e56002ff4e8fa2951143395fb"
+    },
+    {
+      "path": "docs/HG-2-DEBATE.md",
+      "bytes": 9436,
+      "sha256": "ad0e0848be1bfd54b2a5dd8ea2b3d4ae1b170d5ddc6a6ed40232bdac7ad81cdb"
+    },
+    {
+      "path": "docs/PUBLICATION-CHECKLIST.md",
+      "bytes": 3952,
+      "sha256": "b6be43e41cd5a52cec72151ab9f975ba5b9991585c679c976d4e57a7296115fa"
+    },
+    {
+      "path": "docs/WEBSITE-COPY.md",
+      "bytes": 5865,
+      "sha256": "6412936adcdea8e9c69fa42c1e85b7397364b7b4e75a7d8c0b407367e92092cc"
+    },
+    {
+      "path": "docs/brief-standard.md",
+      "bytes": 3942,
+      "sha256": "595639ccf95a2d7d471c7574520f42a8e1c131315830acc1325fd2a6a563d63e"
+    },
+    {
+      "path": "docs/component-ledger.md",
+      "bytes": 26423,
+      "sha256": "f36e3df48de53a66b57ffae37b2bb40127afc5297a1ef6c1d3faaf91196cad6f"
+    },
+    {
+      "path": "docs/derived-not-typed.md",
+      "bytes": 5152,
+      "sha256": "2389314402f059860ce4e0b5195b3fc13a807d45a8f37b0cf3136ec52b7b3fb4"
+    },
+    {
+      "path": "docs/known-limits.md",
+      "bytes": 4437,
+      "sha256": "0b3dd09a7608c5500706d072d0dc50e6a2df1261c204cb65ed3cd0e0e36f0ba2"
+    },
+    {
+      "path": "docs/loop-engineering.md",
+      "bytes": 9360,
+      "sha256": "a6f8c607a1494e1a8e945afd85fda0217b2066a704bda52906ded42f09aa878b"
+    },
+    {
+      "path": "doctrine/contracts/goal-contract.md",
+      "bytes": 1991,
+      "sha256": "98a1526995440ea90bc337f91f6a5eac2398990d0a5e397a9eb2075892f3480c"
+    },
+    {
+      "path": "doctrine/contracts/lineage-record.md",
+      "bytes": 1774,
+      "sha256": "7f1416d1bc3c74e40213ebe059a5888a41afb376fb1dc09f342ff43270c40fe6"
+    },
+    {
+      "path": "doctrine/contracts/loop-spec.md",
+      "bytes": 1617,
+      "sha256": "8be495c2eca2d25ded53efdba844d3206bef8e2a35a35841b23350fed73d63f7"
+    },
+    {
+      "path": "doctrine/contracts/model-routing.md",
+      "bytes": 1934,
+      "sha256": "c6ae3235a3ab050f8f2c8ef42ffb652cf7e1a6cb75071ff49e96706213d32e7b"
+    },
+    {
+      "path": "doctrine/contracts/quality-gates.md",
+      "bytes": 1726,
+      "sha256": "7ee1d2cc7d91105c3e1eb54c122a2d4a38c9d952d7f50eda29ba292ab018863d"
+    },
+    {
+      "path": "doctrine/contracts/token-budget.md",
+      "bytes": 1822,
+      "sha256": "7eab8184fb30f77b86ec84dabf0cde812ea42963e2e35648da1d0933ca3b58c4"
+    },
+    {
+      "path": "doctrine/conventions/provenance.md",
+      "bytes": 478,
+      "sha256": "ef92ba815c9b94e277a4456f9fe356301abf103e85fa7ae2ee6d4c8ba915be83"
+    },
+    {
+      "path": "doctrine/conventions/session-log-format.md",
+      "bytes": 1637,
+      "sha256": "bf8cfa8a2018dc4eed4bd18801295773dc604c64feafb5fbe864fbeeeaad89be"
+    },
+    {
+      "path": "doctrine/conventions/skill-author-guide.md",
+      "bytes": 3853,
+      "sha256": "d3d5caa94b19d909a44e565135b22efb551c501dc23f2ed0738074bd7854d135"
+    },
+    {
+      "path": "doctrine/conventions/style-guide.md",
+      "bytes": 8226,
+      "sha256": "6c78e0a832a641501fceb7eeb158033443cb70a14b1194745bbd94f19d0b5aea"
+    },
+    {
+      "path": "doctrine/conventions/token-efficiency.md",
+      "bytes": 2606,
+      "sha256": "ab5e9a776cf012bca450779fee648efa73d0a9e182f4dadae0f5fd5c0837dc92"
+    },
+    {
+      "path": "doctrine/conventions/trigger-registry.yaml",
+      "bytes": 9907,
+      "sha256": "bb725cb88476ddcf42d46886107a7212b5f3ba723d8c620a8cfb3be401449126"
+    },
+    {
+      "path": "doctrine/conventions/universal-skill-routing.md",
+      "bytes": 1553,
+      "sha256": "a8fe6a59bad27cb1bd7f6de6faf47c4a868674bde572fb65afa93d93473ef543"
+    },
+    {
+      "path": "doctrine/skills/adoption-captain/SKILL.md",
+      "bytes": 5440,
+      "sha256": "243c42966de5d5a74e1e5897a2a473592903eb10ca99eb6ee95b8aeb1388ceb9"
+    },
+    {
+      "path": "doctrine/skills/adoption-captain/reference/adoption-plan-template.md",
+      "bytes": 9158,
+      "sha256": "3694c3c52f019f71fe45c50a48b39bce077e7cb21aa64d1323a9522ce6d7a02d"
+    },
+    {
+      "path": "doctrine/skills/adoption-captain/reference/adoption-report-template.md",
+      "bytes": 10503,
+      "sha256": "16730fc761050c0c92031e228bef5d216d07bf1ce1abd7fbc8e2ce1e7f39e572"
+    },
+    {
+      "path": "doctrine/skills/adoption-captain/reference/discovery-checklist.md",
+      "bytes": 9581,
+      "sha256": "d04b4623a950060b8a8c3226eaf7df0a8ed6f151d536ef240dbac2a7946e6340"
+    },
+    {
+      "path": "doctrine/skills/adoption-captain/reference/mapping-rubric.md",
+      "bytes": 12426,
+      "sha256": "685782b28fbc83425e25c2f55108a01da2170ae51823054549816779e7d85b06"
+    },
+    {
+      "path": "doctrine/skills/adoption-captain/reference/memory-commit-protocol.md",
+      "bytes": 10934,
+      "sha256": "fe51c3564cf242a1b33a5ed6fad32a52c896951c6ec3a0992e300cfc9db43547"
+    },
+    {
+      "path": "doctrine/skills/adoption-captain/reference/non-breaking-rules.md",
+      "bytes": 7709,
+      "sha256": "951be9c0343af20570d277c82f08334935803d289625ab59e82ce8617c2101e4"
+    },
+    {
+      "path": "doctrine/skills/adoption-captain/reference/preserve-map.md",
+      "bytes": 8282,
+      "sha256": "4abfde6578dc2c95599550c9fc2cd4291e05613987f6880dd52206e6a534144f"
+    },
+    {
+      "path": "doctrine/skills/adoption-captain/reference/validation-protocol.md",
+      "bytes": 9384,
+      "sha256": "27762041577f5f0a2858962c370c7efd884b8d12388a8f09fb9f4cedbeb58207"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-planning/SKILL.md",
+      "bytes": 3495,
+      "sha256": "94d0a2564f58b5e18499e5c0890b76af3ca511da8bd38fbb7af8fcdfd677e081"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-planning/reference/concession-discipline.md",
+      "bytes": 6426,
+      "sha256": "eeb851f4a4b91ce4aa6aedb1d44409408fc3aee540bf390990a8ccc8abbe7748"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-planning/reference/cross-feedback-template.md",
+      "bytes": 4833,
+      "sha256": "bc897ac2b9635a588e780ebf6f9b7d8c23e95f89b12a80dae3b9f90ae8695384"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-planning/reference/escalation-discipline.md",
+      "bytes": 6670,
+      "sha256": "94d6c5bb6773af07f9e2f7a4276b17165db0718e585da05300a171d499cbb606"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-planning/reference/protocol.md",
+      "bytes": 8882,
+      "sha256": "459bf4ec3e1afd0f8ad8e9097326c8f03f2ae3f6c8638c88e125ad9b41db585d"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-planning/reference/task-assignment.md",
+      "bytes": 6133,
+      "sha256": "3c71a00060274700a0af9deacf350a7a2b3c8dbe86d504b58d057fa2fc48b5c2"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-planning/reference/voting-format.md",
+      "bytes": 5255,
+      "sha256": "19368727da634ae9e2a79b2c67925b7775629aa7f1c9669e7f37daff19c8629f"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-planning/reference/when-to-convene.md",
+      "bytes": 8365,
+      "sha256": "1d72b722a8ba06747b24ab5985ea885ec2cd606a70b34018d160ed0311c47981"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-planning/reference/worked-example.md",
+      "bytes": 11462,
+      "sha256": "8a1e41b7440d936aa4b692e5f714d8590a840b0b0397bf86b5594d9aa8b2442d"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-review/SKILL.md",
+      "bytes": 5007,
+      "sha256": "d651fea04185cdb3a35e9ec54547b7b0ce34342ef81260fbbcd928e292b5a568"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-review/reference/agent-strengths.md",
+      "bytes": 5026,
+      "sha256": "98fc3a056f8854fc36628b3c63e2a13fda19a21537a8df7ba531f291974997e0"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-review/reference/critique-format.md",
+      "bytes": 4517,
+      "sha256": "8310ffc8713ae7d041a3e044023ac2febd9bc6f1d6d97b4de4e0695fae8dbbea"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-review/reference/loop-4-recovery.md",
+      "bytes": 8236,
+      "sha256": "9e9d61f7d338bb8380cb52affb39b40ab7a36495233c1c8610f0b6358dda249a"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-review/reference/merge-framework.md",
+      "bytes": 8818,
+      "sha256": "c6b72f35fb6c82131bd23b7f73e041e02ebe4b73b6d67bc6213ea92bab7fb634"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-review/reference/phased-review.md",
+      "bytes": 2732,
+      "sha256": "4b07f52f6c7743d1ac7023947e16f031c2e11ad001aad07af891e20bbb284e16"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-review/reference/protocol.md",
+      "bytes": 6514,
+      "sha256": "3a90f3857d55c85b31b4e81830bb713d9e2b261f9ad0c0f911339b2d75fd5997"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-review/reference/roles.md",
+      "bytes": 3837,
+      "sha256": "4edf4434d14d0bd224231488cb3360bb2f1a65016574438f1278fb6e0faac253"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-review/reference/scorecard-rubric.md",
+      "bytes": 13539,
+      "sha256": "94b4295feaf1db8d50ddf976bfbc9ab411a121db1e3cf2c2de7307bf5caeabd8"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-review/reference/when-to-convene.md",
+      "bytes": 3816,
+      "sha256": "d18558c4151b203918d38269058847294ac3adc6b34a4aa39cefac6199f5b193"
+    },
+    {
+      "path": "doctrine/skills/agent-panel-review/reference/worked-example.md",
+      "bytes": 7354,
+      "sha256": "0fe683548a825b89e824f2d6508256e31f0e6612305ad10861b6aded083a2151"
+    },
+    {
+      "path": "doctrine/skills/autoresearch/SKILL.md",
+      "bytes": 508,
+      "sha256": "7e7aef8750b867200655b815fe05abe8d0641e5019639fbd5037a800cb09ddab"
+    },
+    {
+      "path": "doctrine/skills/autoresearch/references/autonomous-loop-protocol.md",
+      "bytes": 6378,
+      "sha256": "c5072cf07514a166aac89abc455417251d9d9be22b376e52ac058243038486cf"
+    },
+    {
+      "path": "doctrine/skills/autoresearch/references/autoresearch-full-spec.md",
+      "bytes": 5465,
+      "sha256": "adb1a7e544506b990c0b389a13f7fc7317e0aa6f665f3529de4a04c6971f9db0"
+    },
+    {
+      "path": "doctrine/skills/autoresearch/references/core-principles.md",
+      "bytes": 3970,
+      "sha256": "ea044cc4d5cdc566ab113e48ee6014de3f9b8b1f99906d56764b85291d8f3183"
+    },
+    {
+      "path": "doctrine/skills/autoresearch/references/plan-workflow.md",
+      "bytes": 4540,
+      "sha256": "ff2813d2ae193f0928b78f12bbc7e1608385c437ec98ca5ace0ae23760b4a62b"
+    },
+    {
+      "path": "doctrine/skills/autoresearch/references/results-logging.md",
+      "bytes": 2623,
+      "sha256": "1fd5020b031e43d34a1891051ea988328d9440ebdb8717284a7b985d28fb1167"
+    },
+    {
+      "path": "doctrine/skills/autoresearch/references/security-workflow.md",
+      "bytes": 35260,
+      "sha256": "38c8fee9b9b11ce1f0495374b826f91cb4776b18c29148e2d3e0e2777e5e2bb7"
+    },
+    {
+      "path": "doctrine/skills/code-audit/SKILL.md",
+      "bytes": 502,
+      "sha256": "1332a8918fa544c1668c54d0c400e844c512fa3dc5e5e62251282f3c80e9dec5"
+    },
+    {
+      "path": "doctrine/skills/code-audit/reference/code-audit-full-spec.md",
+      "bytes": 2246,
+      "sha256": "bbdba8b15fdc1a510379dc1acec46ac1e455fd137e79e3f2a58062a4dfca47de"
+    },
+    {
+      "path": "doctrine/skills/consequence-simulation/SKILL.md",
+      "bytes": 2399,
+      "sha256": "90880d9703aa8b33a96233637e6b5404d9d3f439ef847b0b97bcbf44793d003a"
+    },
+    {
+      "path": "doctrine/skills/consequence-simulation/reference/protocol.md",
+      "bytes": 9578,
+      "sha256": "c3501aad18cd23f44fe566ec599d8ee32e4dbf97aae970351aacc176cb0886d1"
+    },
+    {
+      "path": "doctrine/skills/context-loader/SKILL.md",
+      "bytes": 449,
+      "sha256": "34153508cac404f9dbfc2a516745b3fb9565ec491c44a6c177ec896c1be8d100"
+    },
+    {
+      "path": "doctrine/skills/convergence-detection/SKILL.md",
+      "bytes": 2631,
+      "sha256": "8ae298acfa33f103e0d0de513465aea9422c579129aa6e5d7f57fd14e1688699"
+    },
+    {
+      "path": "doctrine/skills/convergence-detection/reference/protocol.md",
+      "bytes": 9974,
+      "sha256": "be4c7f4fccc531a5e40f30bc977938bd28f5ec04301943e47c2b85ecbdcba02b"
+    },
+    {
+      "path": "doctrine/skills/course-shell/README.md",
+      "bytes": 3365,
+      "sha256": "f31675fa39223394639e5fa380562b255f2caea74bda332f1584630ac39ccda1"
+    },
+    {
+      "path": "doctrine/skills/course-shell/index.html",
+      "bytes": 32497,
+      "sha256": "fd36542d387f536c02ca96cff48d96d37575a5d8d3f97026fd663be3718a25e3"
+    },
+    {
+      "path": "doctrine/skills/cross-domain-translation/SKILL.md",
+      "bytes": 2345,
+      "sha256": "9dc56e7803948a4c24569b031f2699588d9019ba21bf8cc74a049443c3e7a1dd"
+    },
+    {
+      "path": "doctrine/skills/cross-domain-translation/reference/protocol.md",
+      "bytes": 9600,
+      "sha256": "b32d2f7beadcd3b54c7f8ada6dc0c9fe4e29a8c6c395712c555a7f079ca437eb"
+    },
+    {
+      "path": "doctrine/skills/delegation/SKILL.md",
+      "bytes": 3535,
+      "sha256": "67159e405e3761f2818efcf96d628f756bc0add8397a092da46df9df876be447"
+    },
+    {
+      "path": "doctrine/skills/delegation/reference/autonomy-ladder.md",
+      "bytes": 1972,
+      "sha256": "a7c99d6311be1227fefb2a1419b3e160dc35e5b3ee7c95d6510101ae1e43efc5"
+    },
+    {
+      "path": "doctrine/skills/delegation/reference/cost-tier-routing.md",
+      "bytes": 2259,
+      "sha256": "ec8f1e6e5d34af6eaa1153f2c09e96b18cc896155c9b0998cf83f374855c8377"
+    },
+    {
+      "path": "doctrine/skills/delegation/reference/generate-worker.md",
+      "bytes": 1727,
+      "sha256": "552b9350392771a3952173557963c1b90455b5f32b9b46eb6cce4b2cdfa9f86e"
+    },
+    {
+      "path": "doctrine/skills/delegation/reference/research-worker.md",
+      "bytes": 1529,
+      "sha256": "6f4b8808f2e7fa9743106d6dd98b6c8ce27ac1793795ca5cc7e7cc48544ebe7e"
+    },
+    {
+      "path": "doctrine/skills/delegation/reference/test-worker.md",
+      "bytes": 1644,
+      "sha256": "617af32506fe35fcbf357480d2d3707e1ed61fe0b25f87cfae6a2e0ac7bcb3e9"
+    },
+    {
+      "path": "doctrine/skills/detached-judgment/SKILL.md",
+      "bytes": 2888,
+      "sha256": "9b65e49b047943cd092fd700c15e6e38bef8a6a43df7c0ee095eea8d2e6377b5"
+    },
+    {
+      "path": "doctrine/skills/detached-judgment/reference/protocol.md",
+      "bytes": 11157,
+      "sha256": "98a9f6d0b51725a2557148ac860298d93a24453feb48466605ad17fe19319e83"
+    },
+    {
+      "path": "doctrine/skills/engagement-bootstrap/SKILL.md",
+      "bytes": 1821,
+      "sha256": "e5ef71d65576e76f4ae3429e7ed9dabe83ebdd14863812c548ae742d943fbd5d"
+    },
+    {
+      "path": "doctrine/skills/goal-runner/SKILL.md",
+      "bytes": 2694,
+      "sha256": "4fa94476fda1e5fc60c29a103d2db5cc8b6f08ffd53a9a8d780410c7dee912e3"
+    },
+    {
+      "path": "doctrine/skills/goal-runner/reference/claude-goal-adapter.md",
+      "bytes": 2072,
+      "sha256": "420146e1d703a1de77ca3f41ec77488448f350e883d4cb1ba1e6fdff3f044727"
+    },
+    {
+      "path": "doctrine/skills/goal-runner/reference/durable-loop.md",
+      "bytes": 2585,
+      "sha256": "41e27469227e114f288d649151b350229a5584cbaf8caf2ec8ada49b804ddfe9"
+    },
+    {
+      "path": "doctrine/skills/goal-runner/reference/enforcement-chain.md",
+      "bytes": 5099,
+      "sha256": "bb22915b30e469f5fbaafad35773e6357afa8566cbb73af0ca46fd582762f98f"
+    },
+    {
+      "path": "doctrine/skills/goal-runner/reference/goal-contract.md",
+      "bytes": 1991,
+      "sha256": "98a1526995440ea90bc337f91f6a5eac2398990d0a5e397a9eb2075892f3480c"
+    },
+    {
+      "path": "doctrine/skills/loop-engineering/SKILL.md",
+      "bytes": 1000,
+      "sha256": "aff7b705e44ce46b87b53e2ae4a2bd488ea56bd49be812578cf0269dd2af2be1"
+    },
+    {
+      "path": "doctrine/skills/loop-engineering/references/loop-engineering-full-spec.md",
+      "bytes": 6507,
+      "sha256": "a31967eeb6a1865bf80d8a08740459839a17d388d6803e6aa7ecc80e3b679855"
+    },
+    {
+      "path": "doctrine/skills/memory/SKILL.md",
+      "bytes": 3595,
+      "sha256": "408dda0db984a699abec2469954a5745d5a7b2e12317e401007baee0e6730608"
+    },
+    {
+      "path": "doctrine/skills/memory/reference/capture.md",
+      "bytes": 1883,
+      "sha256": "2cb1e41feb74de1578c076b34f81c3e85298b6b7336eb0ef7c7abc782bde0c03"
+    },
+    {
+      "path": "doctrine/skills/memory/reference/compress.md",
+      "bytes": 2972,
+      "sha256": "ef42c36dff81b9f296e579352156bd7fa16558a6e5479876b3a3b04af7c06ae5"
+    },
+    {
+      "path": "doctrine/skills/memory/reference/memory-model.md",
+      "bytes": 1899,
+      "sha256": "8793d291aaeb1fe7335bb06e4f67d39dce0ff7a5d7ce40b0a1ffc39cbb488bdb"
+    },
+    {
+      "path": "doctrine/skills/memory/reference/preserve.md",
+      "bytes": 3063,
+      "sha256": "0abc0c9c56835251f21f486f620600ebc516bce78273bd72c7e50fd68660a07b"
+    },
+    {
+      "path": "doctrine/skills/memory/reference/recall.md",
+      "bytes": 1600,
+      "sha256": "8c392ecaca049cda13253b394e87449c478eee5307f2daf663b9ccffded795a0"
+    },
+    {
+      "path": "doctrine/skills/memory/reference/resume.md",
+      "bytes": 2371,
+      "sha256": "ced2692b82e5abc05bd942d1d4c5ef6768c3dc79db8106e04d2d1c53575739b4"
+    },
+    {
+      "path": "doctrine/skills/mission-control/README.md",
+      "bytes": 3747,
+      "sha256": "8d570245ba4127f4dd025d593eebe1cb11ced587e335ed42c1ff8c77071632d1"
+    },
+    {
+      "path": "doctrine/skills/mission-control/index.html",
+      "bytes": 27406,
+      "sha256": "521899c2326c5d8b4a6807d608e886adff9adf77f468dca175171145ac399dcf"
+    },
+    {
+      "path": "doctrine/skills/nod-protocol/SKILL.md",
+      "bytes": 2977,
+      "sha256": "29dfc2a2d4b5518948ed9a671ebad7834dbe01c6484e7d139f69769dae60d3c8"
+    },
+    {
+      "path": "doctrine/skills/nod-protocol/reference/anti-patterns.md",
+      "bytes": 4788,
+      "sha256": "afbda43ee2fdd4aa5b5d41ad183f6fc03f57847d7526028294ee25bf4492d1eb"
+    },
+    {
+      "path": "doctrine/skills/nod-protocol/reference/gates.md",
+      "bytes": 5569,
+      "sha256": "9b5de50507a5742b29411fe381d54869ec11b505681a4478f5069296a68b1cd9"
+    },
+    {
+      "path": "doctrine/skills/nod-protocol/reference/origin.md",
+      "bytes": 2194,
+      "sha256": "1b4050df7fcc47b4680b6c99ede063db48dd702565219d72d0961970e8becc2b"
+    },
+    {
+      "path": "doctrine/skills/nod-protocol/reference/output-template.md",
+      "bytes": 3545,
+      "sha256": "5e4c0d5bc728762e1f100499a742d8d962323201304cf087ebf35849d2e48960"
+    },
+    {
+      "path": "doctrine/skills/parallel-lens-synthesis/SKILL.md",
+      "bytes": 2108,
+      "sha256": "aaeb612464f2ce450d0617ddd651b092997ce79a3dd191c1428326124eea251d"
+    },
+    {
+      "path": "doctrine/skills/parallel-lens-synthesis/reference/protocol.md",
+      "bytes": 8644,
+      "sha256": "c136b35fddd4a165e099bc623824ebfa796936c5ac4c95dda9ab3165af2ad32f"
+    },
+    {
+      "path": "doctrine/skills/pattern-promoter/SKILL.md",
+      "bytes": 506,
+      "sha256": "34338212833d2e6a24eecfc2c025354a60c83bf7c2074d32cf1a1332eedf370c"
+    },
+    {
+      "path": "doctrine/skills/pressure-test/SKILL.md",
+      "bytes": 3187,
+      "sha256": "f1ce5eeb2cb546707a6241296592e11aeaa9b8e66d8c1af4321d6f38558b512a"
+    },
+    {
+      "path": "doctrine/skills/pressure-test/reference/lenses.md",
+      "bytes": 6700,
+      "sha256": "61044a36b5b9415307ee153faee084a97619a803786d0df1a883b1f80077c19e"
+    },
+    {
+      "path": "doctrine/skills/pressure-test/reference/output-template.md",
+      "bytes": 5588,
+      "sha256": "d954cf57e3104aa647f1c2ca2810a36e55492eb1e4cce4d33f6e0745dcc56c30"
+    },
+    {
+      "path": "doctrine/skills/pressure-test/reference/scope-modes.md",
+      "bytes": 4787,
+      "sha256": "4aefd95aeee18648f0ac436e8f6c413f9691b496068dcf85d313b64848702a03"
+    },
+    {
+      "path": "doctrine/skills/provenance-check/SKILL.md",
+      "bytes": 356,
+      "sha256": "1fbf862615e93b2a85d5db08a50cb8ee52b59f6d10aa85444b24bb4ea6f707c3"
+    },
+    {
+      "path": "doctrine/skills/quality-gate/SKILL.md",
+      "bytes": 2486,
+      "sha256": "9683c237badb0759c1894d9554e20049b09204f26c3052f13cfc2b2c61ec41a3"
+    },
+    {
+      "path": "doctrine/skills/release-captain/SKILL.md",
+      "bytes": 4744,
+      "sha256": "7c55f5bf838ff7d47eedb77fea717cece49ac5f9aefc64a292e0fc7d146371da"
+    },
+    {
+      "path": "doctrine/skills/release-captain/reference/checklist.md",
+      "bytes": 8863,
+      "sha256": "9ffe4ca6b71087b767d2655005294b6887987e09dd2001a3cc858805b8f9f401"
+    },
+    {
+      "path": "doctrine/skills/release-captain/reference/origin.md",
+      "bytes": 3344,
+      "sha256": "8868c7740903abb0534fe535749f876d62ce2977c042cea3534ad4f0092493ae"
+    },
+    {
+      "path": "doctrine/skills/release-captain/reference/output-template.md",
+      "bytes": 5692,
+      "sha256": "342c14b4390946f9beb1a1e54f983f303babc3804a333d57b1a0da90a33552d2"
+    },
+    {
+      "path": "doctrine/skills/release-captain/reference/provenance-verification.md",
+      "bytes": 2888,
+      "sha256": "f73620345e485541dcc35157cf274fef3211742d6669c49e2ac1b58d411752ab"
+    },
+    {
+      "path": "doctrine/skills/release-captain/reference/verification-protocol.md",
+      "bytes": 7051,
+      "sha256": "9916b21db4218930eef33113ddd577d5d89978800ae5f7bbf5a179d2f12badb3"
+    },
+    {
+      "path": "doctrine/skills/request-router/SKILL.md",
+      "bytes": 2656,
+      "sha256": "5a00d38c9b224ecc812521134293d9fc3ca733bfc0f3627ee5d08292b2ced903"
+    },
+    {
+      "path": "doctrine/skills/request-router/reference/compound-requests.md",
+      "bytes": 2021,
+      "sha256": "baeef9de1462b23d02d3b472b0315952125270201fec1b340b5b5782bcefdac4"
+    },
+    {
+      "path": "doctrine/skills/request-router/reference/panel-offer-threshold.md",
+      "bytes": 7357,
+      "sha256": "093f8c6ad7c432b291c95b7509a2ade3a0d2b57a63ccd249c8c6aae5373a0f7e"
+    },
+    {
+      "path": "doctrine/skills/request-router/reference/registry-maintenance.md",
+      "bytes": 4305,
+      "sha256": "d06dfb758c8443d38e44b0a6b22f6140bec02e45fbb06ccfe84f6b2e97b007be"
+    },
+    {
+      "path": "doctrine/skills/request-router/reference/router-rationale.md",
+      "bytes": 5919,
+      "sha256": "495ec3d4ec5053a6e222466294e1a258a36618eb7fffd1a6ff5dfa5f49807a73"
+    },
+    {
+      "path": "doctrine/skills/scroll-shell/README.md",
+      "bytes": 3697,
+      "sha256": "3bd4505b5e920719cbe3bcffa81754efa9ade0a5196be2d265e632b1c02ccdf5"
+    },
+    {
+      "path": "doctrine/skills/scroll-shell/index.html",
+      "bytes": 30431,
+      "sha256": "1f5a359d85d2d5b053cba597800b434b81c224ff8245f6351c6679a12273ff88"
+    },
+    {
+      "path": "doctrine/skills/simulation-to-action-bridge/SKILL.md",
+      "bytes": 2872,
+      "sha256": "68f16ce927af1a585ceba46cab399196653054278b32ee6de7051133c1383193"
+    },
+    {
+      "path": "doctrine/skills/simulation-to-action-bridge/reference/protocol.md",
+      "bytes": 10867,
+      "sha256": "38d933c75369dabd0e2221c47f38716eeaba1dd391fa91a2be4195bed1ba3315"
+    },
+    {
+      "path": "doctrine/skills/skill-creator/SKILL.md",
+      "bytes": 690,
+      "sha256": "10c5fe7869a79bcd248740f4838c1c023d8ebb4334ad3e8a6ca8f64042f414f0"
+    },
+    {
+      "path": "doctrine/skills/skill-creator/references/schemas.md",
+      "bytes": 12120,
+      "sha256": "43b020921e96518b82bea851c01a7f61f7ba3cb9b6a3d11f4c1224c0db42d1cf"
+    },
+    {
+      "path": "doctrine/skills/skill-creator/references/skill-creator-full-spec.md",
+      "bytes": 32923,
+      "sha256": "77e9182f18bd894d3f293928aa3536e3276a305cd2cb2f2b156d8fbb39fd168e"
+    },
+    {
+      "path": "doctrine/skills/slide-shell/README.md",
+      "bytes": 3301,
+      "sha256": "036adbd047bf5798b30ced6f8efe081b43acbd8e90927fec8c07068338e7959b"
+    },
+    {
+      "path": "doctrine/skills/slide-shell/index.html",
+      "bytes": 34866,
+      "sha256": "cb5cf19c40f2d89a3a478e2699069d6bb8ba00e430aae96dfa67b686a2ec6595"
+    },
+    {
+      "path": "doctrine/skills/stakeholder-mapping/SKILL.md",
+      "bytes": 2448,
+      "sha256": "1771a7da4c826ae9e8abfa3f8057cb3ca6152eb5d393a03b09523d16b2c744f4"
+    },
+    {
+      "path": "doctrine/skills/stakeholder-mapping/reference/protocol.md",
+      "bytes": 2680,
+      "sha256": "dad57eb2f31ecb175705a309820d2b226f180b73787ef4e436265e543a7daba3"
+    },
+    {
+      "path": "doctrine/skills/token-economist/SKILL.md",
+      "bytes": 1491,
+      "sha256": "1d0e20c32caac72a8b2a217f7bb300c841a82b690a0a0511676813163f1de7a0"
+    },
+    {
+      "path": "doctrine/skills/trigger-indexer/SKILL.md",
+      "bytes": 443,
+      "sha256": "c1a15aaf0015b03b253f4cc92c769cc85a5b1dfdc661e73c4fd5a6d71f53bf39"
+    },
+    {
+      "path": "doctrine/skills/trigger-indexer/reference/registry-schema.md",
+      "bytes": 1297,
+      "sha256": "dc66c5f53bf49e9ef738ab4a0000a843411ed37c4a17fb301a33d65ba111f385"
+    },
+    {
+      "path": "doctrine/skills/ultra-think/SKILL.md",
+      "bytes": 1727,
+      "sha256": "95027bbdefcbdb3b76037b2d6670d0ebb61b29c08303106b5d1f201fb802633a"
+    },
+    {
+      "path": "doctrine/skills/ultra-think/reference/ultra-think-framework.md",
+      "bytes": 1451,
+      "sha256": "2750a774f71456954187cfb5451799544fcc8606f6ada7819162a4a2e58c46a9"
+    },
+    {
+      "path": "doctrine/skills/viz/SKILL.md",
+      "bytes": 4200,
+      "sha256": "70656aaceeecf9d421ab946a5978e8cd543cd95bc210a32b4c9209010fdeb3bc"
+    },
+    {
+      "path": "doctrine/skills/viz/reference/canon.md",
+      "bytes": 4700,
+      "sha256": "1e6581b1b675291e1dbeb0b0ad4e239070ffb0a9a556c194b4fe25606aedabc6"
+    },
+    {
+      "path": "doctrine/skills/viz/reference/critique-protocol.md",
+      "bytes": 4447,
+      "sha256": "adb5823064b2e54dc21c0418d3d9ccc65a98c7741067592f19cf4abd67f32315"
+    },
+    {
+      "path": "doctrine/skills/viz/reference/nyt-graphics.md",
+      "bytes": 4236,
+      "sha256": "997d5e219f440f432345515b51f4977157b736d492ad51b682e230883ada7705"
+    },
+    {
+      "path": "doctrine/skills/viz/reference/prompts.md",
+      "bytes": 9728,
+      "sha256": "9f9effd20c43f86cc6c552158d5b3e5ec1bcf50aaf02687e1b48c0466e0b64fa"
+    },
+    {
+      "path": "doctrine/skills/viz/reference/rules.md",
+      "bytes": 6484,
+      "sha256": "ce3382edf9b1e3a5b10f17ea8419ba03bb4a7be53f75814e157f2d7cf331ccee"
+    },
+    {
+      "path": "doctrine/skills/viz/reference/taxonomy.md",
+      "bytes": 10089,
+      "sha256": "d3c63c6181bbfe22229f83255af2b11afa9356e1aa55d6ab374916d6980338dc"
+    },
+    {
+      "path": "doctrine/tiers/AGENT-tier1.md",
+      "bytes": 2012,
+      "sha256": "5186d4cdd5fc8eab9b7ced1464feb6cc2a0d3b1f7d876f10fa490d0359709363"
+    },
+    {
+      "path": "doctrine/tiers/AGENT-tier2.md",
+      "bytes": 2190,
+      "sha256": "657ffabdb7d784da63974f0d59cb39d677fe7559d0782359a44c16c5935b2c46"
+    },
+    {
+      "path": "doctrine/tiers/AGENT-tier3.md",
+      "bytes": 2189,
+      "sha256": "4c2836f8ce2b7cc754378e35f193351d0ddd121d1fdbc252e072c80b62e4d402"
+    },
+    {
+      "path": "doctrine/tiers/CLAUDE-tier1.md",
+      "bytes": 145,
+      "sha256": "95e086b6f5ba8cacf4747cf056b3fc5e10e26b9763ddafbcafcecad69832b679"
+    },
+    {
+      "path": "doctrine/tiers/CLAUDE-tier2.md",
+      "bytes": 145,
+      "sha256": "95e086b6f5ba8cacf4747cf056b3fc5e10e26b9763ddafbcafcecad69832b679"
+    },
+    {
+      "path": "doctrine/tiers/CLAUDE-tier3.md",
+      "bytes": 145,
+      "sha256": "95e086b6f5ba8cacf4747cf056b3fc5e10e26b9763ddafbcafcecad69832b679"
+    },
+    {
+      "path": "doctrine/tiers/checklists/era-01-to-02.md",
+      "bytes": 1582,
+      "sha256": "0fb3fa5a41ab3df23cbee470e2d3dd257a7644add22d275a0f750906a68fa5b8"
+    },
+    {
+      "path": "doctrine/tiers/checklists/era-02-to-03.md",
+      "bytes": 2283,
+      "sha256": "a0e4e6ee11bb2c560cb46fbe49a0de996fde30e2b797a1992ca69c749e0fbfb7"
+    },
+    {
+      "path": "doctrine/tiers/checklists/model-routing.md",
+      "bytes": 608,
+      "sha256": "085c79277ccccb686aff8551a049997fa05df23632efd8d199b4e89275a5d4e7"
+    },
+    {
+      "path": "doctrine/tiers/checklists/new-project.md",
+      "bytes": 2197,
+      "sha256": "2cc66a9533beb9c920686432ca69ab2b4bf254954190bbd5e457572d0031755b"
+    },
+    {
+      "path": "doctrine/tiers/checklists/pattern-promotion.md",
+      "bytes": 1627,
+      "sha256": "d220fa42c9df929e8d4174d6be7c5c4594c3a265704fdd0a6f853f80f733360c"
+    },
+    {
+      "path": "doctrine/tiers/checklists/session-closeout.md",
+      "bytes": 478,
+      "sha256": "46c635ea3ad9590983b8ccc2bf21bfca5e7b7aa1d68987d2c72f6ffc65ff1ae6"
+    },
+    {
+      "path": "doctrine/tiers/checklists/session-start.md",
+      "bytes": 2272,
+      "sha256": "7a2888ff7e91158d68e9f97e063ecbf0109760909f40ede523e2ec9a32efcfe9"
+    },
+    {
+      "path": "doctrine/tiers/tier0.md",
+      "bytes": 1612,
+      "sha256": "8267dc306925ff1a41f1b7f9dc0a39ac3bc48ba3089eba232d2625209fa04ddd"
+    },
+    {
+      "path": "doctrine/tiers/tier1-current.md",
+      "bytes": 234,
+      "sha256": "ea6d703c361c2e983340bb02932d0863a86d805d5f90d5a077714bef4ab9c492"
+    },
+    {
+      "path": "doctrine/tiers/tier1-subsystem/README.md",
+      "bytes": 267,
+      "sha256": "0ea7e26ecf5c28aa7fbd31493ee327e2e98f5fbd5d38235d6c1e68964d8ef5ed"
+    },
+    {
+      "path": "enforcement-rules.yaml",
+      "bytes": 10112,
+      "sha256": "b49af21e7f99339da6815f2bbeb2bbe359d8edd7f61fac9cc3149555fa436bb0"
+    },
+    {
+      "path": "enforcement/.github/workflows/enforce.yml",
+      "bytes": 1192,
+      "sha256": "1caf1b5495b26afd138bb52ab0ab287d63d4d6b934433ca953109390ac954b8d"
+    },
+    {
+      "path": "enforcement/bin/check-counts.sh",
+      "bytes": 3811,
+      "sha256": "a989590cf25de7618000d627691cdedb69b888459f6bc5b17ef32a1747235d74"
+    },
+    {
+      "path": "enforcement/bin/check-kit.sh",
+      "bytes": 711,
+      "sha256": "44d536c8eff9605940314af7ced1db0b654517985a27f873daf4d2a392cbc028"
+    },
+    {
+      "path": "enforcement/bin/check-line-caps.sh",
+      "bytes": 1742,
+      "sha256": "fa02bac7a5e2b6ebb2d86cf44d088a3ac17c5e4abc75fa8f7d4abca87f1f335b"
+    },
+    {
+      "path": "enforcement/bin/check-portability.sh",
+      "bytes": 9424,
+      "sha256": "f0f7a742a1cb3d51125649feabbe419ed50766d788cf35f9d589f1420d8f381b"
+    },
+    {
+      "path": "enforcement/bin/check-registry-coherence.sh",
+      "bytes": 2635,
+      "sha256": "2752ac6f52c960cb53dbeec1b590da3fbe906e7fd62dacec6ad8a5a485e145b7"
+    },
+    {
+      "path": "enforcement/bin/check-runtime-wiring.sh",
+      "bytes": 5224,
+      "sha256": "9d2fcf71bc0fd99765ebd1ba29c00e3b6dd6725cc091b67d903745cfe8efe75c"
+    },
+    {
+      "path": "enforcement/bin/check-tier-discipline.sh",
+      "bytes": 1990,
+      "sha256": "54087fb71485acce8a562d2086767e3d268d72a4117450ee418504e11c8530b5"
+    },
+    {
+      "path": "enforcement/bin/simulate-fresh-clone.sh",
+      "bytes": 1658,
+      "sha256": "b737950ce0e3b541908428227afe8c250d301f172cc896c3fe10e4ceffc3b529"
+    },
+    {
+      "path": "enforcement/hooks/post-session/append-state.sh",
+      "bytes": 280,
+      "sha256": "a3eee982c8cf703b099c49096aea567d83994a7a69a1d2499a8ed69b4e9b2a1b"
+    },
+    {
+      "path": "enforcement/hooks/pre-commit/enforce.sh",
+      "bytes": 603,
+      "sha256": "51c6c3c49542095386f9d891a3ee7e7a1a1798823ba113d422f668ba71e9d0ca"
+    },
+    {
+      "path": "enforcement/hooks/pre-commit/no-em-dashes.sh",
+      "bytes": 401,
+      "sha256": "4452ed5275fb5fc8807234e619f625ed52783def442822af8b3f090babbd3366"
+    },
+    {
+      "path": "enforcement/tests/fixtures/leak-sample.md",
+      "bytes": 147,
+      "sha256": "7f62b97bc89c1ed0c36272f0e1dbcc96b4cf14342d582d64d3b22d1c7b7a1f7f"
+    },
+    {
+      "path": "enforcement/tests/fixtures/oversized-SKILL.md",
+      "bytes": 920,
+      "sha256": "0531edc81b979bfa820e1fad52df12961f6bf1551d34ba823169ce1ec2d34298"
+    },
+    {
+      "path": "enforcement/tests/fixtures/session-router/heavy.json",
+      "bytes": 150,
+      "sha256": "c0913f72f65e5d4511921c6627897132fd720139b7f1fda27a69b480d7b820b9"
+    },
+    {
+      "path": "enforcement/tests/fixtures/session-router/light.json",
+      "bytes": 86,
+      "sha256": "bb0322827b05fe2aa69e0551a3b9850a2e601be3352ee59cbc8592f94c543225"
+    },
+    {
+      "path": "enforcement/tests/fixtures/session-router/medium.json",
+      "bytes": 117,
+      "sha256": "5c7a664626af49450cdf63607955916f9f01c426dfd2daf82eb5abe30d3cd538"
+    },
+    {
+      "path": "enforcement/tests/fixtures/tier-violation.md",
+      "bytes": 152,
+      "sha256": "828b1d09e0620a6732f06e43de57859ba0a03d0f7ee043da39aaabe370e8677d"
+    },
+    {
+      "path": "enforcement/tests/fixtures/usage-guard/agent-cheap-model.json",
+      "bytes": 262,
+      "sha256": "72ace2fb2a2e87cec448c0f29351efd5e9296518bfa7a99ff6d119624d8b9135"
+    },
+    {
+      "path": "enforcement/tests/fixtures/usage-guard/agent-no-model.json",
+      "bytes": 222,
+      "sha256": "dd71e031e0e9e8b6351cf18c3a47b259a85e163be5888fa226deb56ae00bdbbc"
+    },
+    {
+      "path": "enforcement/tests/fixtures/usage-guard/workflow-cap-hit.json",
+      "bytes": 223,
+      "sha256": "b060e0fb1944bae90ed5558b0b9dac2a8c9494a85f0be2ffb22de5ec4fdc58f9"
+    },
+    {
+      "path": "enforcement/tests/run-selftest.sh",
+      "bytes": 9521,
+      "sha256": "4940a229556fe9d49a3a9b0629698f6a6872efee29284444371e997a275b7e20"
+    },
+    {
+      "path": "forbidden-terms.txt",
+      "bytes": 874,
+      "sha256": "1e36416a409041cac42afed66ad90ea5d9a1946cea58e6a3c46bcbf5f1cef056"
+    },
+    {
+      "path": "leak-denylist.txt",
+      "bytes": 1059,
+      "sha256": "865932de2f208e16e070374d0a27e69dfff43688016fef0f1fe57f4bcb7cd29e"
+    },
+    {
+      "path": "proof/delegation-economics/README.md",
+      "bytes": 3836,
+      "sha256": "6d851a12922d1c9dda3ca2e2c8a9ac4de57e5713fc4af30aeb5c79fa94031575"
+    },
+    {
+      "path": "proof/loop-adoption-evidence/measure.sh",
+      "bytes": 2726,
+      "sha256": "e9234aca165c84774577e528d96034e5b0a49e2071c8ac6c5eb1a282a7ffd587"
+    },
+    {
+      "path": "proof/loop-adoption-evidence/results.md",
+      "bytes": 949,
+      "sha256": "8804d6d625f609f795468cb748071493f2b948ecb43579c047f66308acc2a8ad"
+    },
+    {
+      "path": "proof/loop-spec-net-positive.md",
+      "bytes": 4788,
+      "sha256": "88b9df17f2d3c2f0a714fd7004c1ada6c8cafbc5fd9d2e77b7b252456e91d1ce"
+    },
+    {
+      "path": "proof/session-start-benchmark/measure.sh",
+      "bytes": 4759,
+      "sha256": "144b773da5c1bf9b5e9e4e47a4056ef91694283e1c8cea8c82c4cd2de397cca7"
+    },
+    {
+      "path": "proof/session-start-benchmark/results.md",
+      "bytes": 1583,
+      "sha256": "df2a4b70eee4e10c2aab391c71ded6ab141fa187e636bbd994dd579646a51b0a"
+    },
+    {
+      "path": "reference-impl/README.md",
+      "bytes": 1261,
+      "sha256": "9aabb3d21bcd352027651f9fd4f12edbfead534c8c3fc7ee4fd28e1b17d31155"
+    },
+    {
+      "path": "reference-impl/code/__pycache__/cache_key.cpython-313.pyc",
+      "bytes": 8269,
+      "sha256": "1336d3b3d8772b39eaab39d42c41047c99cbaf04460a38a5e92e47576519bd6a"
+    },
+    {
+      "path": "reference-impl/code/__pycache__/schema_validator.cpython-313.pyc",
+      "bytes": 5227,
+      "sha256": "81de83ef7911dc7c6008f27c626cd6feb8968325f62c593f804e3824c592abe2"
+    },
+    {
+      "path": "reference-impl/code/cache_key.py",
+      "bytes": 7074,
+      "sha256": "b5a8c0dc2739173105b3db7ca07a33ab1c1b57ba3b57e8ba2e5cfa4074b71abe"
+    },
+    {
+      "path": "reference-impl/code/phase_wrapper.sh",
+      "bytes": 3698,
+      "sha256": "a187407c0ebe534fd1ca9fc528e73c1970ab107d6962d44d2fdc7e6a2f331353"
+    },
+    {
+      "path": "reference-impl/code/pipeline_runs.sql",
+      "bytes": 3719,
+      "sha256": "8b85fd2bfdec1f628f4cc356c0d42db654e7fd3d2d30f976ee7463271a669329"
+    },
+    {
+      "path": "reference-impl/code/schema_validator.py",
+      "bytes": 4098,
+      "sha256": "a8b230f723f97ec609a538f56e913b9eb7e49d46288a41a68711147e2d958e5e"
+    },
+    {
+      "path": "reference-impl/scripts/__pycache__/build-manifest.cpython-313.pyc",
+      "bytes": 4808,
+      "sha256": "b67899bec9b1fff2a7b3fc96b69bea8104b4feca64c42b7c14616695491e616a"
+    },
+    {
+      "path": "reference-impl/scripts/__pycache__/verify-integrity.cpython-313.pyc",
+      "bytes": 4396,
+      "sha256": "ef5a6f05af44b0cf67da7fb9ab028bcfd035b3546e83a6858cc24a6c556f4ee7"
+    },
+    {
+      "path": "reference-impl/scripts/__pycache__/verify-origin.cpython-313.pyc",
+      "bytes": 4581,
+      "sha256": "010ccfbd148b4f25882c12addb8270422fe2ea879502510caadd989c3adb81cb"
+    },
+    {
+      "path": "reference-impl/scripts/build-manifest.py",
+      "bytes": 2428,
+      "sha256": "337246ca78b15f6aeb20522be95a52cbbd81845bcee3b967bc682906a74cb806"
+    },
+    {
+      "path": "reference-impl/scripts/new-project.sh",
+      "bytes": 1138,
+      "sha256": "6f9b9c8bbf9e80c3a501761a71491ea61ea7e74a61988cb8f71de161622c3ce4"
+    },
+    {
+      "path": "reference-impl/scripts/verify-integrity.py",
+      "bytes": 2636,
+      "sha256": "b74cd0b51de56b2ffcb5cc61aef570899b6a91f13cc91a0920aea504c3c0d7db"
+    },
+    {
+      "path": "reference-impl/scripts/verify-origin.py",
+      "bytes": 2609,
+      "sha256": "b4aa14cab0aa11e349ce4d2db1503df752099f18b830b49c2883c2e5e269c82e"
+    },
+    {
+      "path": "reference-impl/skill-creator/LICENSE.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "reference-impl/skill-creator/agents/analyzer.md",
+      "bytes": 10435,
+      "sha256": "851f8bd7ca6b16073723b03d2f7db7c769d9bdfe71b0ac5010176aabd050488c"
+    },
+    {
+      "path": "reference-impl/skill-creator/agents/comparator.md",
+      "bytes": 7346,
+      "sha256": "6d1b229968e6acf6fd2336fe9dd1b8c5f53ec8f2275c349398da21ae41d84a02"
+    },
+    {
+      "path": "reference-impl/skill-creator/agents/grader.md",
+      "bytes": 9049,
+      "sha256": "12f2e9bb79c0869ba87356b1faa7c275d82fe2470bd834a167c038e52591f374"
+    },
+    {
+      "path": "reference-impl/skill-creator/assets/eval_review.html",
+      "bytes": 616,
+      "sha256": "777bfaacaa33eebd30d7bdf97ab365cfbd10334b6817deeff8717275cfd17bb1"
+    },
+    {
+      "path": "reference-impl/skill-creator/eval-viewer/generate_review.py",
+      "bytes": 16365,
+      "sha256": "74c3224719f7d5a0889e38f8e6b23c80f57767eea1ac8eaf8392662b01832d14"
+    },
+    {
+      "path": "reference-impl/skill-creator/eval-viewer/viewer.html",
+      "bytes": 613,
+      "sha256": "e7cb7796515614c40271a3b1a4845db81b90739b75e959cae678f83b342db286"
+    },
+    {
+      "path": "reference-impl/skill-creator/scripts/__init__.py",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "reference-impl/skill-creator/scripts/aggregate_benchmark.py",
+      "bytes": 14386,
+      "sha256": "200b7b039d1d052295fd16e1141d9699c496de591b139818066bd21ebbdc83a9"
+    },
+    {
+      "path": "reference-impl/skill-creator/scripts/generate_report.py",
+      "bytes": 12847,
+      "sha256": "1450618867dc3776b9d4128c83b33b8ed268696653ccbca2bb584deb803f1d6d"
+    },
+    {
+      "path": "reference-impl/skill-creator/scripts/improve_description.py",
+      "bytes": 11114,
+      "sha256": "54ee4d1be1e39a19a1e1103b6700f26a2be39883136bf17bcbed2ef6ac0e8d88"
+    },
+    {
+      "path": "reference-impl/skill-creator/scripts/package_skill.py",
+      "bytes": 4234,
+      "sha256": "1a33059b0db1ef73375d46d513e5ea81369d2e8838c970597b0d52ddef8d1c0f"
+    },
+    {
+      "path": "reference-impl/skill-creator/scripts/quick_validate.py",
+      "bytes": 3969,
+      "sha256": "faf8532dbfa0cb55780a126213ce0017a6790afe26667ccd5b33a12a742e183e"
+    },
+    {
+      "path": "reference-impl/skill-creator/scripts/run_eval.py",
+      "bytes": 11464,
+      "sha256": "43e3b8f80dbf69c343967ba77e268fae991d9fa3ed68b32a0ff02532cd48657f"
+    },
+    {
+      "path": "reference-impl/skill-creator/scripts/run_loop.py",
+      "bytes": 13605,
+      "sha256": "7bd6f674203168520517eec94c55f493c0d154339b061b4d7c0f0dad187d0f21"
+    },
+    {
+      "path": "reference-impl/skill-creator/scripts/utils.py",
+      "bytes": 1661,
+      "sha256": "3af8ae62c40c73ab712207436a0d9a981e845f25c5a7040229eb189cc8e45bb1"
+    },
+    {
+      "path": "runtime/README.md",
+      "bytes": 589,
+      "sha256": "b2ad38bc900a06fe60739b57625096798aa01fe5b934d17e3397b67f0fbac761"
+    },
+    {
+      "path": "runtime/claude-code/CONFORMANCE.md",
+      "bytes": 1724,
+      "sha256": "fd279491d1e171eee59fc8e32d9194a308b686086b37995b83e7546cf0d868c2"
+    },
+    {
+      "path": "runtime/claude-code/NOTICE",
+      "bytes": 681,
+      "sha256": "43306817735f8b40c2ae156cfa39c315da438202ad34f1c75f62097f0170f815"
+    },
+    {
+      "path": "runtime/claude-code/PATCHES.md",
+      "bytes": 2311,
+      "sha256": "17c7c7827925ff59bf31a47c9415b838f6b7a18b6a7466a0d1380ed63e5e30f7"
+    },
+    {
+      "path": "runtime/claude-code/README.md",
+      "bytes": 1807,
+      "sha256": "47c45a4d84efdcd4ebb07afb20157abd3b2348dbb66507aeb30b723cf31cb572"
+    },
+    {
+      "path": "runtime/claude-code/agents/README.md",
+      "bytes": 369,
+      "sha256": "d9b9f98fa88a12758a8b095f2b89523e6522b384d9069d8102e3e0a7bf6a37fb"
+    },
+    {
+      "path": "runtime/claude-code/goal-adapter.md",
+      "bytes": 3910,
+      "sha256": "1f35c874e4ca9cafcf47256bb287122582667bd97f910dccb0fd4f25dc8758b0"
+    },
+    {
+      "path": "runtime/claude-code/hooks/session-router.sh",
+      "bytes": 5759,
+      "sha256": "9fc25089a26e226a8b8ed96c5d305c9c6a8d0febf8f357f5ec7c83984334c9f7"
+    },
+    {
+      "path": "runtime/claude-code/hooks/usage-guard.sh",
+      "bytes": 6610,
+      "sha256": "5f944daff14972faa05195b8c71714872f89a82de337a338626940574712fece"
+    },
+    {
+      "path": "runtime/claude-code/install-adapter.sh",
+      "bytes": 2960,
+      "sha256": "c0308bf7e48cf33291460163f2be9cb8004d9d8e903b06229be17cc54a312d07"
+    },
+    {
+      "path": "runtime/claude-code/settings.fragment.json",
+      "bytes": 947,
+      "sha256": "b74abfff95b0ac27730c3f5ede028e7a0b7d15ccd6c8ae333c7b3078ec82de72"
+    },
+    {
+      "path": "runtime/claude-code/workflows/phased-review.js",
+      "bytes": 2160,
+      "sha256": "8d54fcac945ff03a13a66c5b3e18c297f5c5611de88812a8a43c2f42a188a869"
+    },
+    {
+      "path": "runtime/codex/AGENTS.md",
+      "bytes": 857,
+      "sha256": "db230c3936c315b79229ffbd3570818309f87d10e53889ba081b60440be70804"
+    },
+    {
+      "path": "runtime/codex/CONFORMANCE.md",
+      "bytes": 756,
+      "sha256": "2855a241116789af71a76ed124610553cd94bff31b5cc792db42f896c170992a"
+    },
+    {
+      "path": "runtime/codex/README.md",
+      "bytes": 355,
+      "sha256": "9abbe92ecce97352ae08d3065992045d2b5f2467a87834bb580adb5113d3881f"
+    },
+    {
+      "path": "runtime/codex/dispatch.sh",
+      "bytes": 182,
+      "sha256": "dc6eba01c87bfc99a89d03274d40844e003e569f56b7fe07fedde6d62cb96115"
+    },
+    {
+      "path": "runtime/cursor/.cursor/rules/compound-ai.mdc",
+      "bytes": 816,
+      "sha256": "0e3c3cb3b4caa76452e504c89af4d8aafdfbca5326e36dcf645207298b3ec556"
+    },
+    {
+      "path": "runtime/cursor/CONFORMANCE.md",
+      "bytes": 643,
+      "sha256": "97e5d9b871f7870f7627cfedb2c4996a2fb47363e47f8a2af69f9127c6d7166f"
+    },
+    {
+      "path": "runtime/cursor/README.md",
+      "bytes": 375,
+      "sha256": "c7be4277ea19564664df95b73b9cd86efca94a186764601c88fde4a1a72c0ec1"
+    },
+    {
+      "path": "runtime/cursor/dispatch.sh",
+      "bytes": 183,
+      "sha256": "25a396f45504681647b3db3ba2d11aa5aeac84f31ff9d8a0829fb2eae5097915"
+    },
+    {
+      "path": "runtime/generic/CONFORMANCE.md",
+      "bytes": 1169,
+      "sha256": "668ba6c048499935f25e75ba3be3043ba3a2b05763c7f02a746407e864415642"
+    },
+    {
+      "path": "runtime/generic/README.md",
+      "bytes": 568,
+      "sha256": "8fc724174ddd34484ad7e2d72304dd957f5a46ecaf356bf4a37045c657b914e0"
+    },
+    {
+      "path": "runtime/generic/dispatch.sh",
+      "bytes": 9280,
+      "sha256": "92d5a848fe24bf38523f4452df8d6c32a69d1ca6fe88ae9cea86ee7260f12375"
+    },
+    {
+      "path": "runtime/generic/prompt-prelude.md",
+      "bytes": 1684,
+      "sha256": "a4a2d04eb5251a50159fbee850d2c5e3d987c21f44fb2828c16184c2eb91cd44"
+    },
+    {
+      "path": "session-log.md",
+      "bytes": 268,
+      "sha256": "42df821c0eda1f33da522453bf9a0e599884f88ba6fc155c21b1803128d2bc58"
+    },
+    {
+      "path": "team/README.md",
+      "bytes": 4938,
+      "sha256": "75e84868db628a63890d4ba400a58b28c46c87e5c12e4cb3c63a02d36b6d0562"
+    },
+    {
+      "path": "team/capability-profile.md",
+      "bytes": 3247,
+      "sha256": "8fb5001525da1f3b1a7ca1050d79ee8f61befa70adceb121d7558363aeac68b0"
+    },
+    {
+      "path": "team/command-center/.gitignore",
+      "bytes": 75,
+      "sha256": "36af9fc434d9ec5153092c74d685f51a12a7d4821409a9f2bf835ec9c260e9ae"
+    },
+    {
+      "path": "team/command-center/README.md",
+      "bytes": 2426,
+      "sha256": "0e8f4d057038869f294a672567a17697dba7da93ad0fb625cc86d1d2aca3a011"
+    },
+    {
+      "path": "team/command-center/refresh.py",
+      "bytes": 9463,
+      "sha256": "d7243ee6e4c999a36dd375400fe925c487786d7edfdf3a3a6d4d8ad68dab6d72"
+    },
+    {
+      "path": "team/command-center/task_state.example.json",
+      "bytes": 4197,
+      "sha256": "a3851f5e063942b0e1e3bdbfe82d1d0db30b68378bbdbb98f390847661303e13"
+    },
+    {
+      "path": "team/install/install.py",
+      "bytes": 8617,
+      "sha256": "20ca10e88be22b7cfb8453dcd9c64fdfc678009a078a128ca49ff81727b43131"
+    },
+    {
+      "path": "team/team-router/SKILL.md",
+      "bytes": 2347,
+      "sha256": "0631287498e2ef7bb573bc09283c358d8b895f54bea57fd7e9e7e161e8cb474a"
+    },
+    {
+      "path": "team/team-router/reference/routing-procedure.md",
+      "bytes": 1964,
+      "sha256": "a593f167b3cf91f0fb3f0ccbcae444b6585292ca7e1fb3cfe41918ba48f9bad8"
+    },
+    {
+      "path": "team/team-router/templates/daily-log.md",
+      "bytes": 1562,
+      "sha256": "be72b0415ab0aefd30abebe75cd2d9beb13e7a57550cb48403b1d4f20482031c"
+    },
+    {
+      "path": "team/team-router/templates/routing-registry.md",
+      "bytes": 1659,
+      "sha256": "9671cab86b176370c39c3568cd57c1ba59362e50d6d662680f192fb6c4ad23cf"
+    },
+    {
+      "path": "team/team-router/templates/team-ledger.md",
+      "bytes": 2767,
+      "sha256": "10d747cb692565a8e5f00a87a2c9aba6b5be392520d9cc8884f587e11d248092"
+    }
+  ]
+}

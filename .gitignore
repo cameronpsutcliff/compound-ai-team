@@ -1,0 +1,10 @@
+.DS_Store
+__pycache__/
+*.pyc
+.env
+.env.*
+node_modules/
+dist/
+
+# Maintainer-only local leak denylist (literal personal terms). Never shipped.
+leak-denylist.local.txt

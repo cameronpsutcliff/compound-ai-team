@@ -1,0 +1,43 @@
+# exclude.txt
+#
+# Paths omitted from the Individual lean release zip. Git-derived trees still
+# contain these paths when listed in include.txt; only the zip packager skips
+# them.
+# Paths are relative to the derived kit root.
+#
+# D-002: Individual (lean) zip excludes reference-impl/ via derive.sh
+# --edition individual. Team (complete) zip ignores this file and includes the
+# full derived tree.
+#
+# Lines beginning with # and blank lines are ignored.
+
+# Canonical working docs
+docs/FINAL-REVIEW.md
+docs/HG-2-DEBATE.md
+docs/derived-not-typed.md
+docs/brief-standard.md
+docs/WEBSITE-COPY.md
+docs/PUBLICATION-CHECKLIST.md
+docs/FRESH-SESSION-DRY-RUN.md
+adoption-report.md
+delegation.md
+project-scaffold.md
+project-internal-structure.md
+doctrine/conventions/universal-skill-routing.md
+AGENT.annotated.md
+
+# Design input only (family framing, private vault/repo names)
+_reference/josh-merge/blend-system.md
+
+# Team edition org layer (Individual lean zip omits team/; Team edition includes it)
+team/
+
+# Maintainer Python surface
+reference-impl/
+
+# Derive tooling stays in git, not in the Individual starter-kit zip
+derive/
+
+# Maintainer-only local leak denylist (literal personal terms). Gitignored and
+# not copied unless deliberately listed in include.txt.
+leak-denylist.local.txt
