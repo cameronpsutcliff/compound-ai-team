@@ -2,6 +2,44 @@
 
 Release notes for the Compound AI Operating Standards kit. Newest first.
 
+## v3.0.4 (2026-06-19)
+
+Impressiveness and depth pass driven by a five-persona cold-reviewer panel (all
+five would-star) plus runtime hardening. No doctrine change.
+
+### Added
+
+- **Enforcement-in-action proof.** `proof/enforcement-in-action/` runs the real
+  `usage-guard` hook and shows it BLOCKING an over-budget conductor-model
+  subagent spawn (exit 2, `decision: block`) and ALLOWING a compliant
+  cheap-model spawn, with the exact before/after. The enforcement is no longer
+  only a diagram.
+- **Conformance is self-proving.** The self-test now executes the CT-AC, CT-UD,
+  CT-SR, and CT-GL conformance cases against the generic, codex, and cursor
+  adapters, so "any agent honors the contract" is tested, not asserted.
+- **README status badges** (CI, release, license) and a "what is actually
+  enforced" table under the hero, so the mechanism is legible in the first 30
+  seconds. `CONTRIBUTING.md`, `SECURITY.md` (which doubles as the threat model),
+  and issue / pull-request templates.
+
+### Fixed
+
+- **Goal-adapter false-positive.** `runtime/generic/dispatch.sh` evaluated a
+  completion condition against the dispatch prompt with no agent run, returning
+  a phantom `done`. It now evaluates only real agent output, halts when no agent
+  ran, runs real bounded iterations, and reports the true iteration count with a
+  no-progress halt.
+- **Internal-process docs leak.** The Team edition was publishing build-process
+  artifacts (`FINAL-REVIEW.md`, `HG-2-DEBATE.md`, `PUBLICATION-CHECKLIST.md`,
+  `component-ledger.md`). These are now excluded from both editions.
+
+### Changed
+
+- Softened the "any agent, none privileged" framing to match `known-limits.md`
+  (hard-enforced on Claude Code, contract-honored elsewhere). Sourced the
+  18-of-22 incident in `docs/ENFORCEMENT-PROVENANCE.md`. Relabeled the Field
+  Guide as the deep reference (not required to adopt) and dropped its draft tag.
+
 ## v3.0.3 (2026-06-19)
 
 A second review pass (an external reviewer plus an internal multi-model panel)

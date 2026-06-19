@@ -93,6 +93,13 @@ should_skip_copy() {
     leak-denylist.local.txt)
       return 0
       ;;
+    # Internal build-process artifacts: never ship in EITHER edition (the Team
+    # edition ignores exclude.txt, so these must be skipped here). They expose
+    # the solo/internal-process reality and contradict the co-owned framing.
+    docs/FINAL-REVIEW.md|docs/HG-2-DEBATE.md|docs/PUBLICATION-CHECKLIST.md|\
+    docs/WEBSITE-COPY.md|docs/FRESH-SESSION-DRY-RUN.md|docs/component-ledger.md)
+      return 0
+      ;;
   esac
   if [ "$EDITION" = "individual" ] && should_skip_zip "$rel"; then
     return 0

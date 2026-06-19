@@ -1,5 +1,5 @@
 # Adopt
-# Compound AI Operating Standards v3.0.3
+# Compound AI Operating Standards v3.0.4
 # Authors: Cameron Sutcliff, Joshua Sutcliff (joshuadsutcliff)
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 

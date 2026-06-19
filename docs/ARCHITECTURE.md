@@ -1,6 +1,6 @@
 # Architecture
 
-# Compound AI Operating Standards v3.0.3
+# Compound AI Operating Standards v3.0.4
 # Source: cameronsutcliff.com/compound-ai | License: CC BY 4.0
 # Authors: Cameron Sutcliff (cameronpsutcliff), Joshua Sutcliff (joshuadsutcliff)
 

@@ -33,7 +33,7 @@ Three promises, falsifiable:
 
 ## Honest about maturity
 
-This is an operating standard with a working reference runtime, not a product with a sales team. Adoption is early and the kit says so. The reference runtime's hard enforcement is strongest on Claude Code today; broad multi-agent enforcement is a contract, not yet a mechanical guarantee on every runtime. What is here is real, runnable, and reproducible. What is aspirational is labeled.
+This is an operating standard with a working reference runtime, not a product with a sales team. Adoption is early and the kit says so. The reference runtime's hard enforcement is strongest on Claude Code today; broad multi-agent enforcement is a contract, not yet a mechanical guarantee on every runtime. What is here is real, runnable, and reproducible. What is aspirational is labeled. The early v3.0.x releases all shipped the same day; they are pre-publication hardening passes from a multi-model review, not churn between adopted versions.
 
 ## Who built it
 

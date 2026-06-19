@@ -1,4 +1,8 @@
-# Compound AI Operating Standards v3.0.3
+# Compound AI Operating Standards v3.0.4
+
+[![CI](https://github.com/cameronpsutcliff/compound-ai/actions/workflows/enforce.yml/badge.svg)](https://github.com/cameronpsutcliff/compound-ai/actions/workflows/enforce.yml)
+[![Release](https://img.shields.io/github/v/release/cameronpsutcliff/compound-ai)](https://github.com/cameronpsutcliff/compound-ai/releases)
+[![License: Apache-2.0 and CC-BY-4.0](https://img.shields.io/badge/license-Apache--2.0%20and%20CC--BY--4.0-blue)](LICENSE)
 
 **A co-owned operating kit that turns any capable AI coding agent into a
 compounding work surface.**
@@ -24,6 +28,18 @@ everywhere else, never silently absent.
 
 ---
 
+## What is actually enforced
+
+Stated up front, so the vocabulary never outruns the mechanism (full detail in
+[docs/known-limits.md](docs/known-limits.md)):
+
+| Discipline | How it is enforced |
+|---|---|
+| Costly subagent spawns and fan-out over the usage ceiling, on Claude Code | Hard block: a `PreToolUse` hook denies the call |
+| Repo invariants (personal-data leaks, skill counts, tier-0 discipline, registry coherence, hand-typed benchmark figures) | Hard block: CI gates with a planted-fixture self-test |
+| The same disciplines on Codex, Cursor, and other runtimes | Advisory: the agent is given the contract and honors it; nothing mechanically stops a violating call |
+| Tiered context loading and main-loop model choice | Human-controlled convention, not a mechanical block |
+
 ## The six-layer architecture
 
 The kit is organized as six layers. You may stop at any layer; every layer
@@ -33,7 +49,7 @@ below the one you stop at still applies and the Standard still holds.
 |---|---|---|---|
 | 1 | **Doctrine** | `doctrine/` | Portable core any agent honors: tiered context, skills, goal and loop contracts, conventions. Plain Markdown and YAML, no tools. |
 | 2 | **Capabilities** | `capabilities/` | The runtime-agnostic capability model. Four contracts (`adapter-contract`, `usage-discipline`, `session-routing`, `goal-loop`) that define what any adapter must guarantee. |
-| 3 | **Runtime adapters** | `runtime/` | Real per-runtime adapters, none privileged: `claude-code` (full hook enforcement), `codex`, `cursor`, `generic` (the graceful-degradation path for any agent). |
+| 3 | **Runtime adapters** | `runtime/` | Per-runtime adapters: `claude-code` hard-enforces via hooks; `codex`, `cursor`, and `generic` honor the same contract (advisory, the graceful-degradation path for any agent). |
 | 4 | **Enforcement** | `enforcement/` | CI gates, workflows, and a planted-fixture self-test that block real violations. Run `enforcement/bin/check-kit.sh`. |
 | 5 | **Proof** | `proof/` | The session-start benchmark and other net-positive evidence. |
 | 6 | **Reference and adoption** | `reference-impl/`, `adoption/` | Maintainer Python tooling and the drop-in adoption protocol. |
@@ -43,7 +59,7 @@ capability and adapter model lets any agent plug in, and how Claude Code hard
 enforces via hooks while any other agent honors the same contract through the
 generic adapter.
 
-## Any agent, none privileged
+## Any agent honors the contract (Claude Code hard-enforces)
 
 The capability layer is runtime-agnostic. A capability is defined once in
 `capabilities/<name>.md` as a contract, an input and output shape, a reference
@@ -128,7 +144,7 @@ states what the hooks block, what stays advisory, and what the human still
 controls, rather than overclaiming. See `docs/known-limits.md`.
 
 The early v3.0.x releases are same-day pre-publication hardening passes from a
-multi-model review, not instability between adopted versions. Pin v3.0.3 or
+multi-model review, not instability between adopted versions. Pin v3.0.4 or
 later.
 
 ## License

@@ -91,4 +91,5 @@ CT-AC-6  An unparsable or empty task returns status="error" with a non-empty hal
 ```
 
 These tests are exercised by `enforcement/tests/run-selftest.sh` for the
-claude-code runtime. Other runtimes add entries to the same self-test.
+generic dispatcher and thin runtime wrappers. Claude Code hook-level coverage
+is recorded under CT-UD and CT-SR in the same self-test.

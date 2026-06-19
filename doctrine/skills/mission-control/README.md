@@ -1,6 +1,6 @@
 # Mission Control
 
-Part of the Compound AI Operating Standards v3.0.3 kit.
+Part of the Compound AI Operating Standards v3.0.4 kit.
 
 ## What this produces
 

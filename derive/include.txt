@@ -13,6 +13,8 @@
 .github/**
 AGENT.md
 BACKLOG.md
+CONTRIBUTING.md
+SECURITY.md
 CITATION.cff
 CLAUDE.md
 HANDOFF.md
