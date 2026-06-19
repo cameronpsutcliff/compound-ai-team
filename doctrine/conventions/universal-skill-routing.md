@@ -19,6 +19,9 @@ Typical layout:
     ceo/
     skill-creator/
 
+~/.claude/skills/spotlight  -> ~/.compound-ai/skills/spotlight
+~/.agents/skills/spotlight  -> ~/.compound-ai/skills/spotlight
+~/.codex/skills/spotlight   -> ~/.compound-ai/skills/spotlight
 ```
 
 ## Rules
@@ -39,6 +42,9 @@ Typical layout:
 |---|---|
 | Global operating standards | `~/.compound-ai/operating-standards` |
 | Global shared skills | `~/.compound-ai/skills` |
+| Claude native root | `~/.claude/skills` |
+| OpenSpace or shared agent root | `~/.agents/skills` |
+| Codex-specific skills | `~/.codex/skills` |
 
 ## Verification
 
@@ -53,6 +59,7 @@ OK ceo       missing=-
 ```
 
 `missing=codex` can be acceptable when Codex already sees the shared skill
+through another configured root, such as `~/.agents/skills`, or when the skill
 is intentionally not available to Codex.
 
 Any `DRIFT` row means two runtimes have different copies of what appears to be

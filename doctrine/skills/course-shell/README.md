@@ -1,6 +1,6 @@
 # Course Shell
 
-Part of the Compound AI Operating Standards v3.0.4 kit.
+Part of the Compound AI Operating Standards v3.0.5 kit.
 
 ## What this produces
 

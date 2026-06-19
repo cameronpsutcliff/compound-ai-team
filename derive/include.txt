@@ -12,7 +12,6 @@
 .gitignore
 .github/**
 AGENT.md
-BACKLOG.md
 CONTRIBUTING.md
 SECURITY.md
 CITATION.cff
@@ -22,17 +21,14 @@ LICENSE
 LICENSE.md
 NOTICE
 NOTICE.md
-Project.md
 README.md
 EXECUTIVE.md
 RELEASES.md
 STANDARD.md
-STATE.md
 _citations.md
 _map.md
 _skills-index.md
 _tiers.md
-session-log.md
 
 # Adoption entry points
 adoption/**

@@ -3,7 +3,7 @@
 Optional Claude Code enforcement profile. Separable from the portable Doctrine
 (Layer A). Vendor-neutral adoption does not require this module.
 
-**Version:** v3.0.4  
+**Version:** v3.0.5  
 **Authors:** Cameron Sutcliff, Joshua Sutcliff (joshuadsutcliff)  
 **Origin:** System B reference runtime (`github.com/joshuadsutcliff`)
 

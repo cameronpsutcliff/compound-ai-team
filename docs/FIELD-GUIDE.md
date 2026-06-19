@@ -468,6 +468,8 @@ It does not contain the implementation itself. The implementation lives in the s
 agent runtime is active on the same machine, the skills-routing pattern needs
 one more layer. Each agent should keep the native skill directory its runtime
 expects, but shared skills should route to one canonical master directory.
+Claude can keep reading `~/.claude/skills`, Codex or OpenSpace can keep reading
+`~/.agents/skills`, and Codex-specific skills can remain in `~/.codex/skills`.
 The shared skill itself lives once, for example:
 
 ```text
@@ -477,6 +479,8 @@ The shared skill itself lives once, for example:
 The runtime roots point to it:
 
 ```text
+~/.claude/skills/spotlight -> ~/.compound-ai/skills/spotlight
+~/.agents/skills/spotlight -> ~/.compound-ai/skills/spotlight
 ```
 
 This is the difference between two agents having similarly named local skills
@@ -1915,7 +1919,9 @@ These five files are the in-kit reference layer. The session loads them on deman
     provenance-check/SKILL.md           Reports origin, version, manifest match, optional online
 ```
 
-Six pointer skills, each under 100 lines, target 80, each dispatching to the relevant implementation or convention file. The skills are the practical interface to the manual: a session that wants to optimize context tiers invokes `context-loader`, not "read Chapter 8 of the field guide." See Chapter 11 (Skills-Routing Pattern) for the architecture.
+Six pointer skills, each under 100 lines, target 80, each dispatching to the relevant implementation or convention file. The skills are the practical interface to the manual: a session that wants to optimize context tiers invokes a routing skill, not "read Chapter 8 of the field guide." See Chapter 11 (Skills-Routing Pattern) for the architecture.
+
+> Note: this section documents the original starter-kit skill layout. Several of these pointer skills (`context-loader`, `pattern-promoter`, `provenance-check`, `trigger-indexer`) were consolidated into broader skills or demoted to CI in the v3.0.0 merge. `_skills-index.md` is the authoritative, derived list of the current routable skills; treat it, not this historical appendix, as ground truth for what exists today.
 
 **Checklists (the operational interface)**
 

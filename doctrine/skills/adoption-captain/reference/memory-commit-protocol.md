@@ -31,8 +31,11 @@ future session, without overriding the host project's existing rules.
 | `<project>/CLAUDE.md` | Claude Code | This project | Project-scoped; medium risk |
 | `<project>/AGENT.md` | Generic / Codex / etc. | This project | Project-scoped; medium risk |
 | `<project>/AGENTS.md` | Codex CLI | This project | Project-scoped; medium risk |
+| `<project>/.aider.conf.yml` | Aider | This project | Project-scoped; medium risk |
 | `<project>/CONVENTIONS.md` | Aider native | This project | Project-scoped; medium risk |
 | `<project>/AGENTS.codex.md` or similar | Codex per-project | This project | Project-scoped; medium risk |
+| `~/.claude/CLAUDE.md` | Claude Code | ALL projects for this user | Global; **high risk; explicit consent required** |
+| `~/.codex/AGENTS.md` | Codex CLI | ALL projects for this user | Global; **high risk; explicit consent required** |
 | Claude Code auto-memory | Claude Code (per-project) | Persistent per-project memory | Project-scoped; medium risk |
 
 Default behavior: update PROJECT-LEVEL surfaces only. Global-level
@@ -174,6 +177,9 @@ If the host has multiple agent runtimes sharing skills, add this section:
 
 Native runtime roots remain native:
 
+- Claude: `~/.claude/skills`
+- OpenSpace/shared agents: `~/.agents/skills`
+- Codex-specific: `~/.codex/skills`
 
 Shared skills route to the canonical global root:
 `~/.compound-ai/skills`.
@@ -228,6 +234,7 @@ The operator approves per surface or declines per surface. A decline
 records the decision in the adoption report; the agent does not retry
 that surface in this session.
 
+For global surfaces (~/.claude/CLAUDE.md, ~/.codex/AGENTS.md), the
 agent surfaces an EXTRA confirmation: "This is a global instruction
 file that affects all projects for this user, not just this one.
 Confirm you want kit awareness in your global agent context?"
@@ -277,6 +284,7 @@ the discipline, not the automation.
 
 ### Anti-pattern: silent edits to global files
 
+**Symptom.** Agent edits `~/.claude/CLAUDE.md` without an explicit
 global-scope confirmation.
 
 **Fix.** Global surfaces always require a second confirmation distinct

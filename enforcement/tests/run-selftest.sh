@@ -392,6 +392,7 @@ run_json_assert "CT-UD-3 Bash tool returns allow without evaluation" 'data.get("
 run_json_assert "CT-UD-4 malformed probe fails open" 'data.get("decision")=="allow" and data.get("usage_pct")==-1' bash -c "printf 'not-json' | '$hook_tree/runtime/claude-code/hooks/usage-guard.sh' block"
 run_json_assert "CT-UD-5 closed pct ceiling blocks delegation" 'data.get("decision")=="block"' bash -c "USAGE_GUARD_BLOCK_PCT=0 '$hook_tree/runtime/claude-code/hooks/usage-guard.sh' block < '$FIXTURES_DIR/usage-guard/agent-cheap-model.json'"
 run_json_assert "CT-UD-6 approved cheap worker passes model check" 'data.get("decision")=="allow"' bash -c "'$hook_tree/runtime/claude-code/hooks/usage-guard.sh' block < '$FIXTURES_DIR/usage-guard/agent-cheap-model.json'"
+run_expect_pass "settings-wiring integration invokes wired PreToolUse command" bash "$SELF_DIR/settings-wiring-integration.sh"
 
 usage_notice_payload="$TMP_ROOT/usage-inform.json"
 usage_notice_file="$TMP_ROOT/usage-estimation.notice"

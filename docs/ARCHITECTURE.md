@@ -1,6 +1,6 @@
 # Architecture
 
-# Compound AI Operating Standards v3.0.4
+# Compound AI Operating Standards v3.0.5
 # Source: cameronsutcliff.com/compound-ai | License: CC BY 4.0
 # Authors: Cameron Sutcliff (cameronpsutcliff), Joshua Sutcliff (joshuadsutcliff)
 
@@ -97,10 +97,12 @@ economics and loop-adoption evidence.
 ### Layer 6 - Reference implementation and adoption (`reference-impl/`, `adoption/`)
 
 `reference-impl/` is the only place Python lives: provenance verification,
-manifest build, derive tooling, and the skill-creator scaffold. It is excluded
-from the lean Individual edition and included in the Team edition. `adoption/`
-holds the drop-in protocol: `ADOPT.md`, the installer, and the multi-agent
-`INSTALL.md` walkthrough.
+manifest build, derive tooling, and the skill-creator scaffold. It ships in both
+editions (the verifiers are stdlib-only and adopters are told to run them); it
+is not tier-0 loaded, so it does not affect the lean session-start cost. The
+Individual zip stays lean by omitting the canonical working docs, the derive
+tooling, and the Team org layer. `adoption/` holds the drop-in protocol:
+`ADOPT.md`, the installer, and the multi-agent `INSTALL.md` walkthrough.
 
 ---
 

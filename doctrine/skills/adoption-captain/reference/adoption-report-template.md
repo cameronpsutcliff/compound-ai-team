@@ -164,6 +164,7 @@ Surfaces updated in Stage 8b:
 |---|---|---|---|
 | CLAUDE.md | ./CLAUDE.md | UPDATED | yes |
 | AGENT.md | ./AGENT.md | SKIPPED (not present) | -- |
+| ~/.claude/CLAUDE.md | global | SKIPPED (operator opted out) | -- |
 
 Memory-commit verified: yes.
 Surfaces updated: ./CLAUDE.md (markers confirmed present and properly paired).
@@ -333,6 +334,7 @@ Run date: 2026-04-01 14:22 UTC
 | Surface | Path | Status | Markers |
 |---|---|---|---|
 | CLAUDE.md | ./CLAUDE.md | UPDATED | confirmed |
+| ~/.claude/CLAUDE.md | global | SKIPPED (opt-out) | -- |
 
 Memory-commit verified: yes.
 Surfaces updated: ./CLAUDE.md.

@@ -1,5 +1,5 @@
 # Agent Handoff
-# Compound AI Operating Standards v3.0.4
+# Compound AI Operating Standards v3.0.5
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 This is the document you hand to a fresh agent (Claude, Codex, Cursor, Aider, Continue, or any other) to get it operational on this kit in under two minutes.
@@ -27,7 +27,7 @@ Copy everything between the rules and paste into a new agent session:
 
 ---
 
-You are about to use the **Compound AI Operating Standards kit v3.0.4** at this path. The kit is a tiered operating layer with a routed skill library and a set of project shells (see `_skills-index.md` for the exact, derived counts). Your job is to load it correctly, then help me work.
+You are about to use the **Compound AI Operating Standards kit v3.0.5** at this path. The kit is a tiered operating layer with a routed skill library and a set of project shells (see `_skills-index.md` for the exact, derived counts). Your job is to load it correctly, then help me work.
 
 **First check: am I in a new project or an existing one?**
 
@@ -71,7 +71,7 @@ If the directory contains the user's existing code, README, package files, agent
 ## What the agent sees after running this
 
 ```
-LOADED COMPOUND AI v3.0.4
+LOADED COMPOUND AI v3.0.5
 ═════════════════════════
 
 Tier 1: Session infrastructure (12 skills):
@@ -140,13 +140,13 @@ For a project that uses this kit, write a project-specific handoff that subclass
 ```markdown
 # Project Handoff: [Project Name]
 
-You are working on [project] which uses Compound AI Operating Standards v3.0.4.
+You are working on [project] which uses Compound AI Operating Standards v3.0.5.
 
 Read these files in order:
 1. AGENT.md (root)
-2. Project.md (project-specific overview: what this is, who uses it, current state)
+2. Project.md in your project (project-specific overview: what this is, who uses it, current state; created during adoption, read if present)
 3. _tiers.md, _skills-index.md, session-start.md, request-router (per HANDOFF.md)
-4. STATE.md (live state)
+4. STATE.md in your project (live state; read if present)
 
 Project-specific context:
 - Tech stack: [fill]

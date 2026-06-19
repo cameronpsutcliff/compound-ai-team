@@ -90,14 +90,25 @@ should_skip_copy() {
   local rel="$1"
   rel="${rel%/}"
   case "$rel" in
+    # Build-time bytecode caches: never ship. A .pyc embeds the absolute build
+    # path in its co_filename (a personal-path leak that text-greps miss) and is
+    # non-deterministic, which breaks the manifest/verify-integrity check. These
+    # regenerate whenever a .py is run or compiled, so filter them at every
+    # derive, regardless of what is in the canonical tree.
+    __pycache__|*/__pycache__|*/__pycache__/*|*.pyc|*.pyo)
+      return 0
+      ;;
     leak-denylist.local.txt)
       return 0
       ;;
-    # Internal build-process artifacts: never ship in EITHER edition (the Team
-    # edition ignores exclude.txt, so these must be skipped here). They expose
-    # the solo/internal-process reality and contradict the co-owned framing.
+    # Internal build-process and private-deployment docs: never ship in EITHER
+    # edition (the Team edition ignores exclude.txt, so these must be skipped
+    # here). They expose the solo/internal-process reality, contradict the
+    # co-owned framing, or carry private deployment specifics (a named private
+    # project, real launchd job labels, an internal orchestration pipeline).
     docs/FINAL-REVIEW.md|docs/HG-2-DEBATE.md|docs/PUBLICATION-CHECKLIST.md|\
-    docs/WEBSITE-COPY.md|docs/FRESH-SESSION-DRY-RUN.md|docs/component-ledger.md)
+    docs/WEBSITE-COPY.md|docs/FRESH-SESSION-DRY-RUN.md|docs/component-ledger.md|\
+    docs/derived-not-typed.md|docs/brief-standard.md)
       return 0
       ;;
   esac
@@ -204,7 +215,7 @@ HARD_PATH = re.compile(
     ("/" + "Users" + r"/[^/\s]+")
     # hidden local runtime folders, but NOT public VCS/editor dirs: a clone URL
     # ending .git would otherwise trip this after the allowlist strips the host.
-    r"|/\.(?!git\b|github\b|gitignore\b|gitattributes\b|gitkeep\b|gitmodules\b|cursor\b|vscode\b)[A-Za-z0-9_-]+\b"
+    r"|/\.(?!git\b|github\b|gitignore\b|gitattributes\b|gitkeep\b|gitmodules\b|cursor\b|vscode\b|claude\b|codex\b|gemini\b|kiro\b|compound-ai\b|agents\b|aider\b)[A-Za-z0-9_-]+\b"
 )
 
 # Version strings are NOT blanket-rewritten. A global old->new version sub
@@ -514,6 +525,24 @@ print(f"derive.sh: files indexed: {len(entries)}")
 PY
 else
   echo "derive.sh: WARN build-manifest.py not found; manifest not fully regenerated" >&2
+fi
+
+# Shipped-script syntax gate: the line-scrub can drop a line that carries a
+# private path and leave a script that no longer parses (a dropped `if ...; then`
+# guard once shipped a non-parsing installer). Refuse to ship a tree whose shell
+# scripts do not parse, so a stale or over-scrubbed derive can never publish a
+# broken installer again.
+syntax_failures=0
+while IFS= read -r sh_file; do
+  if ! bash -n "$sh_file" 2>/dev/null; then
+    echo "derive.sh: ERROR shipped script does not parse: ${sh_file#$DEST/}" >&2
+    bash -n "$sh_file" 2>&1 | sed 's/^/derive.sh:   /' >&2
+    syntax_failures=$((syntax_failures + 1))
+  fi
+done < <(find "$DEST" -type f -name '*.sh')
+if [ "$syntax_failures" -ne 0 ]; then
+  echo "derive.sh: FATAL $syntax_failures shipped shell script(s) failed to parse; refusing to package" >&2
+  exit 1
 fi
 
 if [ "$MAKE_ZIP" -eq 1 ]; then

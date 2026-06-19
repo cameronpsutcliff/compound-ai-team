@@ -79,5 +79,4 @@ When a release fails the gate, cite which step:
 
 This skill exists because Codex named the gap. The kit's own panel-
 review pattern produced its own correction; the structured cross-
-feedback in the cameronsutcliffdotcom-outputs working folder is the
-provenance.
+feedback in the review working folder is the provenance.

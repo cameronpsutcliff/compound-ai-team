@@ -1,5 +1,5 @@
 # Project Operating Contract
-# Compound AI Operating Standards v3.0.4
+# Compound AI Operating Standards v3.0.5
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0 (code) / CC BY 4.0 (docs)
 
 Canonical URL: `https://cameronsutcliff.com/compound-ai`
@@ -53,9 +53,9 @@ privileged.
 
 | Question | Load |
 |---|---|
-| Current project state | `STATE.md` |
-| Recent changes | `session-log.md` |
-| Open items | `BACKLOG.md` |
+| Current project state | `STATE.md` in your project, if present |
+| Recent changes | `session-log.md` in your project, if present |
+| Open items | `BACKLOG.md` in your project, if present |
 | Tier model | `_tiers.md` |
 | File map | `_map.md` |
 | Human skill registry | `_skills-index.md` |
@@ -92,7 +92,7 @@ Start: read this file, read `_skills-index.md`, load `request-router` and
 `trigger-registry.yaml`, read `STATE.md` if present.
 
 End: record validation performed; update state/log/backlog if work changed;
-promote reusable patterns via `pattern-promoter`.
+promote reusable patterns via the `memory` skill (preserve mode).
 
 ## Governance
 
