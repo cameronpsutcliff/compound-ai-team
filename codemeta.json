@@ -3,7 +3,7 @@
   "@type": "SoftwareSourceCode",
   "name": "Compound AI Operating Standards",
   "description": "A co-owned operating kit for capable AI coding agents: a portable, vendor-neutral doctrine paired with an optional Claude Code enforced runtime for hook-enforced usage and routing controls.",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "author": [
     {
       "@type": "Person",
@@ -18,7 +18,7 @@
       "familyName": "Sutcliff"
     }
   ],
-  "codeRepository": "https://github.com/cameronpsutcliff/compound-ai-operating-standards",
+  "codeRepository": "https://github.com/cameronpsutcliff/compound-ai",
   "url": "https://cameronsutcliff.com/compound-ai",
   "license": [
     "https://creativecommons.org/licenses/by/4.0/",
@@ -32,5 +32,5 @@
     "JavaScript"
   ],
   "dateCreated": "2026-05-13",
-  "dateModified": "2026-06-18"
+  "dateModified": "2026-06-19"
 }

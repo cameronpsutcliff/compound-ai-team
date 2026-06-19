@@ -1,9 +1,9 @@
 # exclude.txt
 #
-# Paths omitted from the Individual lean release zip. Git-derived trees still
-# contain these paths when listed in include.txt; only the zip packager skips
-# them.
-# Paths are relative to the derived kit root.
+# Paths omitted from the Individual (lean) edition. For --edition individual,
+# derive.sh skips these from BOTH the derived tree AND the release zip (see
+# should_skip_copy). For --edition team, this file is ignored entirely and the
+# full derived tree ships. Paths are relative to the derived kit root.
 #
 # D-002: Individual (lean) zip excludes reference-impl/ via derive.sh
 # --edition individual. Team (complete) zip ignores this file and includes the
@@ -32,8 +32,11 @@ _reference/josh-merge/blend-system.md
 # Team edition org layer (Individual lean zip omits team/; Team edition includes it)
 team/
 
-# Maintainer Python surface
-reference-impl/
+# reference-impl/ now ships in BOTH editions (v3.0.1): adopters are told by 15+
+# docs to run reference-impl/scripts/verify-integrity.py and verify-origin.py to
+# verify what they downloaded. The verifiers are stdlib-only and self-contained;
+# the pattern code and skill-creator are legitimate developer reference material.
+# It is not tier-0 loaded, so this does not affect the lean session-start claim.
 
 # Derive tooling stays in git, not in the Individual starter-kit zip
 derive/

@@ -122,7 +122,7 @@ Button:
 
 ### Source
 
-`github.com/cameronpsutcliff/compound-ai-operating-standards`
+`github.com/cameronpsutcliff/compound-ai`
 
 Fork, inspect, cite, or contribute.
 
@@ -142,7 +142,7 @@ Canonical source:
 
 GitHub:
 
-`https://github.com/cameronpsutcliff/compound-ai-operating-standards`
+`https://github.com/cameronpsutcliff/compound-ai`
 
 ## FAQ
 
@@ -175,7 +175,7 @@ A good `CLAUDE.md` is one operating file. This is a versioned kit with context t
   },
   "description": "A field guide and starter kit for building AI systems that compound instead of reset.",
   "url": "https://cameronsutcliff.com/compound-ai",
-  "codeRepository": "https://github.com/cameronpsutcliff/compound-ai-operating-standards",
+  "codeRepository": "https://github.com/cameronpsutcliff/compound-ai",
   "license": [
     "https://creativecommons.org/licenses/by/4.0/",
     "https://www.apache.org/licenses/LICENSE-2.0"

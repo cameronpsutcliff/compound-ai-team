@@ -1,6 +1,6 @@
 # Known Limits
 
-Compound AI Operating Standards v3.0.0
+Compound AI Operating Standards v3.0.1
 
 This document states honestly what the kit enforces mechanically, what remains
 advisory, and what the human always controls. A Thoughtworks-grade reader will
@@ -32,6 +32,15 @@ installed and the hooks are wired):
 - Agent/Workflow tool calls at or above the cost-cap proxy block threshold
   (default 90%): hard-blocked by `usage-guard.sh` Policy 2.
 
+**Other runtimes (codex, cursor, generic) are advisory, not hard-block.** The
+runtime hard blocks above are real only on Claude Code, which exposes
+`PreToolUse` and `UserPromptSubmit` hooks. On every other runtime the same
+discipline is carried by a prompt prelude plus an optional dispatch wrapper: the
+agent is told the contract and is expected to honor it, but nothing mechanically
+stops a violating tool call. This is graceful degradation by design, not a hidden
+gap. No claim in this kit should be read as promising universal hard-blocking;
+enforcement is hard where the runtime supports it and advisory everywhere else.
+
 ---
 
 ## Advisory at runtime (the human and agent are trusted, no mechanical block)
@@ -50,6 +59,17 @@ programmatic signal exposes the Claude Code plan's true weekly limit. The
 `USAGE_GUARD_COST_LIMIT` parameter is a configurable approximation. The
 authoritative check is Claude Code's `/usage` command. When the proxy and
 `/usage` disagree, tune `USAGE_GUARD_COST_LIMIT` in `settings.local.json`.
+
+**Usage ceiling is estimator-based unless `ccusage` is installed.** The
+usage-guard cost ceiling reads real metered spend only when the third-party
+`ccusage` CLI is present (`npm install -g ccusage`). Without it, `usage-guard.sh`
+falls back to local character/prompt-length estimation: the usage figure is an
+estimate, not a billing read, and it never triggers a metered API call to find
+out. Probe absence or failure is fail-open (the hook exits 0, never blocking
+work). Treat the displayed ceiling as advisory; the authoritative figure is
+Claude Code's `/usage`. Install ccusage to upgrade the estimate to a read of
+Claude Code's own cost data. See `capabilities/usage-discipline.md` and the
+ccusage step in `adoption/INSTALL.md`.
 
 **Session-router tier injection.** `session-router.sh` classifies prompts as
 LIGHT/MEDIUM/HEAVY and injects a routing prior into the conductor's context.

@@ -1,4 +1,4 @@
-# Compound AI Operating Standards v3.0.0
+# Compound AI Operating Standards v3.0.1
 
 **A co-owned operating kit that turns any capable AI coding agent into a
 compounding work surface.**
@@ -10,11 +10,13 @@ Most AI work resets every session: the operator re-explains the project, the
 agent bulk-loads everything it might need, and the cost rises while the value
 stays flat. This kit makes the work compound instead. It ships a portable
 operating doctrine, a runtime-agnostic capability model that any agent can plug
-into, and a real enforcement layer that blocks violations rather than asking
-nicely.
+into, and a real enforcement layer that hard-blocks violations on Claude Code
+and is honored by prompt-prelude and wrapper on other runtimes. Enforcement is
+graceful-degradation by design: hard where the runtime supports it, advisory
+everywhere else, never silently absent.
 
 **Canonical site:** [cameronsutcliff.com/compound-ai](https://cameronsutcliff.com/compound-ai)
-**Source repo:** [github.com/cameronpsutcliff/compound-ai-operating-standards](https://github.com/cameronpsutcliff/compound-ai-operating-standards)
+**Source repo:** [github.com/cameronpsutcliff/compound-ai](https://github.com/cameronpsutcliff/compound-ai)
 
 ---
 
@@ -31,9 +33,13 @@ whole reference resident.
 | Kit session-start (tier-0 always-load) | 2 | 1,276 |
 | **Ratio (naive / kit)** | | **158.4x** |
 
-No metered API, no model call. Pure shell, reproducible on a bare laptop:
-`bash proof/session-start-benchmark/measure.sh`. The ratio is
-estimator-independent because both sets use the same divisor. See `proof/`.
+The token counts are character/heuristic estimates (bytes / 4) of session-start
+context, not a metered tokenizer read of any specific model. No metered API and
+no model call: pure shell, reproducible on a bare laptop with
+`bash proof/session-start-benchmark/measure.sh`. The point is order-of-magnitude
+(resident-everything vs route-on-demand), not a model-exact byte count; the
+ratio is estimator-independent because both sets use the same divisor. See
+`proof/`.
 
 ## The six-layer architecture
 

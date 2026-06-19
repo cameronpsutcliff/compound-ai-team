@@ -2,7 +2,6 @@
 
 Cursor implements the shared runtime contract with:
 
-- `.cursor/rules/compound-ai.mdc` for always-on Cursor rules.
 - `dispatch.sh` for mechanical `dispatch(task) -> result` checks.
 - `CONFORMANCE.md` for capability-contract mapping.
 

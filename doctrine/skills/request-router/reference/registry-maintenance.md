@@ -1,6 +1,6 @@
 # Registry Maintenance Reference
-# Compound AI Operating Standards v3.0.0
-# Source: github.com/cameronsutcliff/compound-ai-operating-standards | License: Apache 2.0
+# Compound AI Operating Standards v3.0.1
+# Source: github.com/cameronpsutcliff/compound-ai | License: Apache 2.0
 
 The trigger registry is a repo invariant enforced by CI, not a tier-1 skill
 invocation. Registry drift is a build failure. This reference covers how to

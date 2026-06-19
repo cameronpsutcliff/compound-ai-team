@@ -81,7 +81,6 @@ domain is unreachable).
 
 ```bash
 # Bundled manifest version
-BUNDLED=$(jq -r .version "$RELEASE_DIR/kit-v2/compound-ai.manifest.json")
 
 # Public manifest version
 PUBLIC=$(jq -r .version "$WEBSITE_PUBLIC/manifest.json")
@@ -149,7 +148,7 @@ echo "Release URL points at: $RELEASE_URL_VERSION"
 [ "$RELEASE_URL_VERSION" = "$KIT_VERSION" ] && echo "URL matches kit version" || echo "URL MISMATCH"
 
 # Verify the tag exists on GitHub
-curl -sI "https://github.com/cameronpsutcliff/compound-ai-operating-standards/releases/tag/$KIT_VERSION" \
+curl -sI "https://github.com/cameronpsutcliff/compound-ai/releases/tag/$KIT_VERSION" \
   | head -1
 ```
 

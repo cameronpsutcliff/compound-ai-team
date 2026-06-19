@@ -84,7 +84,7 @@ Every active skill in the kit has at least one entry in
 `trigger-registry.yaml`. This is intentional: the router can stay short,
 while the routing surface remains complete and machine-readable.
 
-The cost: the registry must be maintained. That is why v3.0.0 adds
+The cost: the registry must be maintained. That is why v2.6.0 adds
 `trigger-indexer`, which checks active `SKILL.md` files, pointer paths,
 and count math whenever skills change.
 

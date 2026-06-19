@@ -16,4 +16,3 @@
 # Lines beginning with # and blank lines are ignored.
 
 /Users/
-~/masterportfolio

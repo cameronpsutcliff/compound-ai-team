@@ -67,8 +67,8 @@ Release artifact SHA256 values:
 Publication status:
 
 1. Website is live at `https://cameronsutcliff.com/compound-ai`.
-2. GitHub repo is live at `https://github.com/cameronpsutcliff/compound-ai-operating-standards`.
-3. GitHub release is live at `https://github.com/cameronpsutcliff/compound-ai-operating-standards/releases/tag/v1.0.0`.
+2. GitHub repo is live at `https://github.com/cameronpsutcliff/compound-ai`.
+3. GitHub release is live at `https://github.com/cameronpsutcliff/compound-ai/releases/tag/v1.0.0`.
 4. Online origin verification returns `VERIFIED`.
 
 ---
@@ -86,8 +86,8 @@ Loop 6 completed the external publication step Cameron requested.
 Published surfaces:
 
 1. `https://cameronsutcliff.com/compound-ai`
-2. `https://github.com/cameronpsutcliff/compound-ai-operating-standards`
-3. `https://github.com/cameronpsutcliff/compound-ai-operating-standards/releases/tag/v1.0.0`
+2. `https://github.com/cameronpsutcliff/compound-ai`
+3. `https://github.com/cameronpsutcliff/compound-ai/releases/tag/v1.0.0`
 
 Checks run:
 

@@ -18,9 +18,9 @@ cameronpsutcliff
 joshuadsutcliff
 
 # Public repositories and canonical site
-github.com/cameronpsutcliff/compound-ai-operating-standards
-cameronpsutcliff/compound-ai-operating-standards
-compound-ai-operating-standards
+github.com/cameronpsutcliff/compound-ai
+cameronpsutcliff/compound-ai
+compound-ai
 cameronsutcliff.com
 
 # Credited case-study system (operator decision: kept named as a real proof

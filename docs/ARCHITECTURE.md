@@ -1,6 +1,6 @@
 # Architecture
 
-# Compound AI Operating Standards v3.0.0
+# Compound AI Operating Standards v3.0.1
 # Source: cameronsutcliff.com/compound-ai | License: CC BY 4.0
 # Authors: Cameron Sutcliff (cameronpsutcliff), Joshua Sutcliff (joshuadsutcliff)
 
@@ -85,9 +85,11 @@ them, so the enforcement story is itself tested. All thresholds live in
 Net-positive evidence a reviewer can reproduce. The headline is the
 session-start benchmark: full reference resident costs about 158.4x the context
 the kit loads at session start (135 files and roughly 202,207 estimated tokens
-versus 2 files and roughly 1,276). Pure shell, no metered API, reproducible on a
-bare laptop with `bash proof/session-start-benchmark/measure.sh`. Also includes
-delegation economics and loop-adoption evidence.
+versus 2 files and roughly 1,276). The token figures are character estimates
+(bytes / 4), not a tokenizer read, so the point is order-of-magnitude, not a
+model-exact byte count. Pure shell, no metered API, reproducible on a bare laptop
+with `bash proof/session-start-benchmark/measure.sh`. Also includes delegation
+economics and loop-adoption evidence.
 
 ### Layer 6 - Reference implementation and adoption (`reference-impl/`, `adoption/`)
 

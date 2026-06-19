@@ -56,6 +56,18 @@ prompt-length estimation, and returns a JSON object matching the output schema
 above. It is invoked as a `PreToolUse` hook for matchers `Agent` and
 `Workflow`.
 
+**Dependency note: `ccusage`.** On claude-code, `ccusage` is the metered-read
+backend: it surfaces Claude Code's local session-cost data so the guard can
+compare real spend against `USAGE_GUARD_COST_LIMIT`. It is an optional,
+third-party CLI (`npm install -g ccusage`), not bundled with the kit. When it is
+absent, broken, or returns unparseable output, the capability degrades to local
+character/prompt-length estimation: it still returns a valid decision, it never
+issues a metered API call to determine usage, and it never blocks on the probe
+failing (fail-open, per Contract clause 4). The estimate is inform-by-default,
+not authoritative; the authoritative read is Claude Code's `/usage`. Other
+runtimes have no `ccusage` equivalent and always run on the estimation path
+described in section 3's graceful-degradation prompt.
+
 Key behaviors to replicate in other runtimes:
 - Always return a valid JSON object even on internal error.
 - Cheap approved workers (sonnet, haiku, named roles in `CHEAP_WORKERS`) skip

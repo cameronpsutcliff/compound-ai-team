@@ -1,15 +1,16 @@
 # Skills Index
-# Compound AI Operating Standards v3.0.0
+# Compound AI Operating Standards v3.0.1
 # Authors: Cameron Sutcliff + Joshua Sutcliff
-# Source: github.com/cameronsutcliff/compound-ai-operating-standards | License: Apache 2.0
+# Source: github.com/cameronpsutcliff/compound-ai | License: Apache 2.0
 
 Load at session start. This is the human-readable capability registry. The
 machine-readable routing surface is
 `doctrine/conventions/trigger-registry.yaml`.
 
 Total skills: derived by `check-counts.sh` (do not hand-edit this number).
-Base after the skill-merge: 27 active SKILL.md files + 4 retired redirect stubs
-(31 SKILL.md files total). Team edition adds `team-router`; Individual derive omits `team/`.
+Full repo after the skill-merge: 27 active SKILL.md files + 4 retired redirect
+stubs (31 SKILL.md files total). The Individual derive omits `team/`, dropping
+`team-router` to leave 26 active; the Team derive keeps all 27.
 
 ---
 
@@ -85,16 +86,24 @@ Individual derive omits `team/`; Team derive includes it.
 
 ---
 
-## Skill-merge Changes (Cameron + Josh)
+## v3.0.0 Changes
 
-Cross-repo merge of both contributors' skills into unified, intent-routed skills
-(the viz-routing pattern: one trigger set, sub-components loaded on demand).
+New co-owned repo (Option Z). Two authors: Cameron Sutcliff + Joshua Sutcliff.
+v3.0.0 merges both contributors' skills into unified, intent-routed skills (the
+viz-routing pattern: one trigger set, sub-components loaded on demand) and applies
+the five-part standalone-skill rule to every component. All component decisions
+are recorded in `docs/component-ledger.md`.
+
+Merged into unified skills:
 
 - **`memory` (new, Tier 1).** Folds Josh's session-lifecycle commands (compress,
   preserve, resume) with Cameron's file-based memory model (capture, recall) into
   one skill with five meta-modes. Sub-components in `reference/`.
   - `context-loader` retired into `memory` (resume mode).
-  - `pattern-promoter` retired into `memory` (preserve mode, ACE format kept).
+  - `pattern-promoter` retired into `memory` (preserve mode). The ACE-scored
+    promotion format (CAOS promotion format plus helpful=N / harmful=N scoring
+    from the enforced runtime) is kept inside that mode; full Dataview surfacing
+    remains a future milestone.
 
 - **`delegation` (new, Tier 1).** Folds Josh's named workers (researcher,
   code-generator, tester) with Cameron's delegation doctrine, cost-tier routing,
@@ -106,13 +115,6 @@ Cross-repo merge of both contributors' skills into unified, intent-routed skills
   Lite only: no sealed-panel anonymity internals; the panel narrative points to
   Field Guide Chapters 31 to 32. Runnable workflow lives in
   `runtime/claude-code/workflows/phased-review.js`.
-
-Active skill count held at 26 (added 2, retired 2). Retired redirect stubs now
-number 4. All decisions recorded in `docs/component-ledger.md`.
-
-## v3.0.0 Changes
-
-New co-owned repo (Option Z). Two authors: Cameron Sutcliff + Joshua Sutcliff.
 
 Consolidation cuts (five-part rule applied to all components):
 
@@ -127,10 +129,6 @@ Consolidation cuts (five-part rule applied to all components):
   `doctrine/skills/release-captain/reference/provenance-verification.md`.
   "verify origin" and "check provenance" triggers now route to release-captain.
 
-- `pattern-promoter` re-scoped to ACE format. Promotion output now uses the
-  ACE-scored format (CAOS promotion format plus helpful=N / harmful=N scoring
-  from the enforced runtime). Full Dataview surfacing is a future milestone.
-
 Kept separate (merge proposals withdrawn under cross-critique):
 
 - `adoption-captain` and `engagement-bootstrap` remain separate. The split is
@@ -139,12 +137,15 @@ Kept separate (merge proposals withdrawn under cross-critique):
 - `agent-panel-planning` and `agent-panel-review` remain separate. Distinct
   lifecycle phases (pre-execution vs post-execution) and distinct artifacts
   (converged plan vs sealed critique).
-- `goal-runner` and `loop-engineering` kept verbatim from v3.0.0.
+- `goal-runner` and `loop-engineering` kept verbatim from v2.7.0.
 
-Active skill count: derived by `check-counts.sh`. Do not hand-type it.
-All component decisions are recorded in `docs/component-ledger.md`.
+Count. v3.0.0 leaves four retired redirect stubs on disk: `context-loader`,
+`pattern-promoter`, `provenance-check`, `trigger-indexer`. The Individual derive
+ships 26 active skills (11 Tier 1 + 15 Tier 2); the full repo (Team superset,
+adding `team-router`) is 27 active. `check-counts.sh` derives these from the
+filesystem; do not hand-type the number.
 
-## v3.0.0 Changes
+## v2.7.0 Changes
 
 - Added `loop-engineering`: the Loop Spec contract, three hard stops,
   closed-loop default, maker/checker verification, memory on disk. No loop
@@ -152,7 +153,7 @@ All component decisions are recorded in `docs/component-ledger.md`.
 - Added `templates/loop-spec.md`: the fill-in per-loop contract.
 - Total active skills: 28.
 
-## v3.0.0 Changes
+## v2.6.0 Changes
 
 - Added `goal-runner`: durable goal contract, validation loop, slow lanes,
   selector/repair symmetry, rendered contract checks, and memory closeout.

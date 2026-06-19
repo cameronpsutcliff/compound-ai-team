@@ -1,6 +1,6 @@
 # Map
 
-Navigation map for Compound AI Operating Standards v3.0.0. Tier model lives in `_tiers.md`.
+Navigation map for Compound AI Operating Standards v3.0.1. Tier model lives in `_tiers.md`.
 
 ## Root files
 
@@ -26,7 +26,7 @@ Navigation map for Compound AI Operating Standards v3.0.0. Tier model lives in `
 | `doctrine/tiers/` | tier0/tier1 context, checklists, tier AGENT files |
 | `doctrine/skills/` | All skills (tier 1 infrastructure, tier 2 capabilities, tier 3 shells) |
 | `doctrine/contracts/` | goal-contract, loop-spec, and related templates |
-| `doctrine/conventions/` | style-guide, token-efficiency, skill-author-guide, trigger-registry |
+| `doctrine/conventions/` | style-guide, token-efficiency, skill-author-guide, trigger-registry, session-log-format, quick-recap |
 
 ## Layer 2: Capabilities (runtime-agnostic)
 
@@ -48,6 +48,7 @@ Navigation map for Compound AI Operating Standards v3.0.0. Tier model lives in `
 | Path | Purpose |
 |---|---|
 | `enforcement/bin/` | CI doctrine gates (`check-*.sh`, orchestrated by `check-kit.sh`) |
+| `.github/workflows/` | CI workflows (repo root, so GitHub Actions triggers them) |
 | `enforcement/tests/` | Planted-fixture self-test harness |
 | `enforcement/hooks/` | Git hooks (pre-commit, post-session) |
 

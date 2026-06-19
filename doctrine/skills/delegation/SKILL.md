@@ -1,7 +1,7 @@
 # Skill: delegation
 # Compound AI Operating Standards
 # Authors: Cameron Sutcliff, Joshua Sutcliff (joshuadsutcliff)
-# Source: github.com/cameronsutcliff/compound-ai-operating-standards | License: Apache 2.0
+# Source: github.com/cameronpsutcliff/compound-ai | License: Apache 2.0
 
 ## What this skill does
 

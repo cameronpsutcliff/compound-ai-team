@@ -196,13 +196,11 @@ HARD_PATH = re.compile(
     ("/" + "Users" + r"/[^/\s]+")
 )
 
-VERSION_SUBS = [
-    ("v3.0.0", "v3.0.0"),
-    ("3.0.0", "3.0.0"),
-    ("v3.0.0", "v3.0.0"),
-    ("3.0.0", "3.0.0"),
-]
-
+# Version strings are NOT blanket-rewritten. A global old->new version sub
+# corrupts history: it rewrites "## v2.7.0 Changes" changelog headers and the
+# "v2.7.0: Cameron Sutcliff solo edition" attribution into the current version.
+# Current-version stamps live literally in the canonical and are bumped at
+# source; legacy references that remain are deliberate history or examples.
 TOKEN_SUBS = [
     ("app.db", "app.db"),
     ("ENHANCEMENTS.md", "ENHANCEMENTS.md"),
@@ -233,6 +231,13 @@ allowlist = load_terms(canonical / "attribution-allowlist.txt")
 denylist = load_terms(canonical / "leak-denylist.txt")
 if not denylist:
     denylist = load_terms(canonical / "forbidden-terms.txt")
+# Defense-in-depth: merge the maintainer-only literal personal terms (gitignored,
+# never shipped) into the scrub denylist so any personal literal in the canonical
+# is dropped at derive time, not just caught by the gate. The shipped denylist
+# stays generic-pattern-only; the literals live here and apply at build time.
+local_denylist = load_terms(canonical / "leak-denylist.local.txt")
+if local_denylist:
+    denylist = sorted(set(denylist) | set(local_denylist), key=len, reverse=True)
 
 
 
@@ -299,8 +304,6 @@ def transform_text(text: str, *, scrub_lines: bool = True) -> str:
     text = drop_appendix_e(text)
     for old, new in TOKEN_SUBS:
         text = text.replace(old, new)
-    for old, new in VERSION_SUBS:
-        text = text.replace(old, new)
     if scrub_lines:
         kept = [ln for ln in text.splitlines(keepends=True) if not line_is_leak(ln)]
         return "".join(kept)
@@ -339,6 +342,19 @@ from pathlib import Path
 dest = Path(sys.argv[1])
 registry = dest / "doctrine/conventions/trigger-registry.yaml"
 index = dest / "_skills-index.md"
+handoff = dest / "HANDOFF.md"
+
+if handoff.is_file():
+    text = handoff.read_text(encoding="utf-8")
+    # team-router is Team-only; remove its Tier-1 roster line and decrement the
+    # Tier-1 count so HANDOFF.md stays coherent with the stripped registry
+    # (check-handoff-skills.sh enforces this).
+    text = re.sub(r"\n[ \t]*✓[ \t]+team-router\b[^\n]*", "", text, count=1)
+    text = text.replace(
+        "Tier 1: Session infrastructure (12 skills):",
+        "Tier 1: Session infrastructure (11 skills):",
+    )
+    handoff.write_text(text, encoding="utf-8")
 
 if registry.is_file():
     text = registry.read_text(encoding="utf-8")
@@ -381,7 +397,6 @@ PY
 )"
 VERSION="${VERSION:-3.0.0}"
 
-MANIFEST_PATH="$DEST/compound-ai.manifest.json"
 python3 - "$MANIFEST_PATH" "$VERSION" <<'PY'
 import json
 import sys
@@ -392,10 +407,10 @@ path = Path(sys.argv[1])
 version = sys.argv[2]
 seed = {
     "package_name": "Compound AI Operating Standards",
-    "origin_id": "compound-ai-operating-standards",
+    "origin_id": "compound-ai",
     "authors": ["Cameron Sutcliff", "Joshua Sutcliff"],
     "canonical_url": "https://cameronsutcliff.com/compound-ai",
-    "source_repo": "https://github.com/cameronpsutcliff/compound-ai-operating-standards",
+    "source_repo": "https://github.com/cameronpsutcliff/compound-ai",
     "version": version,
     "release_date": date.today().isoformat(),
     "license_docs": "CC-BY-4.0",
@@ -482,7 +497,7 @@ else
 fi
 
 if [ "$MAKE_ZIP" -eq 1 ]; then
-  ZIP_NAME="compound-ai-starter-kit-v${VERSION}.zip"
+  ZIP_NAME="compound-ai-${EDITION}-v${VERSION}.zip"
   ZIP_PATH="$(dirname "$DEST")/$ZIP_NAME"
   echo "derive.sh: building zip $ZIP_PATH (edition=$EDITION)"
   python3 - "$DEST" "$ZIP_PATH" "$EXCLUDE_FILE" "$EDITION" <<'PY'

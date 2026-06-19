@@ -2,7 +2,6 @@
 
 Cursor conforms through two surfaces:
 
-- `.cursor/rules/compound-ai.mdc` supplies always-on prompt discipline.
 - `dispatch.sh` wraps task dispatch with the shared generic shell adapter and
   sets `CAOS_RUNTIME_NAME=cursor`.
 

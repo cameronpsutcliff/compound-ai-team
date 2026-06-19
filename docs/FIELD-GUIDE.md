@@ -5,7 +5,7 @@
 **Version:** 1.0.0-draft
 **Status:** In progress. See the build plan for chapter ownership and the rolling build log.
 **Author:** Cameron Sutcliff
-**Canonical source:** `github.com/cameronpsutcliff/compound-ai-operating-standards`
+**Canonical source:** `github.com/cameronpsutcliff/compound-ai`
 **Landing page:** `cameronsutcliff.com/compound-ai`
 **License:** CC BY 4.0 (docs), Apache 2.0 (code samples). See `compound-ai-starter-kit/LICENSE.md`.
 
@@ -469,6 +469,7 @@ expects, but shared skills should route to one canonical master directory.
 The shared skill itself lives once, for example:
 
 ```text
+~/.compound-ai/skills/spotlight
 ```
 
 The runtime roots point to it:
@@ -1800,6 +1801,7 @@ Terms used throughout this manual, defined precisely. Where a term has multiple 
 
 **Universal skill routing.** The multi-agent extension of the skills-routing
 pattern. Each runtime keeps its native skill root, while shared skills are
+symlinked to one canonical master directory such as `~/.compound-ai/skills`.
 Prevents Claude, Codex, OpenSpace, and future agents from drifting into
 different local copies of the same skill. See Chapter 11.
 

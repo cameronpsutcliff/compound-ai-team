@@ -192,7 +192,7 @@ this file is moved to `.compound-ai/` in Stage 5 if adoption proceeds).
 # Discovery Report
 Date: YYYY-MM-DD
 Host project: <path>
-Agent: adoption-captain v3.0.0
+Agent: adoption-captain v2.6.0
 
 ## Agent instruction files
 

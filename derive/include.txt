@@ -10,6 +10,7 @@
 
 # Root contracts, provenance, and indexes
 .gitignore
+.github/**
 AGENT.md
 BACKLOG.md
 CITATION.cff
@@ -21,6 +22,7 @@ NOTICE
 NOTICE.md
 Project.md
 README.md
+RELEASES.md
 STANDARD.md
 STATE.md
 _citations.md

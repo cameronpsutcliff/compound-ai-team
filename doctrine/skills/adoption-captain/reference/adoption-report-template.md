@@ -18,7 +18,7 @@ requires re-running the full discovery protocol.
 Date: YYYY-MM-DD
 Operator: <operator name or handle>
 Host project: <absolute path>
-Kit version: v3.0.0
+Kit version: v2.6.0
 
 ---
 
@@ -214,7 +214,7 @@ approvals.
 Date: 2026-04-01
 Operator: jsmith
 Host project: ~/your-projects/task-board
-Kit version: v3.0.0
+Kit version: v2.6.0
 
 ---
 
