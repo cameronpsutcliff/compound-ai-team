@@ -23,8 +23,8 @@ operator approves the resulting table in Stage 5 before any edits are made.
 
 ## Tier 1 infrastructure skills
 
-These 9 skills form the kit's operating backbone. Most projects should adopt
-at least 5 of them.
+These Tier-1 infrastructure skills form the kit's operating backbone. Most
+projects should adopt at least 5 of them.
 
 ### adoption-captain
 
@@ -68,19 +68,37 @@ adding the router is more scaffolding than it is worth.
 
 ---
 
-### context-loader
+### goal-runner
 
 **Classification logic.**
 
 | Condition | Classification |
 |---|---|
-| Project has a complex state that varies across sessions (e.g. active projects, live data) | adopt now |
-| Project is simple and stateless (e.g. a utility library) | adapt (slim version; most fields empty) |
-| Operator already has a session-start ritual that serves this purpose | conflict -- surface to operator; may be skip or adapt |
+| Project has multi-step goals that must run to a completion condition | adopt now |
+| Operator works in short, self-contained requests with no "keep going until done" need | defer |
+| Project already has its own task-runner or checklist discipline | adapt (goal-runner reinforces the existing finish condition; does not replace it) |
 
-Context-loader is the kit's per-session context discipline. If the project
-already has a session-start procedure documented in CLAUDE.md or README.md,
-classify as conflict and resolve in Stage 2 before proceeding.
+Goal-runner holds a durable completion condition across a long task so work
+does not stall half-finished. Its value scales with task length and the cost
+of a dropped thread.
+
+---
+
+### memory
+
+**Classification logic.**
+
+| Condition | Classification |
+|---|---|
+| Project has state that varies across sessions, or an active session-log / development history | adopt now |
+| Project is simple and stateless (e.g. a one-shot utility) | adapt (slim version: resume only, most fields empty) |
+| Operator already has a session-start ritual or its own pattern-documentation system | adapt (point memory at the existing system; do not replace it) |
+
+Memory is the kit's cross-session continuity skill. It covers two modes:
+resume (rebuild working context at session start) and preserve (promote a
+durable lesson or pattern so it survives into later sessions). If the project
+already documents session state or patterns in CLAUDE.md or README.md,
+classify as adapt and reinforce the existing system rather than overriding it.
 
 ---
 
@@ -96,15 +114,18 @@ classify as conflict and resolve in Stage 2 before proceeding.
 
 ---
 
-### pattern-promoter
+### delegation
 
 **Classification logic.**
 
 | Condition | Classification |
 |---|---|
-| Project has a session-log or ongoing development work | adopt now |
-| Project is a one-shot tool with no development history | skip |
-| Project uses its own pattern documentation system | adapt (point pattern-promoter at the existing system instead of the kit default) |
+| Project routinely hands work to other agents or model tiers | adopt now |
+| Project is single-agent with no delegation surface | defer (relevant if the project grows multi-agent) |
+| Operator already has a cost-tier or routing convention documented | adapt (delegation reinforces the existing routing rule) |
+
+Delegation decides which agent and which cost tier handles a unit of work.
+It earns its place once a project spans more than one agent or model.
 
 ---
 
@@ -128,26 +149,14 @@ classify as conflict and resolve in Stage 2 before proceeding.
 |---|---|
 | Project has versioned releases (npm package, GitHub release, deployed app) | adopt now |
 | Project ships frequently but has no release formalization (e.g. continuous deploy) | adapt (ship gate for the human-decision checkpoints, not the CI gate) |
+| Project generates content with factual claims and needs a provenance / verify-origin check before publishing | adopt now (release-captain runs the provenance step at its ship gate) |
 | Project is a research codebase, internal script, or single-file tool with no release concept | skip |
 
----
-
-### provenance-check
-
-**Classification logic.**
-
-| Condition | Classification |
-|---|---|
-| Project generates content with factual claims, research output, or LLM-assisted analysis | adopt now |
-| Project is pure code generation with no prose claims | skip |
-| Project has its own citation or attribution discipline | adapt (reinforce existing discipline; do not replace it) |
+Release-captain runs the pre-ship gate, including the provenance and
+verify-origin step that confirms published claims trace to a source. A project
+with no versioned release but with factual prose still benefits from that step.
 
 ---
-
-## Tier 2 cognitive mode skills
-
-These skills are most valuable for high-stakes analytical and deliberative
-work. They add overhead; adopt only where the work warrants it.
 
 ### agent-panel-planning
 
@@ -177,6 +186,27 @@ overhead without benefit.
 | Project has an existing PR review culture that already catches quality gaps | adapt (agent-panel-review as a pre-PR step, not a replacement) |
 
 ---
+
+### team-router
+
+**Classification logic.**
+
+| Condition | Classification |
+|---|---|
+| Team edition installed and the operator runs a multi-agent command center (inbox, ledger, routing) | adopt now |
+| Individual edition (team-router is not present in this edition) | skip |
+| Solo operator with no team ledger or command-center surface | skip |
+
+team-router is the one Tier-1 skill whose presence is edition-conditional: it
+ships only in the Team edition. For Individual-edition installs there is nothing
+to adopt, so record "skip: Team edition only."
+
+---
+
+## Tier 2 cognitive mode skills
+
+These skills are most valuable for high-stakes analytical and deliberative
+work. They add overhead; adopt only where the work warrants it.
 
 ### ultra-think
 
@@ -349,10 +379,10 @@ overhead without benefit.
 | Single agent, no panel workflow | Defer agent-panel-planning and agent-panel-review |
 | No external deliverables or consumers | Defer release-captain and quality-gate |
 | No LLM calls in the project | Defer token-economist |
-| No prose or factual claims | Skip provenance-check |
+| No prose or factual claims | release-captain provenance step adds little value |
 | Pure implementation, no strategy decisions | Defer ultra-think, defer pressure-test |
 | No data visualization work | Skip viz |
-| Project uses existing pattern documentation | Adapt pattern-promoter, do not replace |
+| Project uses existing pattern documentation | Adapt memory (preserve mode), do not replace |
 | Project already has a release gate | Adapt release-captain, do not duplicate |
 | Single-pass tasks, no iterative loops | Skip convergence-detection |
 
@@ -366,7 +396,7 @@ The mapping table in the adoption plan uses this format:
 | Skill | Tier | Classification | Rationale |
 |---|---|---|---|
 | request-router | T1 | adopt now | 4+ skills adopted; router reduces dispatch overhead |
-| context-loader | T1 | adopt now | Active development state varies per session |
+| memory | T1 | adopt now | Active development state varies per session |
 | agent-panel-planning | T1 | defer | Solo-agent project; no multi-agent workflow |
 | viz | T2 | skip | CLI tool; no visualization work |
 | ... | | | |

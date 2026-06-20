@@ -1,5 +1,5 @@
 # Provenance Verification Reference
-# Compound AI Operating Standards v3.0.6
+# Compound AI Operating Standards v3.0.7
 # Source: github.com/cameronpsutcliff/compound-ai | License: Apache 2.0
 
 Provenance verification is Step 3 of the ship gate. This reference covers

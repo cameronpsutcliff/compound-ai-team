@@ -83,14 +83,14 @@ These skills are classified "adopt now" and will be activated in Phase 2.
 | Skill | Tier | Classification | Rationale |
 |---|---|---|---|
 | request-router | T1 | adopt now | [project-specific rationale] |
-| context-loader | T1 | adopt now | [project-specific rationale] |
+| goal-runner | T1 | adopt now | [project-specific rationale] |
+| memory | T1 | adopt now | [project-specific rationale] |
 | token-economist | T1 | adopt now | [project-specific rationale] |
-| provenance-check | T1 | adopt now | [project-specific rationale] |
 | ... | | | |
 
 **Adapt notes (if any):** List any "adopt with adaptation" skills here,
-with a description of the adaptation (e.g. "context-loader trigger list
-trimmed to 3 items relevant to this project's session state").
+with a description of the adaptation (e.g. "memory trigger list trimmed to
+the 3 resume fields relevant to this project's session state").
 
 ---
 

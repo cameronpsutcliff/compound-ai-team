@@ -1,5 +1,5 @@
 # Skill: request-router
-# Compound AI Operating Standards v3.0.6
+# Compound AI Operating Standards v3.0.7
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 ## What this skill does
@@ -29,7 +29,7 @@ Canonical registry:
    order.
 5. If an `offer` match fires, answer briefly and offer the panel or workflow.
 6. If no match fires, answer directly.
-7. If routing feels stale, invoke `trigger-indexer`.
+7. If routing feels stale, refresh the trigger registry per `reference/registry-maintenance.md` (registry coherence is a CI invariant, not a session-time skill).
 
 ## Durable goal fast path
 
@@ -64,8 +64,8 @@ Expanded thresholds live in `reference/panel-offer-threshold.md`.
 Some requests need a skill chain. Examples:
 
 - Goal + implementation: `goal-runner` -> relevant capability -> `quality-gate`
-- Release: `release-captain` -> `quality-gate` -> `provenance-check`
-- Existing adoption: `adoption-captain` -> `trigger-indexer` -> `goal-runner`
+- Release: `release-captain` -> `quality-gate` (release-captain runs the provenance check at its Step 3)
+- Existing adoption: `adoption-captain` -> `goal-runner`
 
 More recipes: `reference/compound-requests.md`.
 

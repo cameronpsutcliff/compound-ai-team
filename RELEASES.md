@@ -2,6 +2,30 @@
 
 Release notes for the Compound AI Operating Standards kit. Newest first.
 
+## v3.0.7 (2026-06-19)
+
+Roster-accuracy pass. No doctrine change.
+
+### Fixed
+
+- **Retired skills no longer presented as live.** The v3.0.0 skill-merge retired
+  four Tier-1 skills (`context-loader` and `pattern-promoter` folded into
+  `memory`; `provenance-check` folded into `release-captain`'s ship-gate
+  provenance step; `trigger-indexer` demoted to the `check-registry-coherence.sh`
+  CI invariant), but several docs still listed them as adoptable. The tier roster
+  (`tier0.md`, `AGENT-tier1.md`), the `request-router` skill and its
+  compound-request recipes, the skill-author guide example, and the
+  `adoption-captain` reference templates (mapping rubric, adoption report,
+  adoption plan, preserve map) now reflect the actual 12-skill Tier-1 roster and
+  route each retired capability to its live successor.
+
+### Changed
+
+- **Portable example path in the release-verification walkthrough.** The
+  `release-captain` verification protocol example used a maintainer-specific
+  site path; it now uses a generic `/path/to/your-website/...` placeholder so
+  the walkthrough is portable to any adopter.
+
 ## v3.0.6 (2026-06-19)
 
 Enforcement-coverage and honesty pass. No doctrine change.

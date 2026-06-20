@@ -64,7 +64,7 @@ knowingly overriding their own rule.
 |---|---|---|---|---|
 | "Use gpt-4o-mini for all summarization tasks; cost control" | AGENT.md:31 | No model prescription | PRESERVE | Kit does not override model choice. The preserve rule is noted in memory-commit. |
 
-### Example 4: Commit message format (CONFLICT)
+### Example 4: Commit message format (ADD)
 
 | Existing rule | Source | Kit default | Classification | Rationale |
 |---|---|---|---|---|
@@ -74,7 +74,7 @@ knowingly overriding their own rule.
 
 | Existing rule | Source | Kit default | Classification | Rationale |
 |---|---|---|---|---|
-| (no provenance or attribution discipline) | -- | provenance-check skill catches unsourced claims | ADD | No existing rule; provenance-check can be adopted now. |
+| (no provenance or attribution discipline) | -- | release-captain's provenance step catches unsourced claims | ADD | No existing rule; release-captain's provenance / verify-origin step can be adopted now. |
 
 ### Example 6: Pre-existing panel discipline (DEFER)
 

@@ -417,6 +417,20 @@ if index.is_file():
     )
     index.write_text(text, encoding="utf-8")
 
+tier0 = dest / "doctrine/tiers/tier0.md"
+if tier0.is_file():
+    text = tier0.read_text(encoding="utf-8")
+    text = text.replace("Session infrastructure (12):", "Session infrastructure (11):")
+    text = text.replace(", team-router", "")
+    tier0.write_text(text, encoding="utf-8")
+
+agent_tier1 = dest / "doctrine/tiers/AGENT-tier1.md"
+if agent_tier1.is_file():
+    text = agent_tier1.read_text(encoding="utf-8")
+    text = text.replace("12 session infrastructure skills", "11 session infrastructure skills")
+    text = text.replace(", team-router", "")
+    agent_tier1.write_text(text, encoding="utf-8")
+
 print("derive.sh: individual Team edition entries removed")
 PY
 fi

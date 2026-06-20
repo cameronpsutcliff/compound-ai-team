@@ -1,6 +1,6 @@
 # Skill Author Guide
 
-Version: v3.0.6
+Version: v3.0.7
 Authors: Cameron Sutcliff, Joshua Sutcliff (joshuadsutcliff)
 
 Use this file when adding, revising, or evaluating a skill under `skills/` or
@@ -75,7 +75,7 @@ whole framework.
 
 Short kebab-case. Name the job, not the tool:
 
-- `context-loader` (not `claude-loader`)
+- `request-router` (not `claude-router`)
 - `token-economist` (not `usage-optimizer`)
 - `quality-gate` (not `pre-ship-checker`)
 
