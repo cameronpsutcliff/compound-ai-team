@@ -1,6 +1,6 @@
 # Scroll Shell
 
-Part of the Compound AI Operating Standards v3.0.6 kit.
+Part of the Compound AI Operating Standards v3.0.7 kit.
 
 ## What this produces
 

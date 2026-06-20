@@ -7,7 +7,7 @@ The universal layer. Everything in this folder applies to every project, every s
 - **`conventions/`**  -  style guide, em-dash policy, voice rules, skill-author guide, token-efficiency rules, provenance conventions, trigger registry
 - **`context/`**  -  `tier0.md` (always-load), `tier1-current.md` (live working context), `tier1-subsystem/` (per-domain slices)
 - **`checklists/`**  -  session-start, session-closeout, era transitions (Demo → Ramp-up → Durable), pattern promotion, model routing
-- **`skills-core/`**  -  13 session infrastructure skills: request-router, goal-runner, trigger-indexer, context-loader, token-economist, engagement-bootstrap, quality-gate, pattern-promoter, provenance-check, agent-panel-planning, agent-panel-review, release-captain, adoption-captain
+- **`skills-core/`**  -  12 session infrastructure skills: request-router, goal-runner, memory, token-economist, engagement-bootstrap, quality-gate, delegation, agent-panel-planning, agent-panel-review, release-captain, adoption-captain, team-router
 - **`design-system/`**  -  Abyssal design tokens (CSS variables, base styles) for use in Tier 3 shells
 
 ## Rules at this tier

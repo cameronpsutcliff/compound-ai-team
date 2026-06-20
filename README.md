@@ -1,4 +1,4 @@
-# Compound AI Operating Standards v3.0.6
+# Compound AI Operating Standards v3.0.7
 
 [![CI](https://github.com/cameronpsutcliff/compound-ai/actions/workflows/enforce.yml/badge.svg)](https://github.com/cameronpsutcliff/compound-ai/actions/workflows/enforce.yml)
 [![Release](https://img.shields.io/github/v/release/cameronpsutcliff/compound-ai)](https://github.com/cameronpsutcliff/compound-ai/releases)
@@ -144,7 +144,7 @@ states what the hooks block, what stays advisory, and what the human still
 controls, rather than overclaiming. See `docs/known-limits.md`.
 
 The early v3.0.x releases are same-day pre-publication hardening passes from a
-multi-model review, not instability between adopted versions. Pin v3.0.6 or
+multi-model review, not instability between adopted versions. Pin v3.0.7 or
 later.
 
 ## License

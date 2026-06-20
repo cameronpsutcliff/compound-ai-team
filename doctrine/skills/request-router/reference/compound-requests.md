@@ -11,7 +11,7 @@ Some requests need more than one skill. Apply in sequence.
 | High-stakes deliverable start-to-finish | `agent-panel-planning` to converge on the plan, then `agent-panel-review` on the drafts, with `nod-protocol` on any contested decision |
 | Full strategic cycle | `parallel-lens-synthesis`, `consequence-simulation`, `simulation-to-action-bridge` |
 | Durable goal execution | `goal-runner`, then relevant capability skill, then `quality-gate` |
-| Existing-project adoption | `adoption-captain`, then `trigger-indexer`, then `goal-runner` for follow-on work |
+| Existing-project adoption | `adoption-captain`, then `goal-runner` for follow-on work |
 | Pre-ship release verification | `release-captain` runs the ten-step ship gate; `agent-panel-review` if the deliverable also warrants editorial review |
 
 ## How to apply a chain

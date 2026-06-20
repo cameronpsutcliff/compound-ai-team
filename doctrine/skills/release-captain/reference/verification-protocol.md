@@ -14,7 +14,7 @@ for projects that fork the structure.
 # What version is shipping?
 KIT_VERSION="v2.3.2"   # set to the actual candidate
 RELEASE_DIR="/tmp/release-captain-test"
-WEBSITE_PUBLIC="/path/to/cameronsutcliffdotcom/public/compound-ai"
+WEBSITE_PUBLIC="/path/to/your-website/public/compound-ai"
 SOURCE_KIT="/tmp/compound-ai-v2"  # or wherever the kit source lives
 ```
 

@@ -1,5 +1,5 @@
 # Tier 0 Context
-# Compound AI Operating Standards v3.0.6
+# Compound AI Operating Standards v3.0.7
 # Source: cameronsutcliff.com/compound-ai | License: Apache 2.0
 
 Always load this for non-trivial work.
@@ -17,11 +17,10 @@ Always load this for non-trivial work.
 Load `_skills-index.md` for the full registry with triggers and pointers.
 Load `doctrine/conventions/trigger-registry.yaml` when trigger behavior matters.
 
-**Tier 1 - Session infrastructure (13):**
-request-router (load at session start), context-loader, token-economist,
-engagement-bootstrap, quality-gate, pattern-promoter, provenance-check,
-adoption-captain, release-captain, agent-panel-planning,
-agent-panel-review, goal-runner, trigger-indexer
+**Tier 1 - Session infrastructure (12):**
+request-router (load at session start), goal-runner, memory, token-economist,
+engagement-bootstrap, quality-gate, delegation, agent-panel-planning,
+agent-panel-review, release-captain, adoption-captain, team-router
 
 **Tier 2 - Cognitive modes (7):**
 parallel-lens-synthesis, consequence-simulation, cross-domain-translation,

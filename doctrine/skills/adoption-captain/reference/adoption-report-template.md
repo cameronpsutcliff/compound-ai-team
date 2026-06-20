@@ -70,14 +70,15 @@ Full skill classification from Stage 4:
 | adoption-captain | T1 | active (this run) | Kit adopted in this session |
 | engagement-bootstrap | T1 | skip | Existing project |
 | request-router | T1 | adopt now | N skills adopted; router adds value |
-| context-loader | T1 | adopt now | ... |
-| token-economist | T1 | adopt now | ... |
-| pattern-promoter | T1 | adopt now | ... |
+| goal-runner | T1 | adopt now | Multi-step goals need a completion condition |
+| memory | T1 | adopt now | Session state and patterns vary across sessions |
+| token-economist | T1 | adopt now | LLM calls present; context cost matters |
+| delegation | T1 | defer | Single-agent project; no routing surface yet |
 | quality-gate | T1 | defer | No external deliverables yet |
 | release-captain | T1 | skip | No versioned release process |
-| provenance-check | T1 | adopt now | ... |
 | agent-panel-planning | T1 | defer | Solo-agent project |
 | agent-panel-review | T1 | defer | Solo-agent project |
+| team-router | T1 | skip | Team edition only; solo operator |
 | ultra-think | T2 | adopt now | Architecture decisions are frequent |
 | detached-judgment | T2 | adopt now | Sycophancy risk noted |
 | nod-protocol | T2 | defer | Not requested by operator |
@@ -268,14 +269,15 @@ Conflict resolved: CLAUDE.md rule "em dashes permitted in comments for clarity"
 | adoption-captain | T1 | active (this run) | Kit adopted in this session |
 | engagement-bootstrap | T1 | skip | Existing project |
 | request-router | T1 | adopt now | 5 skills adopted; router justified |
-| context-loader | T1 | adopt now | Active sprint; session state varies |
+| goal-runner | T1 | adopt now | Active sprint; multi-step tasks run to done |
+| memory | T1 | adopt now | session-log.md present; state varies across sessions |
 | token-economist | T1 | skip | No LLM calls in this project |
-| pattern-promoter | T1 | adopt now | session-log.md present; active dev |
+| delegation | T1 | skip | Solo developer; no agent routing |
 | quality-gate | T1 | adapt | Ships to Vercel; gate adapted for PR review |
 | release-captain | T1 | defer | No versioned package; Vercel auto-deploys |
-| provenance-check | T1 | skip | Pure code project; no prose claims |
 | agent-panel-planning | T1 | defer | Solo developer |
 | agent-panel-review | T1 | defer | Solo developer |
+| team-router | T1 | skip | Team edition only; solo developer |
 | ultra-think | T2 | adopt now | Architecture decisions expected |
 | detached-judgment | T2 | adopt now | Operator requested more pushback |
 | nod-protocol | T2 | adopt now | Operator requested more pushback |
